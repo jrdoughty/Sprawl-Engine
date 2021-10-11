@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "..\\..\\..\\..\\..\\HaxeToolkit\\haxe\\lib\\echoes"
+		}
+	],
+	"settings": {}
+}
