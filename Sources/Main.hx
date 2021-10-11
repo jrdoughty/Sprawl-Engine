@@ -1,5 +1,6 @@
 package;
 
+import js.html.DOMImplementation;
 import kha.System;
 import kha.Assets;
 import kha.Scheduler;
@@ -26,6 +27,7 @@ class Main
 				Workflow.addSystem(new Interaction());
 				Workflow.addSystem(new Bounds(WIDTH, HEIGHT));
 				Workflow.addSystem(new Animation());
+				Workflow.addSystem(new Render());
 			});
 		});
 	}

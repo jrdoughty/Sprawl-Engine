@@ -17,11 +17,12 @@ import kha.FastFloat;
 
 class Project {
 	var characterEcho:Entity;
-	public var numEnemys:Int = 100;
+	public var numEnemys:Int = 1000;
 	public var score:Int = 0;
 	public var fps:Int = 0;
 	public var enemys:Array<Enemy> = [];
 	public var enemiesEcho:Array<Entity> = [];
+	public static var buffer:Framebuffer;
 
 	public function new() 
 	{
@@ -33,7 +34,11 @@ class Project {
 			new Position(Main.WIDTH /2 , Main.HEIGHT-Main.HEIGHT/5),
 			new Velocity(0,0),
 			new components.Player(),
-			new ImageComp(images.main)
+			AnimComp.createAnimDataRange(0,3,Math.round(1000000)),
+			new ImageComp(images.main),
+			new Scale(1,1),
+			new WH(32,32),
+			new Visible(true)
 		);
 		var i;
 		for(i in 0...numEnemys)
@@ -67,6 +72,7 @@ class Project {
 	}
 	function render(framebuffer: Framebuffer): Void 
 	{
+		buffer = framebuffer;/*
 		var graphics = framebuffer.g2;
 		graphics.begin();
 		//Scene.the.render(graphics);Assets.images.back
@@ -83,37 +89,8 @@ class Project {
 		graphics.fontSize = 48;
 		graphics.drawString(fps+"", 540, 32);
 		graphics.end();	
-		
+		*/
 		score++;
-	}
-	
-    public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
-		var ic = e.get(ImageComp);
-		var ac = e.get(AnimComp);
-		var wh:WH = e.get(WH);
-		var pos:Position = e.get(Position);
-		var s:Scale = e.get(Scale);
-		var vis:Visible = e.get(Visible);
-		var angle:Angle = e.get(Angle);
-		if (ic.value != null && vis != null && cast(vis, Bool) )
-			{
-			g.color = Color.White;
-			if (angle != null && cast(angle,FastFloat) != 0) 
-					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(cast(angle,FastFloat))).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
-			g.drawScaledSubImage(ic.value, Std.int(ac.indices[ac.index] * wh.w) % ic.value.width, 
-            Math.floor(ac.indices[ac.index] * wh.w / ic.value.width) * wh.h, 
-            wh.w, wh.h, 
-            Math.round(pos.x), Math.round(pos.y), 
-            wh.w * s.x, wh.h * s.y);
-			if (angle != null && cast(angle,FastFloat) != 0) 
-				g.popTransformation();
-        }
-		#if debug_collisions
-			g.color = Color.fromBytes(255, 0, 0);
-			g.drawRect(x - collider.x * scaleX, y - collider.y * scaleY, width, height);
-			g.color = Color.fromBytes(0, 255, 0);
-			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
-		#end
 	}
 	
 	
