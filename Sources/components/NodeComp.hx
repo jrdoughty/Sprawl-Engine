@@ -1,15 +1,8 @@
 package components;
 
-class NodeComp {
+class NodeComp 
+{
     public var neighbors:Array<NodeComp>;
-    public var leftNode:NodeComp;
-    public var rightNode:NodeComp;
-    public var topNode:NodeComp;
-    public var bottomNode:NodeComp;
-    public var topLeftNode:NodeComp;
-    public var topRightNode:NodeComp;
-    public var bottomLeftNode:NodeComp;
-    public var bottomRightNode:NodeComp;
     public var parentNode:NodeComp;
     public var occupant:echoes.Entity;
     public var g:Int;
