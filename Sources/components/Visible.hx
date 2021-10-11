@@ -1,7 +1,8 @@
 package components;
 
-class Visible {
-    public function new() {
-        
-    }
+@:forward
+abstract Visible(Bool) {
+
+    public inline function new(b:Bool) this = b;
+
 }

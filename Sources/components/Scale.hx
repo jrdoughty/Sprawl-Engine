@@ -1,8 +1,8 @@
 package components;
 
-class Scale {
-    public var value:Float;
-    public function new(s:Float) {
-        value = s;
-    }
+@:forward
+abstract Scale(Vec2) {
+
+    public inline function new(x = 1.0, y = 1.0) this = new Vec2(x, y);
+
 }

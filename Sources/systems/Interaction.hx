@@ -16,7 +16,7 @@ class Interaction extends System
             var pos1 = entity1.get(Position);
 
             
-            if (test(pos1, pos, 32.0*entity1.get(Scale).value)) {
+            if (test(pos1, pos, 32.0 * entity1.get(Scale).x)) {
                 pos1.y = 0;
             }
             
