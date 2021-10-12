@@ -26,7 +26,7 @@ class Project {
 
 	public function new() 
 	{
-		System.notifyOnRender(render);
+		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 		Scheduler.addTimeTask(secondTick, 0, 1);
 		var images = Assets.images;
@@ -70,26 +70,9 @@ class Project {
 		fps = score;
 		score = 0;
 	}
-	function render(framebuffer: Framebuffer): Void 
+	function frameBufferCapture(framebuffers: Array<Framebuffer>): Void 
 	{
-		buffer = framebuffer;/*
-		var graphics = framebuffer.g2;
-		graphics.begin();
-		//Scene.the.render(graphics);Assets.images.back
-		
-		graphics.drawScaledImage(Assets.images.back,0,0,Main.WIDTH,Main.HEIGHT);
-		for(i in enemiesEcho)
-		{
-			//Animation.render(graphics,i.get(AnimComp),i.get(ImageComp),i.get(WH),i.get(Position),i.get(Scale));
-			renderByEntity(graphics, i);
-		}
-		graphics.drawSubImage(characterEcho.get(ImageComp).value, characterEcho.get(Position).x, characterEcho.get(Position).y, 0, 0, 32, 32);
-		//graphics.drawRect()
-		graphics.font = Assets.fonts.OpenSans;
-		graphics.fontSize = 48;
-		graphics.drawString(fps+"", 540, 32);
-		graphics.end();	
-		*/
+		buffer = framebuffers[0];
 		score++;
 	}
 	
