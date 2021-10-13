@@ -18,7 +18,6 @@ class Render extends System
     @d function draw(player:Player, pos:Position) {
         var buffer = bufferCallback();
         if(buffer == null) return;
-        buffer.g2.begin(true,Color.Black);
         // micro optimizaion to not test each entity twice
         var h1 = sprites.entities.head;
         while (h1 != null) {
@@ -27,7 +26,6 @@ class Render extends System
             renderByEntity(buffer.g2, entity1);
             h1 = h1.next;
         }
-        buffer.g2.end();
     }
     public function new(func:Void->Framebuffer)
     {
@@ -44,7 +42,7 @@ class Render extends System
     {
         //spr.remove();
     }
-*/
+    */
     
     public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
 		var ic = e.get(ImageComp);

@@ -84,7 +84,10 @@ class Project {
 	function frameBufferCapture(framebuffers: Array<Framebuffer>): Void 
 	{
 		buffer = framebuffers[0];//has to happen before the draw
+		
+        buffer.g2.begin(true,Color.Black);
 		Workflow.draw();
+        buffer.g2.end();
 		score++;
 	}
 	
