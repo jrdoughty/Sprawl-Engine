@@ -7,26 +7,31 @@ import kha.Color;
 import  kha.graphics2.Graphics;
 import kha.math.FastMatrix3;
 import kha.FastFloat;
+import kha.Framebuffer;
 
 class Render extends System
 {
-
+    var bufferCallback:Void->Framebuffer;
     var sprites:View<ImageComp>;
-    @u function render(player:Player, pos:Position) {
-        if(Project.buffer == null) return;
-        Project.buffer.g2.begin(true,Color.Black);
+
+
+    @d function draw(player:Player, pos:Position) {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+        buffer.g2.begin(true,Color.Black);
         // micro optimizaion to not test each entity twice
         var h1 = sprites.entities.head;
         while (h1 != null) {
 
             var entity1 = h1.value;
-            renderByEntity(Project.buffer.g2, entity1);
+            renderByEntity(buffer.g2, entity1);
             h1 = h1.next;
         }
-        Project.buffer.g2.end();
+        buffer.g2.end();
     }
-    public function new()
+    public function new(func:Void->Framebuffer)
     {
+        bufferCallback = func;
 		//System.notifyOnRender(updateMovedSprite);
     }
 

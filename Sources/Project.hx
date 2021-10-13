@@ -1,5 +1,6 @@
 package;
 
+import haxe.Constraints.Function;
 import systems.Animation;
 import kha.Framebuffer;
 import kha.Scheduler;
@@ -7,6 +8,7 @@ import kha.System;
 import kha.Assets;
 import echoes.Entity;
 import components.*;
+import systems.*;
 import echoes.Workflow;
 import components.AnimComp.AnimData;
 import haxe.ds.StringMap;
@@ -26,6 +28,14 @@ class Project {
 
 	public function new() 
 	{
+		Workflow.addSystem(new GamePadSystem());
+		Workflow.addSystem(new Mouse());
+		Workflow.addSystem(new Movement(Main.WIDTH, Main.HEIGHT));
+		Workflow.addSystem(new Controls());
+		Workflow.addSystem(new Interaction());
+		Workflow.addSystem(new Bounds(Main.WIDTH, Main.HEIGHT));
+		Workflow.addSystem(new Animation());
+		Workflow.addSystem(new Render(function():Framebuffer{return buffer;}));
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 		Scheduler.addTimeTask(secondTick, 0, 1);
@@ -38,7 +48,8 @@ class Project {
 			new ImageComp(images.main),
 			new Scale(1,1),
 			new WH(32,32),
-			new Visible(true)
+			new Visible(true),
+			new GamePad(0)
 		);
 		var i;
 		for(i in 0...numEnemys)
@@ -72,7 +83,8 @@ class Project {
 	}
 	function frameBufferCapture(framebuffers: Array<Framebuffer>): Void 
 	{
-		buffer = framebuffers[0];
+		buffer = framebuffers[0];//has to happen before the draw
+		Workflow.draw();
 		score++;
 	}
 	

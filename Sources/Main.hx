@@ -22,12 +22,6 @@ class Main
 			Assets.loadEverything(function()
 			{	
 				new Project();
-				Workflow.addSystem(new Movement(WIDTH, HEIGHT));
-				Workflow.addSystem(new Controls());
-				Workflow.addSystem(new Interaction());
-				Workflow.addSystem(new Bounds(WIDTH, HEIGHT));
-				Workflow.addSystem(new Animation());
-				Workflow.addSystem(new Render());
 			});
 		});
 	}
