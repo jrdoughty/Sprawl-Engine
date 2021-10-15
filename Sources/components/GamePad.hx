@@ -2,7 +2,6 @@ package components;
 
 import kha.math.Vector2;
 
-@:allow(sdg.manager.GamePadMan)
 class GamePad
 {
 

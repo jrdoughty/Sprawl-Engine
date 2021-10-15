@@ -18,36 +18,27 @@ class Render extends System
     @d function draw(player:Player, pos:Position) {
         var buffer = bufferCallback();
         if(buffer == null) return;
+        
         // micro optimizaion to not test each entity twice
         var h1 = sprites.entities.head;
         while (h1 != null) {
-
             var entity1 = h1.value;
             renderByEntity(buffer.g2, entity1);
             h1 = h1.next;
         }
     }
+
     public function new(func:Void->Framebuffer)
     {
         bufferCallback = func;
 		//System.notifyOnRender(updateMovedSprite);
     }
 
-    /*
-    @ad inline function onAddPosSprite(pos:Position) 
-    {
-        //tiles[Std.int(pos.y)][Std.int(pos.x)].appendChild(spr); 
-    }
-    @rm inline function onRemovePosSprite(pos:Position) 
-    {
-        //spr.remove();
-    }
-    */
     
     public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
 		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
-		var wh:WH = e.get(WH);
+		var wh:WHComp = e.get(WHComp);
 		var pos:Position = e.get(Position);
 		var s:Scale = e.get(Scale);
 		var vis:Visible = e.get(Visible);

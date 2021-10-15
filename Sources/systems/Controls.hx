@@ -1,48 +1,49 @@
 package systems;
 import components.Position;
 import components.Player;
+import components.GamePad;
+import components.KeyboardComp;
+import components.MouseComp;
+import systems.Mouse;
 import kha.input.Keyboard;
 import kha.input.KeyCode;
 import kha.input.Mouse;
 
 class Controls extends echoes.System
 {
-	public var left:Bool;
-	public var right:Bool;
-	public var up:Bool;
-	public var down:Bool;
 	public var speed:Int = 5;
-	public var mouseDown:Bool = false;
-	public var mouseX:Int;
-	public var mouseY:Int;
     
     public function new() {
-		Keyboard.get().notify(onKeyDown, onKeyUp);
-		Mouse.get().notify(onMouseDown, onMouseUp, onMouseMove,null);
+		//Keyboard.get().notify(onKeyDown, onKeyUp);
+		//Mouse.get().notify(onMouseDown, onMouseUp, onMouseMove,null);
     }
-	@u inline public function update(pos:Position, p:Player)
+	@u public function updateG(pos:Position, p:Player, g:GamePad,k:KeyboardComp,m:MouseComp)
 	{
-		if(up)
+
+
+		if(k.keysHeld[KeyCode.Up] || k.keysHeld[KeyCode.W] || g.buttonsPressed[GamePad.DUP])
 		{
 			pos.y -= speed;
 		}
-		else if(down)
+		else if(k.keysHeld[KeyCode.Down] || k.keysHeld[KeyCode.S] || g.buttonsPressed[GamePad.DDOWN])
 		{
 			pos.y += speed;
 		}
 
-		if(left)
+		if(k.keysHeld[KeyCode.Left] || k.keysHeld[KeyCode.A] || g.buttonsPressed[GamePad.DLEFT])
 		{
 			pos.x -= speed;
 		}
-		else if(right)
+		else if(k.keysHeld[KeyCode.Right] || k.keysHeld[KeyCode.D] || g.buttonsPressed[GamePad.DRIGHT])
 		{
 			pos.x += speed;
 		}
-		if(mouseDown)
+
+		
+		if(Mouse.isHeld(0,m))
 		{
-			var diffX = mouseX - pos.x;
-			var diffY = mouseY - pos.y;
+			var diffX = m.x - pos.x;
+			var diffY = m.y - pos.y;
 
 			if(Math.abs(diffX) > speed)
 			{
@@ -78,63 +79,4 @@ class Controls extends echoes.System
 		}
 	}
 
-	function onKeyDown(key:Int)
-	{
-		switch (key)
-		{				
-			case KeyCode.Left: left = true;
-			case KeyCode.Right: right = true;
-			case KeyCode.Up: up = true;
-			case KeyCode.Down: down = true;
-			case KeyCode.A: 
-				left = true;
-			case KeyCode.D: 
-				right = true;
-			case KeyCode.W: 
-				up = true;
-			case KeyCode.S: 
-				down = true;
-		}
-	}
-	function onKeyUp(key:Int)
-	{
-		switch (key)
-		{				
-			case KeyCode.Left: left = false;
-			case KeyCode.Right: right = false;
-			case KeyCode.Up: up = false;
-			case KeyCode.Down: down = false;
-			case KeyCode.A: 
-				left = false;
-			case KeyCode.D: 
-				right = false;
-			case KeyCode.W: 
-				up = false;
-			case KeyCode.S: 
-				down = false;
-		}
-	}
-	function onMouseDown(button:Int, mX:Int, mY:Int)
-	{
-		if(button == 0)
-		{
-			mouseDown = true;
-		}
-		mouseX = mX;
-		mouseY = mY;
-	}
-	function onMouseUp(button:Int, mX:Int, mY:Int)
-	{
-		if(button == 0)
-		{
-			mouseDown = false;
-		}
-		mouseX = mX;
-		mouseY = mY;
-	}
-	function onMouseMove(mX:Int, mY:Int, mCX:Int, mCY:Int)
-	{
-		mouseX = mX;
-		mouseY = mY;
-	}
 }

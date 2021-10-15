@@ -26,16 +26,27 @@ class Project {
 	public var enemiesEcho:Array<Entity> = [];
 	public static var buffer:Framebuffer;
 
-	public function new() 
+	public function initSystems() 
 	{
-		Workflow.addSystem(new GamePadSystem());
-		Workflow.addSystem(new Mouse());
 		Workflow.addSystem(new Movement(Main.WIDTH, Main.HEIGHT));
 		Workflow.addSystem(new Controls());
 		Workflow.addSystem(new Interaction());
 		Workflow.addSystem(new Bounds(Main.WIDTH, Main.HEIGHT));
 		Workflow.addSystem(new Animation());
+		
+		//Renders after Animation stepping systems
 		Workflow.addSystem(new Render(function():Framebuffer{return buffer;}));
+
+		//Add Inputs at the end because the update loop clears them 
+		Workflow.addSystem(new Keyboard());
+		Workflow.addSystem(new Mouse());
+		Workflow.addSystem(new GamePadSystem());
+	}
+
+	public function new() 
+	{
+		initSystems();
+
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 		Scheduler.addTimeTask(secondTick, 0, 1);
@@ -43,13 +54,15 @@ class Project {
 		characterEcho = new Entity().add(
 			new Position(Main.WIDTH /2 , Main.HEIGHT-Main.HEIGHT/5),
 			new Velocity(0,0),
-			new components.Player(),
+			new Player(),
 			AnimComp.createAnimDataRange(0,3,Math.round(1000000)),
 			new ImageComp(images.main),
 			new Scale(1,1),
-			new WH(32,32),
+			new WHComp(32,32),
 			new Visible(true),
-			new GamePad(0)
+			new GamePad(0),
+			new KeyboardComp(),
+			new MouseComp()
 		);
 		var i;
 		for(i in 0...numEnemys)
@@ -63,7 +76,7 @@ class Project {
 				new Scale(scale,scale),
 				new ImageComp(images.alt),
 				AnimComp.createAnimDataRange(0,3,Math.round(speed)),
-				new WH(32,32),
+				new WHComp(32,32),
 				new AnimData(new StringMap()),
 				new Visible(true),
 				new Angle(360 * Math.random())
@@ -83,7 +96,7 @@ class Project {
 	}
 	function frameBufferCapture(framebuffers: Array<Framebuffer>): Void 
 	{
-		buffer = framebuffers[0];//has to happen before the draw
+		buffer = framebuffers[0];//obviously has to happen before the Workflow.draw
 		
         buffer.g2.begin(true,Color.Black);
 		Workflow.draw();

@@ -5,9 +5,8 @@ import components.GamePad;
 class GamePadSystem extends echoes.System
 {
     
-	function new()
-        {         
-    
+	public function new()
+        {
             for (i in 0...4)
             {
                 if (kha.input.Gamepad.get(i) != null)
@@ -61,7 +60,7 @@ class GamePadSystem extends echoes.System
                 g.rightAnalog.x = value;
             else if (axis == 3)
                 g.rightAnalog.y = value;
-            else if (axis == 2)
+            else if (axis == 4)
                 g.leftTrigger = value;
             else if (axis == 5)
                 g.rightTrigger = value;
@@ -95,12 +94,14 @@ class GamePadSystem extends echoes.System
         {
             if (value > 0)
             {
+                trace('greater: ' + button + " " +value);
                 g.buttonsJustPressed = true;
                 g.buttonsPressed.set(button, true);
                 g.buttonsHeld.set(button, true);
             }
             else
             {
+                trace('not: ' + button + " " +value);
                 g.buttonsHeld.set(button, false);
                 g.buttonsUp.set(button, true);
             }

@@ -1,6 +1,6 @@
 package components;
 
-class WH {
+class WHComp {
 
     public var w:Float;
     public var h:Float;
