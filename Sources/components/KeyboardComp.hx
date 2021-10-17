@@ -1,7 +1,7 @@
 package components;
 import kha.input.KeyCode;
 
-class KeyboardComp
+class KeyboardComp implements hxbit.Serializable
 {
 	public var keysPressed:Map<KeyCode, Bool>;
 	public var keysHeld:Map<KeyCode, Bool>;

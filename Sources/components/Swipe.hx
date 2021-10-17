@@ -1,13 +1,12 @@
 package components;
 
-import kha.math.Vector2;
 
 class Swipe
 {
-	public var start:Vector2;
-	public var end:Vector2;
+	public var start:Vec2;
+	public var end:Vec2;
 
-	public function new(start:Vector2, end:Vector2):Void
+	public function new(start:Vec2, end:Vec2):Void
 	{
 		this.start = start;
 		this.end = end;

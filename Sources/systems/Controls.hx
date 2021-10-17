@@ -11,16 +11,11 @@ import kha.input.Mouse;
 
 class Controls extends echoes.System
 {
-	public var speed:Int = 5;
+	public static inline final speed:Int = 5;
     
-    public function new() {
-		//Keyboard.get().notify(onKeyDown, onKeyUp);
-		//Mouse.get().notify(onMouseDown, onMouseUp, onMouseMove,null);
-    }
+    public function new() {}
 	@u public function updateK(pos:Position, p:Player, k:KeyboardComp)
 	{
-
-
 		if(k.keysHeld[KeyCode.Up] || k.keysHeld[KeyCode.W])
 		{
 			pos.y -= speed;
@@ -37,9 +32,7 @@ class Controls extends echoes.System
 		else if(k.keysHeld[KeyCode.Right] || k.keysHeld[KeyCode.D])
 		{
 			pos.x += speed;
-		}
-
-		
+		}		
 	}
 
 	@u public function updateM(pos:Position, p:Player, m:MouseComp)

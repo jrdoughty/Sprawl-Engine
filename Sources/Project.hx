@@ -10,12 +10,12 @@ import echoes.Entity;
 import components.*;
 import systems.*;
 import echoes.Workflow;
-import components.AnimComp.AnimData;
 import haxe.ds.StringMap;
 import kha.math.FastMatrix3;
 import kha.graphics2.Graphics;
 import kha.Color;
 import kha.FastFloat;
+import hxbit.Serializer;
 
 class Project {
 	var characterEcho:Entity;
@@ -51,6 +51,11 @@ class Project {
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 		Scheduler.addTimeTask(secondTick, 0, 1);
 		var images = Assets.images;
+		
+		var s = new Serializer();
+		var b = s.serialize(new Vec2(5,5));
+		trace(s.unserialize(b,Vec2).x);
+
 		characterEcho = new Entity().add(
 			new Position(Main.WIDTH /2 , Main.HEIGHT-Main.HEIGHT/5),
 			new Velocity(0,0),

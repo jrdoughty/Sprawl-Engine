@@ -1,8 +1,8 @@
 package components;
 
-class Vec2 {
+class Vec2 implements hxbit.Serializable {
 
-    public var x:Float;
+    @:s public var x:Float;
     public var y:Float;
 
     public function new(x = .0, y = .0) {

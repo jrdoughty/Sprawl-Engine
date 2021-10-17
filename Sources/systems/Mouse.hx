@@ -5,6 +5,7 @@ import kha.input.Mouse;
 import components.Swipe;
 import kha.math.Vector2;
 import kha.System;
+import components.Vec2;
 
 class Mouse extends echoes.System
 {
@@ -160,7 +161,7 @@ class Mouse extends echoes.System
 				&& m.durationMouseDown > timeFrom && m.durationMouseDown < timeUntil);									
 	
 			if (swipeOcurred)
-				return new Swipe(new Vector2(m.sx, m.sy), new Vector2(m.x, m.y));
+				return new Swipe(new Vec2(m.sx, m.sy), new Vec2(m.x, m.y));
 			else
 				return null;
 		}

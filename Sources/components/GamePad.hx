@@ -1,8 +1,7 @@
 package components;
 
-import kha.math.Vector2;
 
-class GamePad
+class GamePad implements hxbit.Serializable 
 {
 
 	public static inline var A_X:Int = 0;
@@ -24,8 +23,8 @@ class GamePad
 	public var id:Int;
 	public var active:Bool;
 
-	public var leftAnalog:Vector2;
-	public var rightAnalog:Vector2;
+	public var leftAnalog:Vec2;
+	public var rightAnalog:Vec2;
 	public var leftTrigger:Float = 0;
 	public var rightTrigger:Float = 0;
 	
@@ -38,8 +37,8 @@ class GamePad
 	public function new(id:Int)
 	{
 		this.id = id;
-		leftAnalog = new Vector2(0, 0);
-		rightAnalog = new Vector2(0, 0);
+		leftAnalog = new Vec2(0, 0);
+		rightAnalog = new Vec2(0, 0);
 		leftTrigger = 0;
 		rightTrigger = 0;
 		buttonsPressed = new Map<Int, Bool>();

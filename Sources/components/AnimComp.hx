@@ -2,11 +2,11 @@ package components;
 
 import haxe.ds.StringMap;
 
-class AnimComp {
-	public var indices: Array<Int>;
-	public var speeddiv: Int;
-	public var count: Int;
-	public var index: Int;
+class AnimComp  implements hxbit.Serializable {
+	@:s public var indices: Array<Int>;
+	@:s public var speeddiv: Int;
+	@:s public var count: Int;
+	@:s public var index: Int;
 	
 	
 	public function new(indices: Array<Int>, speeddiv: Int) {
@@ -27,10 +27,5 @@ class AnimComp {
 		return new AnimComp(indices, speeddiv);
 	}
 }
-@:forward
-abstract AnimData(StringMap<AnimComp>) {
-	inline public function new(sm:StringMap<AnimComp>) {
-		this = sm;
-	  }
-}
+
 

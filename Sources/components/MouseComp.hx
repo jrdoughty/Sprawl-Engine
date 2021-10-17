@@ -1,6 +1,6 @@
 package components;
 
-class MouseComp {
+class MouseComp implements hxbit.Serializable {
 
 	public var init:Bool = false;	
 	/**
