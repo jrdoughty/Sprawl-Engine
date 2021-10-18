@@ -51,11 +51,11 @@ class Render extends System
 			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
 		#end
 	}
-    @d function sortByYPos() 
+    @d inline function sortByYPos() 
     {
         sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
     }
-    @d function draw() 
+    @d inline function draw() 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
