@@ -1,13 +1,12 @@
 package systems;
 
-import kha.Color;
-import components.*;
 import echoes.System;
+import kha.Color;
 import kha.Framebuffer;
-import kha.Assets;
+import echo.shape.Circle;
+using kha.graphics2.GraphicsExtension;
 
-
-class UI extends echoes.System
+class CircleRender extends System
 {
     var bufferCallback:Void->Framebuffer;
 
@@ -15,14 +14,14 @@ class UI extends echoes.System
     {
         bufferCallback = func;
     }
+
     
-    @d function draw(s:ScoreComp) 
+    @d function draw(c:Circle) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
-        buffer.g2.color = Color.White;
-        buffer.g2.font = Assets.fonts.OpenSans;
-		buffer.g2.fontSize = 48;
-		buffer.g2.drawString(s.score+"", 32, 32);
+        buffer.g2.color = Color.Yellow;
+        buffer.g2.drawCircle(c.x,c.y,c.radius,2);
     }
+	
 }

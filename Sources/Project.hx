@@ -35,6 +35,8 @@ class Project {
 		Workflow.addSystem(new Movement(Main.WIDTH, Main.HEIGHT));
 		Workflow.addSystem(new Controls());
 		Workflow.addSystem(new UnitIdleMovement());
+		Workflow.addSystem(new EnemyIdleMovement());
+		Workflow.addSystem(new EnemyAttack());
 		Workflow.addSystem(new EnemyUnitCollision());
 		Workflow.addSystem(new MoveToTargetPosition());
 		Workflow.addSystem(new Bounds(Main.WIDTH, Main.HEIGHT));
@@ -42,8 +44,9 @@ class Project {
 		
 		//Renders after Animation stepping systems
 		var bufferCallback = function():Framebuffer{return buffer;};
-		Workflow.addSystem(new Render(function():Framebuffer{return buffer;}));
-		Workflow.addSystem(new UI(function():Framebuffer{return buffer;}));
+		Workflow.addSystem(new Render(bufferCallback));
+		Workflow.addSystem(new CircleRender(bufferCallback));
+		Workflow.addSystem(new UI(bufferCallback));
 		
 		//Add Inputs at the end because the update loop clears them 
 		Workflow.addSystem(new Keyboard());

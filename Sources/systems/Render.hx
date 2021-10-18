@@ -20,7 +20,6 @@ class Render extends System
     public function new(func:Void->Framebuffer)
     {
         bufferCallback = func;
-		//System.notifyOnRender(updateMovedSprite);
     }
 
     
