@@ -8,6 +8,7 @@ import  kha.graphics2.Graphics;
 import kha.math.FastMatrix3;
 import kha.FastFloat;
 import kha.Framebuffer;
+import kha.Assets;
 
 class Render extends System
 {
@@ -15,18 +16,6 @@ class Render extends System
     var sprites:View<ImageComp>;
 
 
-    @d function draw(player:Player, pos:Position) {
-        var buffer = bufferCallback();
-        if(buffer == null) return;
-        
-        // micro optimizaion to not test each entity twice
-        var h1 = sprites.entities.head;
-        while (h1 != null) {
-            var entity1 = h1.value;
-            renderByEntity(buffer.g2, entity1);
-            h1 = h1.next;
-        }
-    }
 
     public function new(func:Void->Framebuffer)
     {
@@ -51,7 +40,7 @@ class Render extends System
 			g.drawScaledSubImage(ic.value, Std.int(ac.indices[ac.index] * wh.w) % ic.value.width, 
             Math.floor(ac.indices[ac.index] * wh.w / ic.value.width) * wh.h, 
             wh.w, wh.h, 
-            Math.round(pos.x), Math.round(pos.y), 
+            Math.round(pos.x - wh.w/2), Math.round(pos.y-wh.h/2), //Render at center
             wh.w * s.x, wh.h * s.y);
 			if (angle != null && cast(angle,FastFloat) != 0) 
 				g.popTransformation();
@@ -63,5 +52,23 @@ class Render extends System
 			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
 		#end
 	}
+    @d function sortByYPos() 
+    {
+        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
+    }
+    @d function draw() 
+    {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+        
+        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
+        // micro optimizaion to not test each entity twice
+        var h1 = sprites.entities.head;
+        while (h1 != null) {
+            var entity1 = h1.value;
+            renderByEntity(buffer.g2, entity1);
+            h1 = h1.next;
+        }
+    }
 	
 }

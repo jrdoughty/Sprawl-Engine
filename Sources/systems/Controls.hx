@@ -11,7 +11,7 @@ import kha.input.Mouse;
 
 class Controls extends echoes.System
 {
-	public static inline final speed:Int = 5;
+	public static inline final speed:Int = 3;
     
     public function new() {}
 	@u public function updateK(pos:Position, p:Player, k:KeyboardComp)
