@@ -18,7 +18,6 @@ import kha.Color;
 import kha.FastFloat;
 import hxbit.Serializer;
 import slide.Slide;
-import echo.Echo;
 
 class Project {
 	var characterEcho:Entity;
@@ -30,14 +29,13 @@ class Project {
 	public var enemys:Array<Enemy> = [];
 	public var enemiesEcho:Array<Entity> = [];
 	public static var buffer:Framebuffer;
-	public static var world:echo.World;
 	public function initSystems() 
 	{
 		Workflow.addSystem(new Movement(Main.WIDTH, Main.HEIGHT));
 		Workflow.addSystem(new Controls());
 		Workflow.addSystem(new UnitIdleMovement());
 		Workflow.addSystem(new EnemyIdleMovement());
-		Workflow.addSystem(new EnemyAttack(world));
+		Workflow.addSystem(new EnemyAttack());
 		Workflow.addSystem(new EnemyUnitCollision());
 		Workflow.addSystem(new MoveToTargetPosition());
 		Workflow.addSystem(new Bounds(Main.WIDTH, Main.HEIGHT));
@@ -46,7 +44,7 @@ class Project {
 		//Renders after Animation stepping systems
 		var bufferCallback = function():Framebuffer{return buffer;};
 		Workflow.addSystem(new Render(bufferCallback));
-		Workflow.addSystem(new EchoShapeRender(bufferCallback));
+		//Workflow.addSystem(new EchoShapeRender(bufferCallback));
 		Workflow.addSystem(new UI(bufferCallback));
 		
 		//Add Inputs at the end because the update loop clears them 
@@ -57,12 +55,6 @@ class Project {
 
 	public function new() 
 	{
-		world = Echo.start({
-			width: 900, // Affects the bounds for collision checks.
-			height: 900, // Affects the bounds for collision checks.
-			gravity_y: 5, // Force of Gravity on the Y axis. Also available for the X axis.
-			iterations: 2 // Sets the number of Physics iterations that will occur each time the World steps.
-		  });
 		  initSystems();
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
@@ -128,7 +120,6 @@ class Project {
 	function update(): Void 
 	{
 		Slide.step(1 / 60);
-		world.step(1 / 60);
 		Workflow.update(1 / 60);
 		
 	}
