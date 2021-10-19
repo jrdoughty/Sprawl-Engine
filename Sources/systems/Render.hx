@@ -31,6 +31,14 @@ class Render extends System
 		var s:Scale = e.get(Scale);
 		var vis:Visible = e.get(Visible);
 		var angle:Angle = e.get(Angle);
+        var x = pos.x;
+        var y = pos.y;
+        //Render at center
+        if(e.get(TopLeftRender) == null)
+        {
+            x -= Math.round(wh.w/2);
+            y -= Math.round(-wh.h/2);
+        }
 		if (ic.value != null && vis != null && cast(vis, Bool) )
 			{
 			g.color = Color.White;
@@ -39,7 +47,7 @@ class Render extends System
 			g.drawScaledSubImage(ic.value, Std.int(ac.indices[ac.index] * wh.w) % ic.value.width, 
             Math.floor(ac.indices[ac.index] * wh.w / ic.value.width) * wh.h, 
             wh.w, wh.h, 
-            Math.round(pos.x - wh.w/2), Math.round(pos.y-wh.h/2), //Render at center
+            x, y, 
             wh.w * s.x, wh.h * s.y);
 			if (angle != null && cast(angle,FastFloat) != 0) 
 				g.popTransformation();
