@@ -14,7 +14,7 @@ class UnitIdleMovement extends System
                 Math.round(unit.get(TargetPosition).y) == Math.round(unit.get(Position).y))
             {
                 unit.remove(TargetPosition);
-                unit.get(Unit).framesUntil = 45;
+                unit.get(Unit).framesUntil = 30;
             }
             unit.get(Unit).framesUntil--; 
             if(unit.get(Unit).framesUntil <= 0 && unit.get(TargetPosition) == null )

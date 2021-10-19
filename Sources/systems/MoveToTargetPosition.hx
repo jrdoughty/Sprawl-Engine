@@ -6,7 +6,16 @@ import slide.Slide;
 
 class MoveToTargetPosition extends System
 {
-    @a public function queueTween(pos:Position, target:TargetPosition) 
+    @a public function queueTweenU(pos:Position, target:TargetPosition,u:Unit) 
+    {
+        var dlt = Math.abs(pos.x - target.x)+ Math.abs(pos.y - target.y);
+        Slide.tween(pos)
+            .to({x:target.x,y:target.y}, dlt/200)
+            .ease(slide.easing.Quad.easeIn)
+            .start();
+            
+    }
+    @a public function queueTweenE(pos:Position, target:TargetPosition, e:Enemy) 
     {
         var dlt = Math.abs(pos.x - target.x)+ Math.abs(pos.y - target.y);
         Slide.tween(pos)

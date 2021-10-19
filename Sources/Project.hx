@@ -1,5 +1,7 @@
 package;
 
+import nape.phys.BodyType;
+import nape.phys.Body;
 import kha.Worker;
 import haxe.Constraints.Function;
 import systems.Animation;
@@ -19,20 +21,26 @@ import kha.FastFloat;
 import hxbit.Serializer;
 import slide.Slide;
 
-class Project {
-	var characterEcho:Entity;
+import nape.geom.Vec2;
+import nape.space.Space;
+import nape.shape.Circle;
 
+class Project {
+	public var characterEcho:Entity;
+	public var space:Space;
 	public var numUnits:Int = 10;
-	public var numPeople:Int = 1;
+	public var numPeople:Int = 10;
 	public var score:Int = 0;
 	public var fps:Int = 0;
 	public var enemys:Array<Enemy> = [];
 	public var enemiesEcho:Array<Entity> = [];
+	public var pegs:Array<Entity> = [];
 	public static var buffer:Framebuffer;
 	public function initSystems() 
 	{
 		Workflow.addSystem(new Movement(Main.WIDTH, Main.HEIGHT));
 		Workflow.addSystem(new Controls());
+		Workflow.addSystem(new PhysicsSystem(space));
 		Workflow.addSystem(new UnitIdleMovement());
 		Workflow.addSystem(new EnemyIdleMovement());
 		Workflow.addSystem(new EnemyAttack());
@@ -44,7 +52,7 @@ class Project {
 		//Renders after Animation stepping systems
 		var bufferCallback = function():Framebuffer{return buffer;};
 		Workflow.addSystem(new Render(bufferCallback));
-		//Workflow.addSystem(new EchoShapeRender(bufferCallback));
+		Workflow.addSystem(new ShapeRender(bufferCallback));
 		Workflow.addSystem(new UI(bufferCallback));
 		
 		//Add Inputs at the end because the update loop clears them 
@@ -55,16 +63,29 @@ class Project {
 
 	public function new() 
 	{
+		space = new Space(new Vec2(0,350));
 		  initSystems();
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 		var images = Assets.images;
-		
+		/*
 		var s = new Serializer();
 		var b = s.serialize(new Vec2(5,5));
 		trace(s.unserialize(b,Vec2).x);
+		*/
 		var sEntity = new Entity().add(
 			new ScoreComp(1));
+		new Entity().add(
+			new Position(0, 0),
+			AnimComp.createAnimDataRange(0,0,Math.round(100)),
+			new ImageComp(images.back),
+			new Scale(1,1),
+			new WHComp(Main.WIDTH,Main.HEIGHT),
+			new WHComp(Main.WIDTH,Main.HEIGHT),
+			new Visible(true),
+			new TopLeftRender(true));
+
+
 		characterEcho = new Entity().add(
 			new Position(Main.WIDTH /2 , Main.HEIGHT-Main.HEIGHT/5),
 			new Velocity(0,0),
@@ -101,7 +122,7 @@ class Project {
 		}
 		for(i in 0...numPeople)
 		{
-			var speed = (Math.random()+.5)*40;
+			var speed = 5;
 			enemiesEcho.push(new Entity().add(//(.4+Math.random()/8)
 				new Position(Main.WIDTH * Math.random(), Main.HEIGHT * Math.random() ),
 				new Velocity(0,0),
@@ -115,11 +136,22 @@ class Project {
 				new Angle(0)//360 * Math.random())
 			));
 		}
+		for(i in 0...120)
+		{
+			var c = new Circle(5);
+			var body = new Body(BodyType.STATIC, new Vec2((30 * i) % Main.WIDTH, 800 - 30*Math.floor(i/30)));
+			if(Math.floor(i/30)%2==0)
+				body.position.x += 15;
+			c.body = body;
+			pegs.push(new Entity().add(c));
+			//pegs[pegs.length-1].get(Circle).body = body;
+		}
 	}
 
 	function update(): Void 
 	{
 		Slide.step(1 / 60);
+		space.step(1/60);
 		Workflow.update(1 / 60);
 		
 	}

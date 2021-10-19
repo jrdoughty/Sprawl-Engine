@@ -3,6 +3,13 @@ package systems;
 import echoes.System;
 import components.*;
 import echoes.View;
+import nape.phys.Material;
+import nape.phys.BodyType;
+import nape.phys.Body;
+import nape.shape.Polygon;
+import nape.shape.Circle;
+import nape.geom.Vec2;
+import echoes.Entity;
 
 class EnemyUnitCollision extends System 
 {
@@ -14,14 +21,36 @@ class EnemyUnitCollision extends System
         var h1 = enemies.entities.head;
         while (h1 != null) {
 
-            var entity1 = h1.value;
-            var posE = entity1.get(Position);
+            var enemy = h1.value;
+            var posE = enemy.get(Position);
             
-            if (Utils.AABBTestFromCenter(entity1.get(Position), entity1.get(WHComp), pos,wh)) 
+            if (Utils.AABBTestFromCenter(enemy.get(Position), enemy.get(WHComp), pos,wh)) 
             {
-                score.entities.head.value.get(ScoreComp).score += 100;
-                entity1.get(Position).y = -100;
-                entity1.add(new Death());
+                //score.entities.head.value.get(ScoreComp).score += 100;
+
+                for(i in 0...(Math.round(Math.random()*5)+2))
+                {
+                    var c = new Circle(5);
+                    var speedY = -8 * (Math.random() * .75 + .15)-4;
+                    var speedX = 2-4*Math.random();
+                    c.body = new Body(BodyType.DYNAMIC);
+                    c.body.position.x = enemy.get(Position).x;
+                    c.body.position.y = enemy.get(Position).y-4;
+                    c.body.shapes.at(0).material = new Material(0,1,2,.5,.001);
+                    c.body.applyImpulse(new Vec2(speedX, speedY));
+                    new Entity().add(c);
+                }
+                enemy.remove(TargetPosition);
+                enemy.add(new TargetPosition(-100,-100));
+                enemy.remove(Enemy);
+                /*
+                var vs:Array<Vec2> = Polygon.box(50,10);
+                var p:Polygon = new Polygon(vs);
+                p.body = new Body(BodyType.STATIC);
+                p.body.position.x = enemy.get(Position).x-20;
+                p.body.position.y = enemy.get(Position).y+20;
+                var floor = new Entity().add(p);
+                */
             }
             
 
