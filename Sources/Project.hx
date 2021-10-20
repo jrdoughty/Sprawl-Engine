@@ -45,6 +45,7 @@ class Project {
 		Workflow.addSystem(new IdleMovement());
 		Workflow.addSystem(new EnemyAttack());
 		Workflow.addSystem(new EnemyUnitCollision());
+		Workflow.addSystem(new DebrisUnitCollision());
 		Workflow.addSystem(new MoveToTargetPosition());
 		Workflow.addSystem(new CatcherCollectSystem());
 		Workflow.addSystem(new Animation());
@@ -217,7 +218,7 @@ class Project {
 				);
 			}
 		}
-		
+		/*
 		for(i in 0...numPeople)
 		{
 			new Entity().add(
@@ -233,6 +234,19 @@ class Project {
 				new Visible(true),
 				new Angle(0),
 				new Building()
+			);
+		}*/
+		var debImages = [images.tree,images.barrel,images.bottle, images.shovel, images.box];
+		for(i in 0...numPeople*4)
+		{
+			new Entity().add(
+				new Position(Math.random()*Main.WIDTH,Math.random()*Main.PLAYAREAHEIGHT),
+				new Scale(1,1),
+				new ImageComp(debImages[(i%debImages.length)]),
+				AnimComp.createAnimDataRange(0,0,Math.round(speed)),
+				new WHComp(debImages[(i%debImages.length)].width,debImages[(i%debImages.length)].height),
+				new Visible(true),
+				new Debris()
 			);
 		}
 	}

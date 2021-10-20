@@ -19,7 +19,7 @@ class ShapeRender extends System
         bufferCallback = func;
     }
 
-    
+    #if debug_collisions
     @d function drawCircle(c:Circle) 
     {
         var buffer = bufferCallback();
@@ -54,5 +54,5 @@ class ShapeRender extends System
         buffer.g2.drawCircle(p.x,p.y,1,1);
     }
     
-
+    #end
 }
