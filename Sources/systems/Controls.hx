@@ -75,5 +75,18 @@ class Controls extends echoes.System
 				}
 			}
 		}
-	
+		@u public function updateByBounds(pos:Position, p:Player)
+			{		
+				if(pos.y > Main.PLAYAREAHEIGHT)
+					pos.y = Main.PLAYAREAHEIGHT;
+				
+				if(pos.x > Main.WIDTH)
+					pos.x = Main.WIDTH;
+				if(pos.y < 0)
+					pos.y = 0;
+				
+				if(pos.x < 0)
+					pos.x = 0;
+				
+			}
 }

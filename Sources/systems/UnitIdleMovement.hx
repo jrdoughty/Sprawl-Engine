@@ -20,6 +20,8 @@ class UnitIdleMovement extends System
             if(unit.get(Unit).framesUntil <= 0 && unit.get(TargetPosition) == null )
             {               
                 var t:TargetPosition = cast(Utils.findRandomPointInCircle(pos,100), TargetPosition);
+                if(t.y > Main.PLAYAREAHEIGHT)
+                    t.y = Main.PLAYAREAHEIGHT;
                 unit.add(t);
             }   
         }

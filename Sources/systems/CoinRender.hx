@@ -1,35 +1,43 @@
 package systems;
 
+import nape.phys.BodyType;
 import echoes.System;
-import echoes.View;
+import kha.Color;
+import kha.Framebuffer;
+import nape.shape.*;
 import components.*;
+import kha.math.Vector2;
+import nape.geom.Vec2;
 import kha.Color;
 import  kha.graphics2.Graphics;
 import kha.math.FastMatrix3;
 import kha.FastFloat;
 import kha.Framebuffer;
 import kha.Assets;
+import echoes.View;
 
-class Render extends System
+
+class CoinRender extends System
 {
     var bufferCallback:Void->Framebuffer;
-    var sprites:View<ImageComp,WHComp>;
-
-
+    var sprites:View<ImageComp,Circle>;
 
     public function new(func:Void->Framebuffer)
     {
         bufferCallback = func;
     }
 
-    
+    @u public function updateRotationOfCoin(c:Circle, a:Angle)
+    {
+        a = cast(c.body.rotation, Angle);   
+    }
     public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
 		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
-		var wh:WHComp = e.get(WHComp);
-		var pos:Position = e.get(Position);
-		var s:Scale = e.get(Scale);
-		var vis:Visible = e.get(Visible);
+		var wh:WHComp = new WHComp(e.get(Circle).radius*2,e.get(Circle).radius*2);
+		var pos:Position = new Position(e.get(Circle).body.position.x,e.get(Circle).body.position.y);
+		var s:Scale = new Scale();
+		var vis:Visible = new Visible(true);
 		var angle:Angle = e.get(Angle);
         var x = pos.x;
         var y = pos.y;
@@ -59,16 +67,10 @@ class Render extends System
 			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
 		#end
 	}
-    @d inline function sortByYPos() 
-    {
-        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
-    }
     @d inline function draw() 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
-        
-        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
         // micro optimizaion to not test each entity twice
         var h1 = sprites.entities.head;
         while (h1 != null) {
@@ -77,5 +79,7 @@ class Render extends System
             h1 = h1.next;
         }
     }
-	
+     
+    
+
 }

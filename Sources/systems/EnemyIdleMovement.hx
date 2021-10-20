@@ -22,6 +22,9 @@ class EnemyIdleMovement extends System
                 if(unit.get(Enemy).framesUntil <= 0 && unit.get(TargetPosition) == null )
                 {               
                     var t:TargetPosition = cast(Utils.findRandomPointInCircle(unit.get(Position),32), TargetPosition);
+                    
+                    if(t.y > Main.PLAYAREAHEIGHT)
+                        t.y = Main.PLAYAREAHEIGHT;
                     unit.add(t);
                 }    
             }

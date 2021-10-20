@@ -44,7 +44,14 @@ class ShapeRender extends System
             verts.push(new Vector2(i.x,i.y));   
         }
         buffer.g2.drawPolygon(p.body.position.x,p.body.position.y, verts);
-        //trace(b.x + "r.x  "+b.y +"r.y");
+    }
+     
+    @d function drawPos(p:components.Position) 
+    {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+        buffer.g2.color = Color.Red;
+        buffer.g2.drawCircle(p.x,p.y,1,1);
     }
     
 

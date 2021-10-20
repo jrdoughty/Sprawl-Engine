@@ -10,6 +10,7 @@ import nape.shape.Polygon;
 import nape.shape.Circle;
 import nape.geom.Vec2;
 import echoes.Entity;
+import kha.Assets;
 
 class EnemyUnitCollision extends System 
 {
@@ -30,7 +31,7 @@ class EnemyUnitCollision extends System
 
                 for(i in 0...(Math.round(Math.random()*5)+2))
                 {
-                    var c = new Circle(5);
+                    var c = new Circle(4);
                     var speedY = -8 * (Math.random() * .75 + .15)-4;
                     var speedX = 2-4*Math.random();
                     c.body = new Body(BodyType.DYNAMIC);
@@ -38,7 +39,11 @@ class EnemyUnitCollision extends System
                     c.body.position.y = enemy.get(Position).y-4;
                     c.body.shapes.at(0).material = new Material(0,1,2,.5,.001);
                     c.body.applyImpulse(new Vec2(speedX, speedY));
-                    new Entity().add(c);
+                    c.body.applyAngularImpulse(5);
+                    new Entity().add(c,
+                        new ImageComp(Assets.images.coin),
+                        AnimComp.createAnimDataRange(0,0,Math.round(100)),
+                        new Angle(0));
                 }
                 enemy.remove(TargetPosition);
                 enemy.add(new TargetPosition(-100,-100));

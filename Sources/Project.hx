@@ -1,5 +1,6 @@
 package;
 
+import nape.shape.Polygon;
 import nape.phys.BodyType;
 import nape.phys.Body;
 import kha.Worker;
@@ -27,9 +28,9 @@ import nape.shape.Circle;
 
 class Project {
 	public var characterEcho:Entity;
-	public var space:Space;
 	public var numUnits:Int = 10;
 	public var numPeople:Int = 10;
+	public var numCollectors:Int = 10;
 	public var score:Int = 0;
 	public var fps:Int = 0;
 	public var enemys:Array<Enemy> = [];
@@ -38,21 +39,21 @@ class Project {
 	public static var buffer:Framebuffer;
 	public function initSystems() 
 	{
-		Workflow.addSystem(new Movement(Main.WIDTH, Main.HEIGHT));
+		Workflow.addSystem(new Movement());
 		Workflow.addSystem(new Controls());
-		Workflow.addSystem(new PhysicsSystem(space));
-		Workflow.addSystem(new UnitIdleMovement());
-		Workflow.addSystem(new EnemyIdleMovement());
+		Workflow.addSystem(new PhysicsSystem());
+		Workflow.addSystem(new IdleMovement());
 		Workflow.addSystem(new EnemyAttack());
 		Workflow.addSystem(new EnemyUnitCollision());
 		Workflow.addSystem(new MoveToTargetPosition());
-		Workflow.addSystem(new Bounds(Main.WIDTH, Main.HEIGHT));
+		Workflow.addSystem(new CatcherCollectSystem());
 		Workflow.addSystem(new Animation());
 		
 		//Renders after Animation stepping systems
 		var bufferCallback = function():Framebuffer{return buffer;};
 		Workflow.addSystem(new Render(bufferCallback));
 		Workflow.addSystem(new ShapeRender(bufferCallback));
+		Workflow.addSystem(new CoinRender(bufferCallback));
 		Workflow.addSystem(new UI(bufferCallback));
 		
 		//Add Inputs at the end because the update loop clears them 
@@ -63,7 +64,6 @@ class Project {
 
 	public function new() 
 	{
-		space = new Space(new Vec2(0,350));
 		  initSystems();
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
@@ -87,7 +87,7 @@ class Project {
 
 
 		characterEcho = new Entity().add(
-			new Position(Main.WIDTH /2 , Main.HEIGHT-Main.HEIGHT/5),
+			new Position(Main.WIDTH /2 , Main.HEIGHT/2),
 			new Velocity(0,0),
 			new Player(),
 			AnimComp.createAnimDataRange(0,3,Math.round(100)),
@@ -105,7 +105,7 @@ class Project {
 		for(i in 0...numUnits)
 		{
 			var speed = (Math.random()+.5)*40;
-			enemiesEcho.push(new Entity().add(//(.4+Math.random()/8)
+			new Entity().add(//(.4+Math.random()/8)
 				Utils.findRandomPointInCircle(characterEcho.get(Position),64),
 				new Velocity(0,0),
 				new Scale(1,1),
@@ -114,17 +114,16 @@ class Project {
 				new WHComp(32,32),
 				new AnimData(new StringMap()),
 				new Visible(true),
-				new Angle(0),//360 * Math.random())
-				new KeyboardComp(),
-				new Unit(Math.round(120 * Math.random())),
-				new MouseComp()
-			));
+				new Angle(0),
+				new Unit(Math.round(120 * Math.random()))
+			);
 		}
+		
+		var speed = 5;
 		for(i in 0...numPeople)
 		{
-			var speed = 5;
 			enemiesEcho.push(new Entity().add(//(.4+Math.random()/8)
-				new Position(Main.WIDTH * Math.random(), Main.HEIGHT * Math.random() ),
+				new Position(Main.WIDTH * Math.random(), Main.PLAYAREAHEIGHT * Math.random() ),
 				new Velocity(0,0),
 				new Scale(1,1),
 				new ImageComp(images.peep),
@@ -143,15 +142,44 @@ class Project {
 			if(Math.floor(i/30)%2==0)
 				body.position.x += 15;
 			c.body = body;
-			pegs.push(new Entity().add(c));
+			pegs.push(new Entity().add(c,
+				new ImageComp(Assets.images.peg),
+				AnimComp.createAnimDataRange(0,0,Math.round(100)),
+				new Angle(0)));
 			//pegs[pegs.length-1].get(Circle).body = body;
+		}
+		//floor
+		var poly:Polygon = new Polygon(Polygon.rect(0,0,Main.WIDTH,10));
+		poly.body = new Body(BodyType.STATIC, new Vec2(0, Main.HEIGHT));
+		new Entity().add(poly);
+		//walls
+		poly = new Polygon(Polygon.rect(0,0,10,Main.HEIGHT));
+		poly.body = new Body(BodyType.STATIC, new Vec2(-9, 0));
+		new Entity().add(poly);
+		poly = new Polygon(Polygon.rect(0,0,10,Main.HEIGHT));
+		poly.body = new Body(BodyType.STATIC, new Vec2(Main.WIDTH, 0));
+		new Entity().add(poly);
+
+		for(i in 0...numCollectors)
+		{
+			new Entity().add(
+				new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-16),
+				new Velocity(0,0),
+				new Scale(1,1),
+				new ImageComp(images.alt),
+				AnimComp.createAnimDataRange(0,3,Math.round(speed)),
+				new WHComp(32,32),
+				new AnimData(new StringMap()),
+				new Visible(true),
+				new Angle(0),
+				new Catcher(Math.round(120 * Math.random()))
+			);
 		}
 	}
 
 	function update(): Void 
 	{
 		Slide.step(1 / 60);
-		space.step(1/60);
 		Workflow.update(1 / 60);
 		
 	}

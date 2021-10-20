@@ -12,6 +12,7 @@ class Main
 {
 	public static var WIDTH = 900;
 	public static var HEIGHT = 900;
+	public static var PLAYAREAHEIGHT = 666;
 	public static function main() {
 		System.start({
 			title:"RTS",

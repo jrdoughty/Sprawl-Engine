@@ -13,6 +13,35 @@ class Utils {
             pos1.y - wh1.h/2 < pos2.y + wh2.h/2 &&
             pos1.y + wh1.h/2 > pos2.y - wh2.h/2;
     }
+    //http://jeffreythompson.org/collision-detection/circle-rect.php
+    //Centered needs fixed
+    public static inline function CenteredRectCircleOverlapTest(recPos:Position, recWH:WHComp, cirPos:Position, r:Float) {
+        
+        var modifiedPos = new Position(recPos.x - recWH.w/2,recPos.y - recWH.h/2);
+
+        return RectCircleOverlapTest(modifiedPos, recWH, cirPos,r);
+    }
+    public static inline function RectCircleOverlapTest(recPos:Position, recWH:WHComp, cirPos:Position, r:Float) {
+        var testX:Float = cirPos.x;
+        var testY:Float = cirPos.y;
+
+        if (cirPos.x < recPos.x) testX = recPos.x;        // left edge
+        else if (cirPos.x > recPos.x + recWH.w) testX = recPos.x + recWH.w;      // right edge
+
+        if (cirPos.y < recPos.y) testY = recPos.y;        // top edge
+        else if (cirPos.y > recPos.y + recWH.h) testY = recPos.y + recWH.h;     // bottom edge
+        
+        // get distance from closest edges
+        var distX = cirPos.x-testX;
+        var distY = cirPos.y-testY;
+        var distance = Math.sqrt( (distX*distX) + (distY*distY) );
+
+        // if the distance is less than the radius, collision!
+        if (distance <= r) {
+            return true;
+        }
+        return false;
+    }
 
     //https://programming.guide/random-point-within-circle.html#:~:text=Generating%20a%20random%20point%20within%20a%20circle%20%28uniformly%29,a%20uniformly%20random%20number%20between%200%20and%201.
     public static inline function findRandomPointInCircle(centerPoint:Position, radius:Float) {
