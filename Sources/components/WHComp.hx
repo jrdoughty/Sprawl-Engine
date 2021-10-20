@@ -8,7 +8,7 @@ class WHComp implements hxbit.Serializable
 
     public function new(w = .0, h = .0)
     {
-        this.w = h;
+        this.w = w;
         this.h = h;
     }
 

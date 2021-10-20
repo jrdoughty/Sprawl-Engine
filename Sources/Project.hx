@@ -67,6 +67,7 @@ class Project {
 		  initSystems();
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
+		var speed = 5;
 		var images = Assets.images;
 		/*
 		var s = new Serializer();
@@ -104,7 +105,6 @@ class Project {
 		var i;
 		for(i in 0...numUnits)
 		{
-			var speed = (Math.random()+.5)*40;
 			new Entity().add(//(.4+Math.random()/8)
 				Utils.findRandomPointInCircle(characterEcho.get(Position),64),
 				new Velocity(0,0),
@@ -112,14 +112,15 @@ class Project {
 				new ImageComp(images.alt),
 				AnimComp.createAnimDataRange(0,3,Math.round(speed)),
 				new WHComp(32,32),
-				new AnimData(new StringMap()),
+				new AnimData([
+					"idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
+					"run"=>AnimComp.createAnimDataRange(0,2,Math.round(speed))]),
 				new Visible(true),
 				new Angle(0),
 				new Unit(Math.round(120 * Math.random()))
 			);
 		}
 		
-		var speed = 5;
 		for(i in 0...numPeople)
 		{
 			enemiesEcho.push(new Entity().add(//(.4+Math.random()/8)
@@ -130,7 +131,9 @@ class Project {
 				new Enemy(),
 				AnimComp.createAnimDataRange(0,3,Math.round(speed)),
 				new WHComp(32,32),
-				new AnimData(new StringMap()),
+				new AnimData([
+					"idle"=>AnimComp.createAnimDataRange(2,2,Math.round(speed)),
+					"run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),
 				new Visible(true),
 				new Angle(0)//360 * Math.random())
 			));
@@ -162,17 +165,74 @@ class Project {
 
 		for(i in 0...numCollectors)
 		{
+			if(i%6==2)
+			{
+				new Entity().add(
+					new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-32),
+					new Velocity(0,0),
+					new Scale(1,1),
+					new ImageComp(images.ogre),
+					AnimComp.createAnimDataRange(0,3,Math.round(speed)),
+					new WHComp(32,64),
+					new AnimData([
+						"idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
+						"run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),
+					new Visible(true),
+					new Angle(0),
+					new Catcher(Math.round(120),3)
+				);
+			}
+			else if(i%6==4)
+			{
+				new Entity().add(
+					new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-16),
+					new Velocity(0,0),
+					new Scale(1,1),
+					new ImageComp(images.goblinbigbag),
+					AnimComp.createAnimDataRange(0,2,Math.round(speed)),
+					new WHComp(32,32),
+					new AnimData([
+						"idle"=>AnimComp.createAnimDataRange(3,5,Math.round(speed)),
+						"run"=>AnimComp.createAnimDataRange(0,2,Math.round(speed))]),
+					new Visible(true),
+					new Angle(0),
+					new Catcher(Math.round(200),5)
+				);
+			}
+			else 
+			{
+				new Entity().add(
+					new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-16),
+					new Velocity(0,0),
+					new Scale(1,1),
+					new ImageComp(images.alt),
+					AnimComp.createAnimDataRange(0,3,Math.round(speed)),
+					new WHComp(32,32),
+					new AnimData([
+						"idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
+						"run"=>AnimComp.createAnimDataRange(0,2,Math.round(speed))]),
+					new Visible(true),
+					new Angle(0),
+					new Catcher(Math.round(60),1)
+				);
+			}
+		}
+		
+		for(i in 0...numPeople)
+		{
 			new Entity().add(
-				new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-16),
+				new Position(Math.random()*Main.WIDTH,Math.random()*Main.PLAYAREAHEIGHT),
 				new Velocity(0,0),
 				new Scale(1,1),
-				new ImageComp(images.alt),
-				AnimComp.createAnimDataRange(0,3,Math.round(speed)),
-				new WHComp(32,32),
-				new AnimData(new StringMap()),
+				new ImageComp(images.building),
+				AnimComp.createAnimDataRange(0,0,Math.round(speed)),
+				new WHComp(64,64),
+				new AnimData([
+					"idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
+					"act"=>AnimComp.createAnimDataRange(2,2,Math.round(speed))]),
 				new Visible(true),
 				new Angle(0),
-				new Catcher(Math.round(120 * Math.random()))
+				new Building()
 			);
 		}
 	}
