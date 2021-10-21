@@ -49,8 +49,7 @@ class Project {
 		if(!Project.active)
 		{
 			Workflow.reset();
-			menuEntityCreate();
-			initGameSystems();
+			initMenuSystems();
 			Project.active = true;
 		}
 		Slide.step(1 / 60);
@@ -76,7 +75,7 @@ class Project {
 			var images = Assets.images;
 			var sEntity = new Entity().add(
 				new ScoreComp(0),
-				new TimeComp(["timer"=>new TimeData(10)]));
+				new TimeComp(["timer"=>new TimeData(1)]));
 			
 			new Entity().add(//Background
 				new Position(0, 0),
@@ -234,37 +233,11 @@ class Project {
 	}
 
 	public function menuEntityCreate() 
-		{
-				var speed = 5;
-				var images = Assets.images;
-				
-				new Entity().add(//Background
-					new Position(0, 0),
-					AnimComp.createAnimDataRange(0,0,Math.round(100)),
-					new ImageComp(images.menubackground),
-					new Scale(Main.WIDTH/images.menubackground.width,Main.HEIGHT/images.menubackground.height),
-					new WHComp(Main.WIDTH,Main.HEIGHT),
-					new WHComp(Main.WIDTH,Main.HEIGHT),
-					new Visible(true),
-					new TopLeftRender(true));
-		
-		
-				new Entity().add(
-					new Position(Main.WIDTH /2 , Main.HEIGHT/2),
-					new Velocity(0,0),
-					new Player(),
-					AnimComp.createAnimDataRange(0,3,Math.round(100)),
-					new ImageComp(images.main),
-					new AnimData(new StringMap()),
-					new Scale(1,1),
-					new WHComp(32,32),
-					new Visible(true),
-					new GamePad(0),
-					new KeyboardComp(),
-					new MouseComp()
-				);
-				
-		}
+	{
+	
+	
+			
+	}
 			
 	public function initGameSystems() 
 	{
@@ -299,7 +272,7 @@ class Project {
 
 	public function initMenuSystems() 
 	{
-		
+		Workflow.addSystem(new StartMenu());
 		//Renders after Animation stepping systems
 		Workflow.addSystem(new Render(bufferCallback));
 		Workflow.addSystem(new ShapeRender(bufferCallback));

@@ -1,6 +1,24 @@
 package;
 import components.*;
 class Utils {
+    public static inline function pointInAABBTest(pos1:Position,  pos2:Position, wh2:WHComp) {
+        return pos1.x < pos2.x+wh2.w &&
+            pos1.x > pos2.x &&
+            pos1.y < pos2.y+wh2.h &&
+            pos1.y > pos2.y;
+    }
+    public static inline function pointInAABBTestWithScale(pos1:Position,  pos2:Position, wh2:WHComp,s:Scale) {
+        return pos1.x < pos2.x+wh2.w * s.x &&
+            pos1.x > pos2.x &&
+            pos1.y < pos2.y+wh2.h * s.y &&
+            pos1.y > pos2.y;
+    }
+    public static inline function pointInAABBTestWithScaleCentered(pos1:Position,  pos2:Position, wh2:WHComp,s:Scale) {
+        return pos1.x < pos2.x + wh2.w/2 * s.x &&
+            pos1.x > pos2.x - wh2.w/2 * s.x  &&
+            pos1.y < pos2.y + wh2.h/2 * s.y &&
+            pos1.y > pos2.y - wh2.h/2 * s.y;
+    }
     public static inline function AABBTest(pos1:Position, wh1:WHComp, pos2:Position, wh2:WHComp) {
         return pos1.x < pos2.x+wh2.w &&
             pos1.x + wh1.w > pos2.x &&

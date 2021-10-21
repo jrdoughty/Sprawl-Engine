@@ -36,19 +36,34 @@ class Render extends System
         //Render at center is default unless the entity has a TopLeftRenderComp
         if(e.get(TopLeftRender) == null)
         {
-            x -= Math.round(wh.w/2);
-            y -= Math.round(wh.h/2);
+            if(s == null)
+            {
+                x -= Math.round(wh.w/2);
+                y -= Math.round(wh.h/2);
+            }
+            else
+            {
+                
+                x -= Math.round(wh.w/2*s.x);
+                y -= Math.round(wh.h/2*s.y);
+            }
         }
 		if (ic.value != null && vis != null && cast(vis, Bool) )
 			{
 			g.color = Color.White;
 			if (angle != null && cast(angle,FastFloat) != 0) 
 					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(cast(angle,FastFloat))).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
-			g.drawScaledSubImage(ic.value, Std.int(ac.indices[ac.index] * wh.w) % ic.value.width, 
-            Math.floor(ac.indices[ac.index] * wh.w / ic.value.width) * wh.h, 
-            wh.w, wh.h, 
-            x, y, 
-            wh.w * s.x, wh.h * s.y);
+			if(ac != null)
+                g.drawScaledSubImage(ic.value, Std.int(ac.indices[ac.index] * wh.w) % ic.value.width, 
+                    Math.floor(ac.indices[ac.index] * wh.w / ic.value.width) * wh.h, 
+                    wh.w, wh.h, 
+                    x, y, 
+                    wh.w * s.x, wh.h * s.y);
+            else if (s == null) {
+                g.drawImage(ic.value,x,y);
+            }
+            else
+                g.drawScaledImage(ic.value, x, y, wh.w*s.x, wh.h*s.y);
 			if (angle != null && cast(angle,FastFloat) != 0) 
 				g.popTransformation();
         }
