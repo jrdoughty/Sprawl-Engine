@@ -10,12 +10,15 @@ import nape.shape.*;
 import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.geom.Vec2;
+import kha.audio1.Audio;
 
 class GameSystem extends System
 {
     public function new ()
     {
-
+        if(Project.bgChannel != null)
+            Project.bgChannel.stop();
+        Project.bgChannel = Audio.play(Assets.sounds.carnivalrides,true);
         var numUnits:Int = 10;
         var numPeople:Int = 10;
         var numCollectors:Int = 10;

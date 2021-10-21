@@ -59,4 +59,15 @@ class UI extends echoes.System
         if(p.y < Main.PLAYAREAHEIGHT)
             p.y = -100;
     }
+    
+    @d function drawButtonFont(b:ButtonComp, p:Position, wh:WHComp, s:Scale) 
+    {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+        buffer.g2.color = Color.White;
+        buffer.g2.font = Assets.fonts._8bitlim;
+		buffer.g2.fontSize = Math.round(8*s.y);
+		buffer.g2.drawString(b.tag, p.x - wh.w/2 - b.tag.length * s.y, p.y - wh.h/2 - buffer.g2.fontSize/2);//totally non-scientific way of centering the text
+        
+    }
 }

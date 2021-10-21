@@ -3,8 +3,12 @@ package components;
 class ButtonComp {
 
     public var tag:String;
-    public function new(t:String) {//Do I need this?
+    public var active:Bool;
+    public var over:Bool;
+    public function new(t:String, a:Bool = true, o:Bool = false) {//Do I need this?
         tag = t;
+        active = a;
+        over = o;
     }
 
 }

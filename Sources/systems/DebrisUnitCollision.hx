@@ -11,6 +11,7 @@ import nape.shape.Circle;
 import nape.geom.Vec2;
 import echoes.Entity;
 import kha.Assets;
+import kha.audio1.Audio;
 
 class DebrisUnitCollision extends System 
 {
@@ -43,6 +44,7 @@ class DebrisUnitCollision extends System
                         new ImageComp(Assets.images.coin),
                         AnimComp.createAnimDataRange(0,0,Math.round(100)),
                         new Angle(0));
+                    Audio.play(Assets.sounds.debris);
                 }
                 debris.remove(Debris); 
                 /*

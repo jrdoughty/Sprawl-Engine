@@ -21,6 +21,7 @@ import kha.Color;
 import kha.FastFloat;
 import hxbit.Serializer;
 import slide.Slide;
+import kha.audio1.AudioChannel;
 
 import nape.geom.Vec2;
 import nape.space.Space;
@@ -30,18 +31,18 @@ class Project {
 	public var score:Int = 0;
 	public var fps:Int = 0;
 	public static var buffer:Framebuffer;
-	public static var activeState:String = 'play';
-	public static var lastActiveState:String = 'play';
+	public static var activeState:String = 'menu';
+	public static var lastActiveState:String;
+	public static var bgChannel:AudioChannel;
 	public var stateStartFunctions:StringMap<Void->Void>;
 
 	public function new() 
 	{
-		initGameSystems();
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
 		stateStartFunctions = ['play'=>initGameSystems,'menu'=>initMenuSystems];
-		gameEntityCreate();
-		
+		lastActiveState = activeState;
+		stateStartFunctions.get(activeState)();		
 	}
 
 	function update(): Void 
@@ -71,16 +72,6 @@ class Project {
 		score++;
 	}
 	
-	public function gameEntityCreate() 
-	{
-	}
-
-	public function menuEntityCreate() 
-	{
-	
-	
-			
-	}
 			
 	public function initGameSystems() 
 	{

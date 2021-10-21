@@ -1,5 +1,6 @@
 package systems;
 
+import kha.audio1.Audio;
 import echoes.System;
 import components.*;
 import echoes.View;
@@ -44,6 +45,7 @@ class EnemyUnitCollision extends System
                         new ImageComp(Assets.images.coin),
                         AnimComp.createAnimDataRange(0,0,Math.round(100)),
                         new Angle(0));
+                    Audio.play(Assets.sounds.smack);
                 }
                 enemy.remove(TargetPosition);
                 enemy.add(new TargetPosition(-100,-100));

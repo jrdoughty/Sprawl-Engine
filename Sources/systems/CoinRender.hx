@@ -9,7 +9,7 @@ import components.*;
 import kha.math.Vector2;
 import nape.geom.Vec2;
 import kha.Color;
-import  kha.graphics2.Graphics;
+import kha.graphics2.Graphics;
 import kha.math.FastMatrix3;
 import kha.FastFloat;
 import kha.Framebuffer;
@@ -21,7 +21,6 @@ class CoinRender extends System
 {
     var bufferCallback:Void->Framebuffer;
     var sprites:View<ImageComp,Circle>;
-
  
     public function new()
     {
