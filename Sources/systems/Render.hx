@@ -17,9 +17,9 @@ class Render extends System
 
 
 
-    public function new(func:Void->Framebuffer)
+    public function new()
     {
-        bufferCallback = func;
+        bufferCallback = Project.bufferCallback;
     }
 
     

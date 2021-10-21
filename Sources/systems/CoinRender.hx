@@ -22,9 +22,10 @@ class CoinRender extends System
     var bufferCallback:Void->Framebuffer;
     var sprites:View<ImageComp,Circle>;
 
-    public function new(func:Void->Framebuffer)
+ 
+    public function new()
     {
-        bufferCallback = func;
+        bufferCallback = Project.bufferCallback;
     }
 
     @u public function updateRotationOfCoin(c:Circle, a:Angle)

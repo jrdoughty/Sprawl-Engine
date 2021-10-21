@@ -14,9 +14,9 @@ class ShapeRender extends System
 {
     var bufferCallback:Void->Framebuffer;
 
-    public function new(func:Void->Framebuffer)
+    public function new()
     {
-        bufferCallback = func;
+        bufferCallback = Project.bufferCallback;
     }
 
     #if debug_collisions

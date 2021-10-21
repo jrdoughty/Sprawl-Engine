@@ -40,7 +40,11 @@ class StartMenu extends System
     {
         if(m.mousePressed[0] && Utils.pointInAABBTestWithScaleCentered(new Position(m.x,m.y),p,wh,s))
         {
-            //down
+            trace(b.tag+' down');
+        }
+        else if(m.mouseUp[0] && Utils.pointInAABBTestWithScaleCentered(new Position(m.x,m.y),p,wh,s))
+        {
+            Project.activeState = 'play';
         }
         else if(Utils.pointInAABBTestWithScaleCentered(new Position(m.x,m.y),p,wh,s))
         {

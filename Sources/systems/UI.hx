@@ -11,9 +11,10 @@ class UI extends echoes.System
 {
     var bufferCallback:Void->Framebuffer;
 
-    public function new(func:Void->Framebuffer)
+    
+    public function new()
     {
-        bufferCallback = func;
+        bufferCallback = Project.bufferCallback;
     }
     
     @d function drawScore(s:ScoreComp) 

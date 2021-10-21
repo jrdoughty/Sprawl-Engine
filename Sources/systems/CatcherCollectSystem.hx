@@ -6,6 +6,10 @@ import echoes.System;
 import echoes.View;
 import nape.shape.Circle;
 import components.*;
+import kha.Assets;
+import kha.Sound;
+import kha.audio1.Audio;
+import kha.audio1.AudioChannel;
 
 class CatcherCollectSystem extends System {
     var circleView:View<Circle>;
@@ -23,6 +27,7 @@ class CatcherCollectSystem extends System {
                     new AwardFont(c.value+""),
                     new Position(p.x,p.y-10)
                     );
+                Audio.play(Assets.sounds.coin,false);
             }    
         }
     }

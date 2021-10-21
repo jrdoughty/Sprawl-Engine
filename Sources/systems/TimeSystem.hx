@@ -18,7 +18,7 @@ class TimeSystem extends System
     {
         if(t.get('timer').endTime - t.get('timer').currentTime <= 0)
         {
-            Project.active = false;
+            Project.activeState = 'menu';
         }
     }
 }
