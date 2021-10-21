@@ -32,7 +32,7 @@ class EnemyUnitCollision extends System
                 for(i in 0...(Math.round(Math.random()*5)+2))
                 {
                     var c = new Circle(4);
-                    var speedY = -8 * (Math.random() * .75 + .15)-4;
+                    var speedY = -2 * (Math.random() * .75 + .15)-4;
                     var speedX = 2-4*Math.random();
                     c.body = new Body(BodyType.DYNAMIC);
                     c.body.position.x = enemy.get(Position).x;

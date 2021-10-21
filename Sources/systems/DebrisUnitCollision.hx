@@ -31,7 +31,7 @@ class DebrisUnitCollision extends System
                 for(i in 0...(Math.round(Math.random())))
                 {
                     var c = new Circle(4);
-                    var speedY = -8 * (Math.random() * .75 + .15)-4;
+                    var speedY = -1 * (Math.random() * .75 + .15)-4;
                     var speedX = 2-4*Math.random();
                     c.body = new Body(BodyType.DYNAMIC);
                     c.body.position.x = debris.get(Position).x;

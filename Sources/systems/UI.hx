@@ -16,14 +16,24 @@ class UI extends echoes.System
         bufferCallback = func;
     }
     
-    @d function drawS(s:ScoreComp) 
+    @d function drawScore(s:ScoreComp) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
         buffer.g2.color = Color.White;
-        buffer.g2.font = Assets.fonts.OpenSans;
+        buffer.g2.font = Assets.fonts._8bitlim;
 		buffer.g2.fontSize = 48;
 		buffer.g2.drawString(s.score+"", 32, 32);
+    }
+    
+    @d function drawTimeLeft(t:TimeComp, s:ScoreComp) 
+    {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+        buffer.g2.color = Color.White;
+        buffer.g2.font = Assets.fonts._8bitlim;
+		buffer.g2.fontSize = 48;
+		buffer.g2.drawString(Math.round((t.get('timer').endTime - t.get('timer').currentTime))+"", 96, 32);
     }
     
     @d function drawAward(a:AwardFont, p:Position) 
@@ -37,7 +47,7 @@ class UI extends echoes.System
         a.r %= 256;
         a.g %= 256;
         buffer.g2.color = Color.fromBytes(a.r,a.g,a.b);
-        buffer.g2.font = Assets.fonts.OpenSans;
+        buffer.g2.font = Assets.fonts._8bitlim;
 		buffer.g2.fontSize = 48;
 		buffer.g2.drawString(a.value, p.x, p.y);
     }
