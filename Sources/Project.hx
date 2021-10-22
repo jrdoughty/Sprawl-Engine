@@ -34,13 +34,18 @@ class Project {
 	public static var activeState:String = 'menu';
 	public static var lastActiveState:String;
 	public static var bgChannel:AudioChannel;
+	public static var highScore:Int = 0;
+	public static var lastScore:Int = 0;
 	public var stateStartFunctions:StringMap<Void->Void>;
 
 	public function new() 
 	{
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
-		stateStartFunctions = ['play'=>initGameSystems,'menu'=>initMenuSystems];
+		stateStartFunctions = [
+			'play'=>initGameSystems,
+			'menu'=>initMenuSystems,
+			'credits'=>initCreditSystems];
 		lastActiveState = activeState;
 		stateStartFunctions.get(activeState)();		
 	}
@@ -107,6 +112,20 @@ class Project {
 	public function initMenuSystems() 
 	{
 		Workflow.addSystem(new StartMenu());
+		//Renders after Animation stepping systems
+		Workflow.addSystem(new Render());
+		Workflow.addSystem(new ShapeRender());
+		Workflow.addSystem(new UI());
+		
+		//Add Inputs at the end because the update loop clears them 
+		Workflow.addSystem(new Keyboard());
+		Workflow.addSystem(new Mouse());
+		Workflow.addSystem(new GamePadSystem());
+	}
+
+	public function initCreditSystems() 
+	{
+		Workflow.addSystem(new CreditMenu());
 		//Renders after Animation stepping systems
 		Workflow.addSystem(new Render());
 		Workflow.addSystem(new ShapeRender());

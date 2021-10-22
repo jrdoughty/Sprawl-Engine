@@ -1,13 +1,11 @@
-let project = new Project('New Project');
+let project = new Project('Git Gold');
 project.addAssets('Assets/**');
 project.addSources('Sources');
 project.addLibrary('Echoes');
 project.addLibrary('hxbit');
 project.addLibrary('slide');
 project.addLibrary('nape-haxe4');
-// hxmath support
-project.addLibrary('hxmath');
-project.addDefine('ECHO_USE_HXMATH');
+project.icon = 'Assets/icon.png';
 project.windowOptions.width = 900;
-project.windowOptions.height = 900;
+project.windowOptions.height = 700;
 resolve(project);

@@ -16,9 +16,8 @@ class GameSystem extends System
 {
     public function new ()
     {
-        if(Project.bgChannel != null)
-            Project.bgChannel.stop();
-        Project.bgChannel = Audio.play(Assets.sounds.carnivalrides,true);
+        if(Project.bgChannel == null)
+            Project.bgChannel = Audio.play(Assets.sounds.carnivalrides,true);
         var numUnits:Int = 10;
         var numPeople:Int = 10;
         var numCollectors:Int = 10;
@@ -93,7 +92,7 @@ class GameSystem extends System
         for(i in 0...120)
         {
             var c = new Circle(5);
-            var body = new Body(BodyType.STATIC, new Vec2((30 * i) % Main.WIDTH, 800 - 30*Math.floor(i/30)));
+            var body = new Body(BodyType.STATIC, new Vec2((30 * i) % Main.WIDTH, Main.HEIGHT-100 - 30*Math.floor(i/30)));
             if(Math.floor(i/30)%2==0)
                 body.position.x += 15;
             c.body = body;
@@ -194,7 +193,13 @@ class GameSystem extends System
     {
         if(t.get('timer').endTime - t.get('timer').currentTime <= 0)
         {
+            if(s.score > Project.highScore)
+            {
+                Project.highScore = s.score;
+            }
+            Project.lastScore = s.score;
             Project.activeState = 'menu';
+            Audio.play(Assets.sounds.endoflevel);
         }
     }
 }

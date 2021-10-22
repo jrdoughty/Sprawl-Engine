@@ -24,17 +24,18 @@ class UI extends echoes.System
         buffer.g2.color = Color.White;
         buffer.g2.font = Assets.fonts._8bitlim;
 		buffer.g2.fontSize = 48;
-		buffer.g2.drawString(s.score+"", 32, 32);
+		buffer.g2.drawString("Score "+s.score+"", 32, 32);
     }
     
     @d function drawTimeLeft(t:TimeComp, s:ScoreComp) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
-        buffer.g2.color = Color.White;
+        var timeLeft =Math.round((t.get('timer').endTime - t.get('timer').currentTime));
+        buffer.g2.color = timeLeft>5?Color.White:Color.Red;
         buffer.g2.font = Assets.fonts._8bitlim;
 		buffer.g2.fontSize = 48;
-		buffer.g2.drawString(Math.round((t.get('timer').endTime - t.get('timer').currentTime))+"", 96, 32);
+		buffer.g2.drawString("Time " + timeLeft, 496, 32);
     }
     
     @d function drawAward(a:AwardFont, p:Position) 
@@ -59,15 +60,25 @@ class UI extends echoes.System
         if(p.y < Main.PLAYAREAHEIGHT)
             p.y = -100;
     }
-    
     @d function drawButtonFont(b:ButtonComp, p:Position, wh:WHComp, s:Scale) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
         buffer.g2.color = Color.White;
         buffer.g2.font = Assets.fonts._8bitlim;
-		buffer.g2.fontSize = Math.round(8*s.y);
-		buffer.g2.drawString(b.tag, p.x - wh.w/2 - b.tag.length * s.y, p.y - wh.h/2 - buffer.g2.fontSize/2);//totally non-scientific way of centering the text
+        buffer.g2.fontSize = Math.round(8*s.y);
+        buffer.g2.drawString(b.tag, p.x - wh.w/2 - b.tag.length * s.y, p.y - wh.h/2 - buffer.g2.fontSize/2);//totally non-scientific way of centering the text
+        
+    }
+    
+    @d function drawText(t:TextComp, p:Position, s:Scale) 
+    {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+        buffer.g2.color = t.color;
+        buffer.g2.font = t.font;
+        buffer.g2.fontSize = Math.round(8*s.y);
+        buffer.g2.drawString(t.text, p.x - t.text.length * s.y, p.y - buffer.g2.fontSize/2);//totally non-scientific way of centering the text
         
     }
 }

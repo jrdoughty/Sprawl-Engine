@@ -33,6 +33,10 @@ class IdleMovement extends System
                 var t = createSafePositionAround(pos,64);
                 if(t.y > Main.PLAYAREAHEIGHT)
                     t.y = Main.PLAYAREAHEIGHT;
+                if(t.x < unit.get(Position).x && unit.get(Scale).x > 0 || t.x > unit.get(Position).x && unit.get(Scale).x < 0)
+                {
+                    unit.get(Scale).x *= -1;
+                }
                 unit.add(t);
                 if(unit.get(AnimData) != null &&unit.get(AnimComp) != null  && unit.get(AnimData).get('run') != null)
                 {
@@ -63,6 +67,10 @@ class IdleMovement extends System
                     var t = createSafePositionAround(unit.get(Position),32);
                     if(t.y > Main.PLAYAREAHEIGHT)
                         t.y = Main.PLAYAREAHEIGHT;
+                    if(t.x < unit.get(Position).x && unit.get(Scale).x > 0 || t.x > unit.get(Position).x && unit.get(Scale).x < 0)
+                    {
+                        unit.get(Scale).x *= -1;
+                    }
                     unit.add(t);
                     if(unit.get(AnimData) != null &&unit.get(AnimComp) != null  && unit.get(AnimData).get('run') != null)
                     {
@@ -134,6 +142,10 @@ class IdleMovement extends System
                     t.x = 0;
                 else if(t.x>Main.WIDTH)
                     t.x = Main.WIDTH;
+                if(t.x < unit.get(Position).x && unit.get(Scale).x > 0 || t.x > unit.get(Position).x && unit.get(Scale).x < 0)
+                {
+                    unit.get(Scale).x *= -1;
+                }
                 unit.add(t);
                 if(unit.get(AnimData) != null &&unit.get(AnimComp) != null  && unit.get(AnimData).get('run') != null)
                 {

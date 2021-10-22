@@ -11,11 +11,11 @@ import systems.*;
 class Main 
 {
 	public static var WIDTH = 900;
-	public static var HEIGHT = 900;
-	public static var PLAYAREAHEIGHT = 666;
+	public static var HEIGHT = 698;
+	public static var PLAYAREAHEIGHT = 466;
 	public static function main() {
 		System.start({
-			title:"RTS",
+			title:"Git Gold",
 			width:WIDTH,
 			height:HEIGHT
 		},
