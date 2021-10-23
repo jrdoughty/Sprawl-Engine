@@ -1,5 +1,6 @@
 package systems;
 
+import components.Position;
 import components.MouseComp;
 import kha.input.Mouse;
 import components.Swipe;
@@ -157,7 +158,7 @@ class Mouse extends echoes.System
 	
 		public static function checkSwipe(distance:Int = 30, timeFrom:Float = 0.1, timeUntil:Float = 0.25, m:MouseComp):Swipe
 		{
-			var swipeOcurred = (isHeld(0,m) && Math.round(Mouse.distance(m.sx, m.sy, m.x, m.y)) > distance
+			var swipeOcurred = (isHeld(0,m) && Math.round(Utils.distance(m.sx, m.sy, m.x, m.y)) > distance
 				&& m.durationMouseDown > timeFrom && m.durationMouseDown < timeUntil);									
 	
 			if (swipeOcurred)
@@ -165,16 +166,9 @@ class Mouse extends echoes.System
 			else
 				return null;
 		}
-		/**
-		 * Find the distance between two points.
-		 * @param	x1		The first x-position.
-		 * @param	y1		The first y-position.
-		 * @param	x2		The second x-position.
-		 * @param	y2		The second y-position.
-		 * @return	The distance.
-		 */
-		public static function distance(x1:Float, y1:Float, x2:Float = 0, y2:Float = 0):Float
+	
+		public static function getPos(m:MouseComp):Position
 		{
-			return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+			return new Position(m.x,m.y);
 		}
 }

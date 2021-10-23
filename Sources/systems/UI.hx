@@ -5,12 +5,12 @@ import components.*;
 import echoes.System;
 import kha.Framebuffer;
 import kha.Assets;
+import echoes.Entity;
 
 
 class UI extends echoes.System
 {
     var bufferCallback:Void->Framebuffer;
-
     
     public function new()
     {
@@ -35,7 +35,7 @@ class UI extends echoes.System
         buffer.g2.color = timeLeft>5?Color.White:Color.Red;
         buffer.g2.font = Assets.fonts._8bitlim;
 		buffer.g2.fontSize = 48;
-		buffer.g2.drawString("Time " + timeLeft, 496, 32);
+		buffer.g2.drawString("Time " + (timeLeft>=0?timeLeft:0), 496, 32);
     }
     
     @d function drawAward(a:AwardFont, p:Position) 

@@ -85,7 +85,6 @@ class Project {
 		Workflow.addSystem(new Controls());
 		Workflow.addSystem(new PhysicsSystem());
 		Workflow.addSystem(new IdleMovement());
-		Workflow.addSystem(new EnemyAttack());
 		Workflow.addSystem(new EnemyUnitCollision());
 		Workflow.addSystem(new DebrisUnitCollision());
 		Workflow.addSystem(new MoveToTargetPosition());

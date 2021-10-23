@@ -30,7 +30,7 @@ class EnemyUnitCollision extends System
             {
                 //score.entities.head.value.get(ScoreComp).score += 100;
 
-                for(i in 0...(Math.round(Math.random()*5)+2))
+                for(i in 0...(Math.round(Math.random()*3)+4))
                 {
                     var c = new Circle(4);
                     var speedY = -2 * (Math.random() * .75 + .15)-4;
@@ -54,6 +54,7 @@ class EnemyUnitCollision extends System
                 {
                     enemy.add(enemy.get(AnimData).get('run'));
                 }
+                unit.framesUntil += 60;
                 /*
                 var vs:Array<Vec2> = Polygon.box(50,10);
                 var p:Polygon = new Polygon(vs);

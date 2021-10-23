@@ -14,13 +14,12 @@ import kha.math.FastMatrix3;
 import kha.FastFloat;
 import kha.Framebuffer;
 import kha.Assets;
-import echoes.View;
+import echoes.Entity;
 
 
 class CoinRender extends System
 {
     var bufferCallback:Void->Framebuffer;
-    var sprites:View<ImageComp,Circle>;
  
     public function new()
     {
@@ -31,7 +30,7 @@ class CoinRender extends System
     {
         a = cast(c.body.rotation, Angle);   
     }
-    public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
+    public static function renderByCircleEntity(g: Graphics, e:echoes.Entity): Void {
 		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
 		var wh:WHComp = new WHComp(e.get(Circle).radius*2,e.get(Circle).radius*2);
@@ -67,17 +66,12 @@ class CoinRender extends System
 			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
 		#end
 	}
-    @d inline function draw() 
+    @d inline function draw(e:Entity,i:ImageComp,c:Circle) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
-        // micro optimizaion to not test each entity twice
-        var h1 = sprites.entities.head;
-        while (h1 != null) {
-            var entity1 = h1.value;
-            renderByEntity(buffer.g2, entity1);
-            h1 = h1.next;
-        }
+            renderByCircleEntity(buffer.g2, e);
+        
     }
      
     

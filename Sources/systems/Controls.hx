@@ -1,77 +1,102 @@
 package systems;
-import components.Position;
-import components.Player;
-import components.GamePad;
-import components.KeyboardComp;
-import components.MouseComp;
+import components.*;
 import systems.Mouse;
 import kha.input.Keyboard;
 import kha.input.KeyCode;
-import kha.input.Mouse;
+import echoes.View;
+import echoes.Entity;
 
 class Controls extends echoes.System
 {
 	public static inline final speed:Int = 3;
     
+    var unitView:View<Unit, Position>;
+
     public function new() {}
-	@u public function updateK(pos:Position, p:Player, k:KeyboardComp)
+	@u public function updateK(p:Entity, pos:Position, playComp:Player, k:KeyboardComp, s:Scale, ac:AnimComp, ad:AnimData)
 	{
-		if(k.keysHeld[KeyCode.Up] || k.keysHeld[KeyCode.W])
+		playComp.framesUntil--;
+
+		if(playComp.framesUntil<=0 && (k.keysHeld[KeyCode.Up] || k.keysHeld[KeyCode.W]))
 		{
 			pos.y -= speed;
+			if(ac.idKey == 'idle')
+			{
+				p.remove(AnimComp);
+				p.add(ad.get('run'));
+			}
 		}
-		else if(k.keysHeld[KeyCode.Down] || k.keysHeld[KeyCode.S])
+		else if(playComp.framesUntil<=0 && (k.keysHeld[KeyCode.Down] || k.keysHeld[KeyCode.S]))
 		{
 			pos.y += speed;
+			if(ac.idKey == 'idle')
+			{
+				p.remove(AnimComp);
+				p.add(ad.get('run'));
+			}
+		}
+		else if(playComp.framesUntil<=0 && (ac.idKey != 'idle'))
+		{
+			p.remove(AnimComp);
+			p.add(ad.get('idle'));//will remain idle if right or left aren't touched
 		}
 
-		if(k.keysHeld[KeyCode.Left] || k.keysHeld[KeyCode.A])
+		if(playComp.framesUntil<=0 && (k.keysHeld[KeyCode.Left] || k.keysHeld[KeyCode.A]))
 		{
 			pos.x -= speed;
+			s.x = -1;
+			p.remove(AnimComp);
+			p.add(ad.get('run'));
+			if(ac.idKey == 'idle')
+			{
+				p.remove(AnimComp);
+				p.add(ad.get('run'));
+			}
 		}
-		else if(k.keysHeld[KeyCode.Right] || k.keysHeld[KeyCode.D])
+		else if(playComp.framesUntil<=0 && (k.keysHeld[KeyCode.Right] || k.keysHeld[KeyCode.D]))
 		{
 			pos.x += speed;
+			s.x = 1;
+			if(ac.idKey == 'idle')
+			{
+				p.remove(AnimComp);
+				p.add(ad.get('run'));
+			}
 		}		
 	}
 
-	@u public function updateM(pos:Position, p:Player, m:MouseComp)
+	@u public function updateM(e:Entity, pos:Position, p:Player, m:MouseComp, ac:AnimComp, ad:AnimData, s:Scale)
 		{		
-			if(Mouse.isHeld(0,m))
+			if(Mouse.isPressed(0,m))
 			{
-				var diffX = m.x - pos.x;
-				var diffY = m.y - pos.y;
-	
-				if(Math.abs(diffX) > speed)
+				for(i in unitView.entities)
 				{
-					if(diffX < 0)
+					if(Utils.getDistanceByPosition(i.get(Position),pos) < 128 && i.get(Unit).framesUntil>0 && i.get(TargetPosition) == null)
 					{
-						pos.x -= speed;
+						i.get(Position).x = pos.x;
+						i.get(Position).y = pos.y;
+						var t = new TargetPosition(Math.round(m.x),Math.round(m.y));
+						if(t.y > Main.PLAYAREAHEIGHT)
+						{
+							t.y = Main.PLAYAREAHEIGHT;
+						}
+						i.get(Unit).framesUntil = Math.round(Utils.getDistanceByPosition(pos,cast(t,Position))); 
+						i.add(t);
+						i.add(i.get(AnimData).get('thrown'));
+						p.framesUntil = 15;
+						e.add(ad.get('throw'));
+						s.x = (pos.x<t.x?1:-1);
+						if(i.get(TargetPosition).x < i.get(Position).x && i.get(Scale).x > 0 || i.get(TargetPosition).x > i.get(Position).x && i.get(Scale).x < 0)
+						{
+							i.get(Scale).x *= -1;
+						} 
+						break;
 					}
-					else
+					else 
 					{
-						pos.x += speed;
+						//trace(Utils.getDistanceByPosition(i.get(Position),pos));
+						//trace(i.get(Unit).framesUntil);
 					}
-				}
-				else
-				{
-					pos.x += diffX;
-				}
-	
-				if(Math.abs(diffY) > speed)
-				{
-					if(diffY < 0)
-					{
-						pos.y -= speed;
-					}
-					else
-					{
-						pos.y += speed;
-					}
-				}
-				else
-				{
-					pos.y += diffY;
 				}
 			}
 		}

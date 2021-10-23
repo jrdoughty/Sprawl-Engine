@@ -47,6 +47,7 @@ class DebrisUnitCollision extends System
                     Audio.play(Assets.sounds.debris);
                 }
                 debris.remove(Debris); 
+                unit.framesUntil += 30;
                 /*
                 var vs:Array<Vec2> = Polygon.box(50,10);
                 var p:Polygon = new Polygon(vs);
