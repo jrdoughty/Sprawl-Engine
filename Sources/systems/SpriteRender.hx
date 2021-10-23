@@ -10,7 +10,7 @@ import kha.FastFloat;
 import kha.Framebuffer;
 import kha.Assets;
 
-class Render extends System
+class SpriteRender extends System
 {
     var bufferCallback:Void->Framebuffer;
     var sprites:View<ImageComp,WHComp>;

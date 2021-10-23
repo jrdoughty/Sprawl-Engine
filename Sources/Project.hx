@@ -81,7 +81,6 @@ class Project {
 	public function initGameSystems() 
 	{
 		Workflow.addSystem(new GameSystem());
-		Workflow.addSystem(new Movement());
 		Workflow.addSystem(new Controls());
 		Workflow.addSystem(new PhysicsSystem());
 		Workflow.addSystem(new IdleMovement());
@@ -92,7 +91,7 @@ class Project {
 		Workflow.addSystem(new Animation());
 		
 		//Renders after Animation stepping systems
-		Workflow.addSystem(new Render());
+		Workflow.addSystem(new SpriteRender());
 		Workflow.addSystem(new ShapeRender());
 		Workflow.addSystem(new CoinRender());
 		Workflow.addSystem(new UI());
@@ -112,8 +111,7 @@ class Project {
 	{
 		Workflow.addSystem(new StartMenu());
 		//Renders after Animation stepping systems
-		Workflow.addSystem(new Render());
-		Workflow.addSystem(new ShapeRender());
+		Workflow.addSystem(new SpriteRender());
 		Workflow.addSystem(new UI());
 		
 		//Add Inputs at the end because the update loop clears them 
@@ -126,8 +124,7 @@ class Project {
 	{
 		Workflow.addSystem(new CreditMenu());
 		//Renders after Animation stepping systems
-		Workflow.addSystem(new Render());
-		Workflow.addSystem(new ShapeRender());
+		Workflow.addSystem(new SpriteRender());
 		Workflow.addSystem(new UI());
 		
 		//Add Inputs at the end because the update loop clears them 
