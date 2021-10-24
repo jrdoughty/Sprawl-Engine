@@ -33,7 +33,7 @@ class PhysicsSpriteRender extends System
         a = cast(c.body.rotation, Angle);   
     }
     public static function renderByCircleEntity(g: Graphics, e:echoes.Entity): Void {
-		var ic:Image = e.get(ImageComp);
+		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
 		var wh:WHComp = new WHComp(e.get(Circle).radius*2,e.get(Circle).radius*2);
 		var pos:Position = new Position(e.get(Circle).body.position.x,e.get(Circle).body.position.y);

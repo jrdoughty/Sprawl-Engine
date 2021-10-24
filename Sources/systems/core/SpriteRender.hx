@@ -26,7 +26,7 @@ class SpriteRender extends System
 
     
     public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
-		var ic:Image = e.get(ImageComp);
+		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
 		var wh:WHComp = e.get(WHComp);
 		var pos:Position = e.get(Position);
