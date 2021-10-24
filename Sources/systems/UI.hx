@@ -28,7 +28,7 @@ class UI extends echoes.System
 		buffer.g2.drawString("Score "+s.score+"", 32, 32);
     }
     
-    @d function drawTimeLeft(t:TimeComp, s:ScoreComp) 
+    @d function drawTimeLeft(t:TimeData, s:ScoreComp) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;

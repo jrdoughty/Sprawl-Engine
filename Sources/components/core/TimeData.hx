@@ -1,21 +1,13 @@
 package components.core;
 
+import components.core.TimeData;
 import haxe.Timer;
+import haxe.ds.StringMap;
 
-class TimeData
+@:forward
+abstract TimeData(StringMap<TimeComp>)
 {
-    public var timeMS:Int;
-    public var loop:Bool;
-    public var isComplete:Bool = false;
-    public var startTime:Float;
-    public var endTime:Float;
-    public var currentTime:Float;
-    public function new(t:Int, loop:Bool = false) 
-    {
-        startTime = Timer.stamp();
-        currentTime = Timer.stamp();
-        endTime = Timer.stamp() + t;
-        timeMS = t;
-        this.loop = loop;
-    }
+	inline public function new(sm:StringMap<TimeComp>) {
+		this = sm;
+	  }
 }

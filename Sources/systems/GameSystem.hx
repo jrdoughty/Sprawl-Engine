@@ -30,9 +30,9 @@ class GameSystem extends System
         var images = Assets.images;
         var sEntity = new Entity().add(
             new ScoreComp(0),
-            new TimeComp(["timer"=>new TimeData(gameTime),"gameEndTimer"=>new TimeData(gameTime+4)]));
+            new TimeData(["timer"=>new TimeComp(gameTime),"gameEndTimer"=>new TimeComp(gameTime+4)]));
         new Entity().add(
-            new TimeComp(["spawn"=>new TimeData(Math.round(gameTime/2))]));
+            new TimeData(["spawn"=>new TimeComp(Math.round(gameTime/2))]));
         
         new Entity().add(//Background
             new Position(0, 0),
@@ -191,7 +191,7 @@ class GameSystem extends System
             );
         }
     }
-    @u function updateTimers(t:TimeComp)
+    @u function updateTimers(t:TimeData)
     {
         for(i in t.keys())
         {
@@ -222,7 +222,7 @@ class GameSystem extends System
             t.remove('spawn');
         }
     }
-    @u function isGameDone(t:TimeComp, s:ScoreComp)
+    @u function isGameDone(t:TimeData, s:ScoreComp)
     {
         if(t.get('timer').endTime - t.get('timer').currentTime <= 0)
         {
