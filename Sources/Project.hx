@@ -5,7 +5,7 @@ import nape.phys.BodyType;
 import nape.phys.Body;
 import kha.Worker;
 import haxe.Constraints.Function;
-import systems.Animation;
+import systems.core.*;
 import kha.Framebuffer;
 import kha.Scheduler;
 import kha.System;
@@ -93,7 +93,7 @@ class Project {
 		//Renders after Animation stepping systems
 		Workflow.addSystem(new SpriteRender());
 		Workflow.addSystem(new ShapeRender());
-		Workflow.addSystem(new CoinRender());
+		Workflow.addSystem(new PhysicsSpriteRender());
 		Workflow.addSystem(new UI());
 		
 		//Add Inputs at the end because the update loop clears them 

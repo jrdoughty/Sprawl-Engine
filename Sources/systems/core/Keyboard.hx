@@ -1,4 +1,4 @@
-package systems;
+package systems.core;
 
 import kha.input.KeyCode;
 import components.core.*;

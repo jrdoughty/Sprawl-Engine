@@ -1,4 +1,4 @@
-package systems;
+package systems.core;
 
 import components.core.*;
 

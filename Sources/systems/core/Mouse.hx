@@ -1,4 +1,4 @@
-package systems;
+package systems.core;
 
 import kha.input.Mouse;
 import kha.math.Vector2;

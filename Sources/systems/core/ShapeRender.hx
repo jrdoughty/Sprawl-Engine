@@ -1,4 +1,4 @@
-package systems;
+package systems.core;
 
 import nape.phys.BodyType;
 import echoes.System;

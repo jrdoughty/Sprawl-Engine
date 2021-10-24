@@ -1,7 +1,7 @@
 package systems;
 import components.*;
 import components.core.*;
-import systems.Mouse;
+import systems.core.Mouse;
 import kha.input.Keyboard;
 import kha.input.KeyCode;
 import echoes.View;

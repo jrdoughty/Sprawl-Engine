@@ -1,4 +1,4 @@
-package systems;
+package systems.core;
 
 import nape.phys.BodyType;
 import echoes.System;
@@ -18,7 +18,7 @@ import echoes.Entity;
 import components.core.*;
 
 
-class CoinRender extends System
+class PhysicsSpriteRender extends System
 {
     var bufferCallback:Void->Framebuffer;
  
