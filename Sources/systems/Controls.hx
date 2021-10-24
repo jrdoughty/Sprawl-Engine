@@ -67,52 +67,52 @@ class Controls extends echoes.System
 	}
 
 	@u public function updateM(e:Entity, pos:Position, p:Player, m:MouseComp, ac:AnimComp, ad:AnimData, s:Scale)
-		{		
-			if(Mouse.isPressed(0,m))
+	{		
+		if(Mouse.isPressed(0,m))
+		{
+			for(i in unitView.entities)
 			{
-				for(i in unitView.entities)
+				if(Utils.getDistanceByPosition(i.get(Position),pos) < 128 && i.get(Unit).framesUntil>0 && i.get(TargetPosition) == null)
 				{
-					if(Utils.getDistanceByPosition(i.get(Position),pos) < 128 && i.get(Unit).framesUntil>0 && i.get(TargetPosition) == null)
+					i.get(Position).x = pos.x;
+					i.get(Position).y = pos.y;
+					var t = new TargetPosition(Math.round(m.x),Math.round(m.y));
+					if(t.y > Main.PLAYAREAHEIGHT)
 					{
-						i.get(Position).x = pos.x;
-						i.get(Position).y = pos.y;
-						var t = new TargetPosition(Math.round(m.x),Math.round(m.y));
-						if(t.y > Main.PLAYAREAHEIGHT)
-						{
-							t.y = Main.PLAYAREAHEIGHT;
-						}
-						i.get(Unit).framesUntil = Math.round(Utils.getDistanceByPosition(pos,cast(t,Position))); 
-						i.add(t);
-						i.add(i.get(AnimData).get('thrown'));
-						p.framesUntil = 15;
-						e.add(ad.get('throw'));
-						s.x = (pos.x<t.x?1:-1);
-						if(i.get(TargetPosition).x < i.get(Position).x && i.get(Scale).x > 0 || i.get(TargetPosition).x > i.get(Position).x && i.get(Scale).x < 0)
-						{
-							i.get(Scale).x *= -1;
-						} 
-						break;
+						t.y = Main.PLAYAREAHEIGHT;
 					}
-					else 
+					i.get(Unit).framesUntil = Math.round(Utils.getDistanceByPosition(pos,cast(t,Position))); 
+					i.add(t);
+					i.add(i.get(AnimData).get('thrown'));
+					p.framesUntil = 15;
+					e.add(ad.get('throw'));
+					s.x = (pos.x<t.x?1:-1);
+					if(i.get(TargetPosition).x < i.get(Position).x && i.get(Scale).x > 0 || i.get(TargetPosition).x > i.get(Position).x && i.get(Scale).x < 0)
 					{
-						//trace(Utils.getDistanceByPosition(i.get(Position),pos));
-						//trace(i.get(Unit).framesUntil);
-					}
+						i.get(Scale).x *= -1;
+					} 
+					break;
+				}
+				else 
+				{
+					//trace(Utils.getDistanceByPosition(i.get(Position),pos));
+					//trace(i.get(Unit).framesUntil);
 				}
 			}
 		}
-		@u public function updateByBounds(pos:Position, p:Player)
-			{		
-				if(pos.y > Main.PLAYAREAHEIGHT)
-					pos.y = Main.PLAYAREAHEIGHT;
-				
-				if(pos.x > Main.WIDTH)
-					pos.x = Main.WIDTH;
-				if(pos.y < 0)
-					pos.y = 0;
-				
-				if(pos.x < 0)
-					pos.x = 0;
-				
-			}
+	}
+	@u public function updateByBounds(pos:Position, p:Player)
+	{		
+		if(pos.y > Main.PLAYAREAHEIGHT)
+			pos.y = Main.PLAYAREAHEIGHT;
+		
+		if(pos.x > Main.WIDTH)
+			pos.x = Main.WIDTH;
+		if(pos.y < 0)
+			pos.y = 0;
+		
+		if(pos.x < 0)
+			pos.x = 0;
+		
+	}
 }

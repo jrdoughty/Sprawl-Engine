@@ -22,7 +22,7 @@ import kha.FastFloat;
 import hxbit.Serializer;
 import slide.Slide;
 import kha.audio1.AudioChannel;
-
+import haxe.Timer;
 import nape.geom.Vec2;
 import nape.space.Space;
 import nape.shape.Circle;
@@ -37,11 +37,13 @@ class Project {
 	public static var highScore:Int = 0;
 	public static var lastScore:Int = 0;
 	public var stateStartFunctions:StringMap<Void->Void>;
+	public var updateTime:Float;
 
 	public function new() 
 	{
 		System.notifyOnFrames(frameBufferCapture);
 		Scheduler.addTimeTask(update, 0, 1 / 60);
+		updateTime = Timer.stamp();
 		stateStartFunctions = [
 			'play'=>initGameSystems,
 			'menu'=>initMenuSystems,
@@ -52,6 +54,9 @@ class Project {
 
 	function update(): Void 
 	{
+		var newUpdate = Timer.stamp();
+		var dt:Float = newUpdate - updateTime;
+		updateTime = newUpdate;
 		if(activeState != lastActiveState)
 		{
 			Workflow.reset();
@@ -60,8 +65,8 @@ class Project {
 		lastActiveState = activeState; 
 
 
-		Slide.step(1 / 60);
-		Workflow.update(1 / 60);
+		Slide.step(dt);
+		Workflow.update(dt);
 	}
 
 	function frameBufferCapture(framebuffers: Array<Framebuffer>): Void 

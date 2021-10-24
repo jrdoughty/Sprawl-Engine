@@ -22,8 +22,8 @@ class PhysicsSystem extends System
     {
         space.bodies.add(p.body);
     }
-    @u public function update() 
+    @u public function update(dt:Float) 
     {
-		space.step(1/60);
+		space.step(dt);
     }
 }
