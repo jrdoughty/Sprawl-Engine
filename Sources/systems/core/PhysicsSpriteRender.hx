@@ -1,5 +1,6 @@
 package systems.core;
 
+import kha.Image;
 import nape.phys.BodyType;
 import echoes.System;
 import kha.Color;
@@ -32,7 +33,7 @@ class PhysicsSpriteRender extends System
         a = cast(c.body.rotation, Angle);   
     }
     public static function renderByCircleEntity(g: Graphics, e:echoes.Entity): Void {
-		var ic = e.get(ImageComp);
+		var ic:Image = e.get(ImageComp);
 		var ac = e.get(AnimComp);
 		var wh:WHComp = new WHComp(e.get(Circle).radius*2,e.get(Circle).radius*2);
 		var pos:Position = new Position(e.get(Circle).body.position.x,e.get(Circle).body.position.y);
@@ -47,13 +48,13 @@ class PhysicsSpriteRender extends System
             x -= Math.round(wh.w/2);
             y -= Math.round(wh.h/2);
         }
-		if (ic.value != null && vis != null && cast(vis, Bool) )
+		if (ic != null && vis != null && cast(vis, Bool) )
 			{
 			g.color = Color.White;
 			if (angle != null && cast(angle,FastFloat) != 0) 
 					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(cast(angle,FastFloat))).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
-			g.drawScaledSubImage(ic.value, Std.int(ac.indices[ac.index] * wh.w) % ic.value.width, 
-            Math.floor(ac.indices[ac.index] * wh.w / ic.value.width) * wh.h, 
+			g.drawScaledSubImage(ic, Std.int(ac.indices[ac.index] * wh.w) % ic.width, 
+            Math.floor(ac.indices[ac.index] * wh.w / ic.width) * wh.h, 
             wh.w, wh.h, 
             x, y, 
             wh.w * s.x, wh.h * s.y);

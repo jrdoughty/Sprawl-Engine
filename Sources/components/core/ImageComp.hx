@@ -1,8 +1,7 @@
 package components.core;
 import kha.Image;
-class ImageComp {
-    public var value:Image;
+abstract ImageComp(Image) from Image to Image {
     public function new(i:Image) {
-        value = i;
+        this = i;
     }
 }

@@ -1,5 +1,6 @@
 package systems.core;
 
+import kha.Image;
 import echoes.System;
 import echoes.View;
 import components.*;
@@ -25,7 +26,7 @@ class SpriteRender extends System
 
     
     public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
-		var ic = e.get(ImageComp);
+		var ic:Image = e.get(ImageComp);
 		var ac = e.get(AnimComp);
 		var wh:WHComp = e.get(WHComp);
 		var pos:Position = e.get(Position);
@@ -49,22 +50,22 @@ class SpriteRender extends System
                 y -= Math.round(wh.h/2*s.y);
             }
         }
-		if (ic.value != null && vis != null && cast(vis, Bool) )
+		if (ic != null && vis != null && cast(vis, Bool) )
 			{
 			g.color = Color.White;
 			if (angle != null && cast(angle,FastFloat) != 0) 
 					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(cast(angle,FastFloat))).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
 			if(ac != null)
-                g.drawScaledSubImage(ic.value, Std.int(ac.indices[ac.index] * wh.w) % ic.value.width, 
-                    Math.floor(ac.indices[ac.index] * wh.w / ic.value.width) * wh.h, 
+                g.drawScaledSubImage(ic, Std.int(ac.indices[ac.index] * wh.w) % ic.width, 
+                    Math.floor(ac.indices[ac.index] * wh.w / ic.width) * wh.h, 
                     wh.w, wh.h, 
                     x, y, 
                     wh.w * s.x, wh.h * s.y);
             else if (s == null) {
-                g.drawImage(ic.value,x,y);
+                g.drawImage(ic,x,y);
             }
             else
-                g.drawScaledImage(ic.value, x, y, wh.w*s.x, wh.h*s.y);
+                g.drawScaledImage(ic, x, y, wh.w*s.x, wh.h*s.y);
 			if (angle != null && cast(angle,FastFloat) != 0) 
 				g.popTransformation();
         }
