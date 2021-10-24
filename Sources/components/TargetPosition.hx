@@ -1,4 +1,5 @@
 package components;
+import components.core.*;
 
 @:forward
 abstract TargetPosition(Vec2) {

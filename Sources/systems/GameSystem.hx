@@ -3,6 +3,7 @@ package systems;
 import haxe.Timer;
 import echoes.System;
 import components.*;
+import components.core.*;
 import echoes.Entity;
 import kha.Assets;
 import haxe.ds.StringMap;

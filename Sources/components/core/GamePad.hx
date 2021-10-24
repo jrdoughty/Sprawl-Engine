@@ -1,4 +1,4 @@
-package components;
+package components.core;
 
 
 class GamePad implements hxbit.Serializable 

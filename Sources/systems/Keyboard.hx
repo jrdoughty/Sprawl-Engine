@@ -1,7 +1,7 @@
 package systems;
 
 import kha.input.KeyCode;
-import components.KeyboardComp;
+import components.core.*;
 class Keyboard extends echoes.System
 {	
 

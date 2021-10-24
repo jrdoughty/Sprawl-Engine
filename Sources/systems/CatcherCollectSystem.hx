@@ -10,6 +10,7 @@ import kha.Assets;
 import kha.Sound;
 import kha.audio1.Audio;
 import kha.audio1.AudioChannel;
+import components.core.*;
 
 class CatcherCollectSystem extends System {
     var circleView:View<Circle>;

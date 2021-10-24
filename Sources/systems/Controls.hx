@@ -1,5 +1,6 @@
 package systems;
 import components.*;
+import components.core.*;
 import systems.Mouse;
 import kha.input.Keyboard;
 import kha.input.KeyCode;

@@ -1,5 +1,6 @@
 package;
 import components.*;
+import components.core.*;
 class Utils {
     public static inline function getDistanceByPosition(pos1:Position,  pos2:Position):Float
     {        

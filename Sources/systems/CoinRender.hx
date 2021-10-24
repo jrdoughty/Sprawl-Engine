@@ -15,6 +15,7 @@ import kha.FastFloat;
 import kha.Framebuffer;
 import kha.Assets;
 import echoes.Entity;
+import components.core.*;
 
 
 class CoinRender extends System

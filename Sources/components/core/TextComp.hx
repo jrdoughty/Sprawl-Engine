@@ -1,4 +1,4 @@
-package components;
+package components.core;
 
 import kha.Font;
 import kha.Color;

@@ -7,6 +7,7 @@ import kha.Framebuffer;
 import nape.shape.*;
 import kha.math.Vector2;
 import nape.geom.Vec2;
+import components.core.*;
 
 using kha.graphics2.GraphicsExtension;
 

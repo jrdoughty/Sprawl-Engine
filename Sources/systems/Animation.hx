@@ -1,6 +1,6 @@
 package systems;
 
-import components.*;
+import components.core.*;
 
 class Animation extends echoes.System
 {

@@ -1,4 +1,4 @@
-package components;
+package components.core;
 
 class MouseComp implements hxbit.Serializable {
 

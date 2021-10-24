@@ -1,12 +1,9 @@
 package systems;
 
-import components.Position;
-import components.MouseComp;
 import kha.input.Mouse;
-import components.Swipe;
 import kha.math.Vector2;
 import kha.System;
-import components.Vec2;
+import components.core.*;
 
 class Mouse extends echoes.System
 {

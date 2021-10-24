@@ -1,4 +1,4 @@
-package components;
+package components.core;
 
 @:forward
 abstract Scale(Vec2) {

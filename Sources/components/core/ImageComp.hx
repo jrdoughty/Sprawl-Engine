@@ -1,4 +1,4 @@
-package components;
+package components.core;
 import kha.Image;
 class ImageComp {
     public var value:Image;

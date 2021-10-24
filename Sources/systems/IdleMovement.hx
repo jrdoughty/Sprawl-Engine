@@ -4,6 +4,7 @@ import echoes.System;
 import echoes.View;
 import echoes.Entity;
 import components.*;
+import components.core.*;
 import nape.shape.Circle;
 class IdleMovement extends System 
 {  

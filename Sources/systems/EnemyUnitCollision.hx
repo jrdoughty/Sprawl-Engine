@@ -3,6 +3,7 @@ package systems;
 import kha.audio1.Audio;
 import echoes.System;
 import components.*;
+import components.core.*;
 import echoes.View;
 import nape.phys.Material;
 import nape.phys.BodyType;

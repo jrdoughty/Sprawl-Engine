@@ -2,6 +2,7 @@ package systems;
 
 import kha.Color;
 import components.*;
+import components.core.*;
 import echoes.System;
 import kha.Framebuffer;
 import kha.Assets;

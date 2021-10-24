@@ -9,6 +9,7 @@ import kha.math.FastMatrix3;
 import kha.FastFloat;
 import kha.Framebuffer;
 import kha.Assets;
+import components.core.*;
 
 class SpriteRender extends System
 {

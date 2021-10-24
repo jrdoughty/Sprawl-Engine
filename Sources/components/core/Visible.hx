@@ -1,7 +1,7 @@
-package components;
+package components.core;
 
 @:forward
-abstract TopLeftRender(Bool) {
+abstract Visible(Bool) {
 
     public inline function new(b:Bool) this = b;
 

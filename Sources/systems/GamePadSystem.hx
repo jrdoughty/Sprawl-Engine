@@ -1,6 +1,6 @@
 package systems;
 
-import components.GamePad;
+import components.core.*;
 
 class GamePadSystem extends echoes.System
 {

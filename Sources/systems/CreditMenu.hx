@@ -4,6 +4,7 @@ import echoes.System;
 import kha.Assets;
 import echoes.Entity;
 import components.*;
+import components.core.*;
 import haxe.ds.StringMap;
 
 class CreditMenu extends System

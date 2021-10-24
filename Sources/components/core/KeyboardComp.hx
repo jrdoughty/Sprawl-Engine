@@ -1,4 +1,4 @@
-package components;
+package components.core;
 import kha.input.KeyCode;
 
 class KeyboardComp implements hxbit.Serializable
