@@ -47,7 +47,7 @@ class ShapeRender extends System
         buffer.g2.drawPolygon(p.body.position.x,p.body.position.y, verts);
     }
      
-    @d function drawPos(p:components.Position) 
+    @d function drawPos(p:Position) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;

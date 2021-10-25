@@ -23,6 +23,25 @@ class SpriteRender extends System
     {
         bufferCallback = Project.bufferCallback;
     }
+    
+    @d inline function sortByYPos() 
+    {
+        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
+    }
+    @d inline function draw() 
+    {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+        
+        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
+        // micro optimizaion to not test each entity twice
+        var h1 = sprites.entities.head;
+        while (h1 != null) {
+            var entity1 = h1.value;
+            renderByEntity(buffer.g2, entity1);
+            h1 = h1.next;
+        }
+    }
 
     
     public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
@@ -76,23 +95,5 @@ class SpriteRender extends System
 			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
 		#end
 	}
-    @d inline function sortByYPos() 
-    {
-        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
-    }
-    @d inline function draw() 
-    {
-        var buffer = bufferCallback();
-        if(buffer == null) return;
-        
-        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
-        // micro optimizaion to not test each entity twice
-        var h1 = sprites.entities.head;
-        while (h1 != null) {
-            var entity1 = h1.value;
-            renderByEntity(buffer.g2, entity1);
-            h1 = h1.next;
-        }
-    }
 	
 }

@@ -32,6 +32,16 @@ class PhysicsSpriteRender extends System
     {
         a = cast(c.body.rotation, Angle);   
     }
+
+    
+    @d inline function draw(e:Entity,i:ImageComp,c:Circle) 
+    {
+        var buffer = bufferCallback();
+        if(buffer == null) return;
+            renderByCircleEntity(buffer.g2, e);
+        
+    }
+
     public static function renderByCircleEntity(g: Graphics, e:echoes.Entity): Void {
 		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
@@ -68,13 +78,6 @@ class PhysicsSpriteRender extends System
 			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
 		#end
 	}
-    @d inline function draw(e:Entity,i:ImageComp,c:Circle) 
-    {
-        var buffer = bufferCallback();
-        if(buffer == null) return;
-            renderByCircleEntity(buffer.g2, e);
-        
-    }
      
     
 

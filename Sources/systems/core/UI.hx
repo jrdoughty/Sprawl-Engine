@@ -18,6 +18,13 @@ class UI extends echoes.System
         bufferCallback = Project.bufferCallback;
     }
     
+    @u function updateAward(a:AwardFont, p:Position) 
+    {
+        p.y--;
+        if(p.y < Main.PLAYAREAHEIGHT)
+            p.y = -100;
+    }
+    
     @d function drawScore(s:ScoreComp) 
     {
         var buffer = bufferCallback();
@@ -53,13 +60,6 @@ class UI extends echoes.System
         buffer.g2.font = Assets.fonts._8bitlim;
 		buffer.g2.fontSize = 48;
 		buffer.g2.drawString(a.value, p.x, p.y);
-    }
-    
-    @u function updateAward(a:AwardFont, p:Position) 
-    {
-        p.y--;
-        if(p.y < Main.PLAYAREAHEIGHT)
-            p.y = -100;
     }
     @d function drawButtonFont(b:ButtonComp, p:Position, wh:Bounds2D, s:Scale) 
     {
