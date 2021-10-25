@@ -61,7 +61,7 @@ class UI extends echoes.System
         if(p.y < Main.PLAYAREAHEIGHT)
             p.y = -100;
     }
-    @d function drawButtonFont(b:ButtonComp, p:Position, wh:WHComp, s:Scale) 
+    @d function drawButtonFont(b:ButtonComp, p:Position, wh:TwoDBounds, s:Scale) 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;

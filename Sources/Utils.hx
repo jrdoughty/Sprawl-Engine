@@ -18,43 +18,43 @@ class Utils {
     {
         return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
-    public static inline function pointInAABBTest(pos1:Position,  pos2:Position, wh2:WHComp) {
+    public static inline function pointInAABBTest(pos1:Position,  pos2:Position, wh2:TwoDBounds) {
         return pos1.x < pos2.x+wh2.w &&
             pos1.x > pos2.x &&
             pos1.y < pos2.y+wh2.h &&
             pos1.y > pos2.y;
     }
-    public static inline function pointInAABBTestWithScale(pos1:Position,  pos2:Position, wh2:WHComp,s:Scale) {
+    public static inline function pointInAABBTestWithScale(pos1:Position,  pos2:Position, wh2:TwoDBounds,s:Scale) {
         return pos1.x < pos2.x+wh2.w * s.x &&
             pos1.x > pos2.x &&
             pos1.y < pos2.y+wh2.h * s.y &&
             pos1.y > pos2.y;
     }
-    public static inline function pointInAABBTestWithScaleCentered(pos1:Position,  pos2:Position, wh2:WHComp,s:Scale) {
+    public static inline function pointInAABBTestWithScaleCentered(pos1:Position,  pos2:Position, wh2:TwoDBounds,s:Scale) {
         return pos1.x < pos2.x + wh2.w/2 * s.x &&
             pos1.x > pos2.x - wh2.w/2 * s.x  &&
             pos1.y < pos2.y + wh2.h/2 * s.y &&
             pos1.y > pos2.y - wh2.h/2 * s.y;
     }
-    public static inline function AABBTest(pos1:Position, wh1:WHComp, pos2:Position, wh2:WHComp) {
+    public static inline function AABBTest(pos1:Position, wh1:TwoDBounds, pos2:Position, wh2:TwoDBounds) {
         return pos1.x < pos2.x+wh2.w &&
             pos1.x + wh1.w > pos2.x &&
             pos1.y < pos2.y+wh2.h &&
             pos1.y + wh1.h > pos2.y;
     }
-    public static inline function AABBTestFromCenter(pos1:Position, wh1:WHComp, pos2:Position, wh2:WHComp) {
+    public static inline function AABBTestFromCenter(pos1:Position, wh1:TwoDBounds, pos2:Position, wh2:TwoDBounds) {
         return pos1.x - wh1.w/2 < pos2.x + wh2.w/2 &&
             pos1.x + wh1.w/2 > pos2.x  - wh2.w/2&&
             pos1.y - wh1.h/2 < pos2.y + wh2.h/2 &&
             pos1.y + wh1.h/2 > pos2.y - wh2.h/2;
     }
-    public static inline function AABBTestWithScale(pos1:Position, wh1:WHComp, pos2:Position, wh2:WHComp) {
+    public static inline function AABBTestWithScale(pos1:Position, wh1:TwoDBounds, pos2:Position, wh2:TwoDBounds) {
         return pos1.x < pos2.x+wh2.w &&
             pos1.x + wh1.w > pos2.x &&
             pos1.y < pos2.y+wh2.h &&
             pos1.y + wh1.h > pos2.y;
     }
-    public static inline function AABBTestFromCenterWithScale(pos1:Position, wh1:WHComp, pos2:Position, wh2:WHComp) {
+    public static inline function AABBTestFromCenterWithScale(pos1:Position, wh1:TwoDBounds, pos2:Position, wh2:TwoDBounds) {
         return pos1.x - wh1.w/2 < pos2.x + wh2.w/2 &&
             pos1.x + wh1.w/2 > pos2.x  - wh2.w/2&&
             pos1.y - wh1.h/2 < pos2.y + wh2.h/2 &&
@@ -68,13 +68,13 @@ class Utils {
      * @param cirPos 
      * @param r 
      */
-    public static inline function CenteredRectCircleOverlapTest(recPos:Position, recWH:WHComp, cirPos:Position, r:Float) {
+    public static inline function CenteredRectCircleOverlapTest(recPos:Position, recWH:TwoDBounds, cirPos:Position, r:Float) {
         
         var modifiedPos = new Position(recPos.x - recWH.w/2,recPos.y - recWH.h/2);
 
         return RectCircleOverlapTest(modifiedPos, recWH, cirPos,r);
     }
-    public static inline function RectCircleOverlapTest(recPos:Position, recWH:WHComp, cirPos:Position, r:Float) {
+    public static inline function RectCircleOverlapTest(recPos:Position, recWH:TwoDBounds, cirPos:Position, r:Float) {
         var testX:Float = cirPos.x;
         var testY:Float = cirPos.y;
 

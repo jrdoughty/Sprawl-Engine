@@ -1,6 +1,6 @@
 package components.core;
 
-class WHComp implements hxbit.Serializable
+class TwoDBounds implements hxbit.Serializable
 {
     public var w:Float;
     public var h:Float;
