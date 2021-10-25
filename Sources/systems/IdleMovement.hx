@@ -105,7 +105,7 @@ class IdleMovement extends System
             var dist:Float = 200;
             for(i in circleView.entities)
             {
-                if(i.get(Circle).body.position.y - i.get(Circle).radius > unit.get(Position).y - unit.get(TwoDBounds).h/2 && 
+                if(i.get(Circle).body.position.y - i.get(Circle).radius > unit.get(Position).y - unit.get(Bounds2D).h/2 && 
                     Math.abs(unit.get(Position).x - i.get(Circle).body.position.x) < dist)
                 {
                     dist = Math.abs(unit.get(Position).x - i.get(Circle).body.position.x);

@@ -17,7 +17,7 @@ class CreditMenu extends System
             new Position(0, 0),
             new ImageComp(images.menubackground),
             new Scale(Main.WIDTH/images.menubackground.width,Main.HEIGHT/images.menubackground.height),
-            new TwoDBounds(images.menubackground.width,images.menubackground.height),
+            new Bounds2D(images.menubackground.width,images.menubackground.height),
             new Visible(true),
             new TopLeftRender(true));
         new Entity().add(
@@ -25,7 +25,7 @@ class CreditMenu extends System
             new ImageComp(images.button),
             new AnimData(new StringMap()),
             new Scale(10,5),
-            new TwoDBounds(48,16),
+            new Bounds2D(48,16),
             new Visible(true),
             new ButtonComp('play'),
             new GamePad(0),
@@ -37,7 +37,7 @@ class CreditMenu extends System
             new ImageComp(images.button),
             new AnimData(new StringMap()),
             new Scale(10,5),
-            new TwoDBounds(48,16),
+            new Bounds2D(48,16),
             new Visible(true),
             new ButtonComp('menu'),
             new GamePad(0),
@@ -94,7 +94,7 @@ class CreditMenu extends System
         );
     }
 
-    @u public function mouseBtnUpdate (m:MouseComp, b:ButtonComp, p:Position, wh:TwoDBounds, s:Scale)
+    @u public function mouseBtnUpdate (m:MouseComp, b:ButtonComp, p:Position, wh:Bounds2D, s:Scale)
     {
         var mPos = new Position(m.x,m.y);
         if(m.mousePressed[0] && Utils.pointInAABBTestWithScaleCentered(mPos,p,wh,s))

@@ -15,7 +15,7 @@ import components.core.*;
 class SpriteRender extends System
 {
     var bufferCallback:Void->Framebuffer;
-    var sprites:View<ImageComp,TwoDBounds>;
+    var sprites:View<ImageComp,Bounds2D>;
 
 
 
@@ -28,7 +28,7 @@ class SpriteRender extends System
     public static function renderByEntity(g: Graphics, e:echoes.Entity): Void {
 		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
-		var wh:TwoDBounds = e.get(TwoDBounds);
+		var wh:Bounds2D = e.get(Bounds2D);
 		var pos:Position = e.get(Position);
 		var s:Scale = e.get(Scale);
 		var vis:Visible = e.get(Visible);

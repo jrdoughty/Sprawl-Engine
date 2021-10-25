@@ -16,7 +16,7 @@ class CatcherCollectSystem extends System {
     var circleView:View<Circle>;
     var scoreView:View<ScoreComp>;
 
-    @u public function update(c:Catcher,p:Position,wh:TwoDBounds) {
+    @u public function update(c:Catcher,p:Position,wh:Bounds2D) {
         for(i in circleView.entities)
         {
             if(i.get(Death) == null && Utils.CenteredRectCircleOverlapTest(p, wh, new Position(i.get(Circle).body.position.x,i.get(Circle).body.position.y),i.get(Circle).radius))

@@ -39,7 +39,7 @@ class GameSystem extends System
             AnimComp.createAnimDataRange(0,0,Math.round(100)),
             new ImageComp(images.back),
             new Scale(1,1),
-            new TwoDBounds(Main.WIDTH,Main.HEIGHT),
+            new Bounds2D(Main.WIDTH,Main.HEIGHT),
             new Visible(true),
             new TopLeftRender(true));
 
@@ -55,7 +55,7 @@ class GameSystem extends System
                 "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed),"run"),
                 "throw"=>AnimComp.createAnimDataRange(4,6,Math.round(speed),"throw")]),
             new Scale(1,1),
-            new TwoDBounds(32,32),
+            new Bounds2D(32,32),
             new Visible(true),
             new GamePad(0),
             new KeyboardComp(),
@@ -70,7 +70,7 @@ class GameSystem extends System
                 new Scale(1,1),
                 new ImageComp(images.unit),
                 AnimComp.createAnimDataRange(0,1,Math.round(speed)),
-                new TwoDBounds(32,32),
+                new Bounds2D(32,32),
                 new AnimData([
                     "idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                     "run"=>AnimComp.createAnimDataRange(0,1,Math.round(speed)),
@@ -91,7 +91,7 @@ class GameSystem extends System
                 new ImageComp(images.peep),
                 new Enemy(),
                 AnimComp.createAnimDataRange(0,3,Math.round(speed)),
-                new TwoDBounds(32,32),
+                new Bounds2D(32,32),
                 new AnimData([
                     "idle"=>AnimComp.createAnimDataRange(2,2,Math.round(speed)),
                     "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),
@@ -133,7 +133,7 @@ class GameSystem extends System
                     new Scale(1,1),
                     new ImageComp(images.ogre),
                     AnimComp.createAnimDataRange(0,0,Math.round(speed)),
-                    new TwoDBounds(32,64),
+                    new Bounds2D(32,64),
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),
@@ -150,7 +150,7 @@ class GameSystem extends System
                     new Scale(1,1),
                     new ImageComp(images.goblinbigbag),
                     AnimComp.createAnimDataRange(3,5,Math.round(speed)),
-                    new TwoDBounds(32,32),
+                    new Bounds2D(32,32),
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(3,5,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,2,Math.round(speed))]),
@@ -167,7 +167,7 @@ class GameSystem extends System
                     new Scale(1,1),
                     new ImageComp(images.alt),
                     AnimComp.createAnimDataRange(0,0,Math.round(speed)),
-                    new TwoDBounds(32,32),
+                    new Bounds2D(32,32),
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,2,Math.round(speed))]),
@@ -185,7 +185,7 @@ class GameSystem extends System
                 new Scale(1,1),
                 new ImageComp(debImages[(i%debImages.length)]),
                 AnimComp.createAnimDataRange(0,0,Math.round(speed)),
-                new TwoDBounds(debImages[(i%debImages.length)].width,debImages[(i%debImages.length)].height),
+                new Bounds2D(debImages[(i%debImages.length)].width,debImages[(i%debImages.length)].height),
                 new Visible(true),
                 new Debris()
             );
@@ -211,7 +211,7 @@ class GameSystem extends System
                     new ImageComp(images.peep),
                     new Enemy(),
                     AnimComp.createAnimDataRange(0,3,Math.round(speed)),
-                    new TwoDBounds(32,32),
+                    new Bounds2D(32,32),
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(2,2,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),

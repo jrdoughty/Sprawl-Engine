@@ -18,7 +18,7 @@ class DebrisUnitCollision extends System
 {
     var debriss:View<Debris, Position, Scale>;
 
-    @u inline function checkOverlap(unit:Unit, pos:Position, wh:TwoDBounds) {
+    @u inline function checkOverlap(unit:Unit, pos:Position, wh:Bounds2D) {
         // micro optimizaion to not test each entity twice
         var h1 = debriss.entities.head;
         while (h1 != null) {
@@ -26,7 +26,7 @@ class DebrisUnitCollision extends System
             var debris = h1.value;
             var posE = debris.get(Position);
             
-            if (Utils.AABBTestFromCenter(debris.get(Position), debris.get(TwoDBounds), pos,wh)) 
+            if (Utils.AABBTestFromCenter(debris.get(Position), debris.get(Bounds2D), pos,wh)) 
             {
                 //score.entities.head.value.get(ScoreComp).score += 100;
 

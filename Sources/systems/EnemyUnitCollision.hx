@@ -19,7 +19,7 @@ class EnemyUnitCollision extends System
     var enemies:View<Enemy, Position, Scale>;
     var score:View<ScoreComp>;
 
-    @u inline function checkOverlap(unit:Unit, pos:Position, wh:TwoDBounds) {
+    @u inline function checkOverlap(unit:Unit, pos:Position, wh:Bounds2D) {
         // micro optimizaion to not test each entity twice
         var h1 = enemies.entities.head;
         while (h1 != null) {
@@ -27,7 +27,7 @@ class EnemyUnitCollision extends System
             var enemy = h1.value;
             var posE = enemy.get(Position);
             
-            if (Utils.AABBTestFromCenter(enemy.get(Position), enemy.get(TwoDBounds), pos,wh)) 
+            if (Utils.AABBTestFromCenter(enemy.get(Position), enemy.get(Bounds2D), pos,wh)) 
             {
                 //score.entities.head.value.get(ScoreComp).score += 100;
 

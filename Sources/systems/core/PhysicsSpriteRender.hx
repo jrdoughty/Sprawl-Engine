@@ -35,7 +35,7 @@ class PhysicsSpriteRender extends System
     public static function renderByCircleEntity(g: Graphics, e:echoes.Entity): Void {
 		var ic = e.get(ImageComp);
 		var ac = e.get(AnimComp);
-		var wh:TwoDBounds = new TwoDBounds(e.get(Circle).radius*2,e.get(Circle).radius*2);
+		var wh:Bounds2D = new Bounds2D(e.get(Circle).radius*2,e.get(Circle).radius*2);
 		var pos:Position = new Position(e.get(Circle).body.position.x,e.get(Circle).body.position.y);
 		var s:Scale = new Scale();
 		var vis:Visible = new Visible(true);
