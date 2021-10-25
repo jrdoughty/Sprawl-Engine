@@ -35,21 +35,28 @@ class SpriteRender extends System
 		var angle:Angle = e.get(Angle);
         var x = pos.x;
         var y = pos.y;
-        //Render at center is default unless the entity has a TopLeftRenderComp
-        if(e.get(TopLeftRender) == null)
-        {
-            if(s == null)
-            {
-                x -= Math.round(wh.w/2);
-                y -= Math.round(wh.h/2);
-            }
-            else
-            {
-                
-                x -= Math.round(wh.w/2*s.x);
-                y -= Math.round(wh.h/2*s.y);
-            }
+        var xOffset = 0.5; // Assumed we render from the center of the sprite by default
+        var yOffset = 0.5;
+        var renderOffset = e.get(RenderOffset2D);
+        var xScale = 1.0; // Assume a sprite scale of 1:1 by default
+        var yScale = 1.0;
+
+        if(renderOffset != null) // If we have a render offset, we'll grab the offsets from that instead
+        { 
+            xOffset = renderOffset.x;
+            yOffset = renderOffset.y;
         }
+        
+        if (s != null) // If we have a scale component, check the components scale instead of using our default
+        {
+            xScale = s.x;    
+            yScale = s.y;    
+        }
+
+        // Calculate the final X/Y,based on our render offset and scale
+        x -= Math.round(wh.w * xOffset * xScale); 
+        y -= Math.round(wh.h * yOffset * yScale);
+
 		if (ic != null && vis != null && cast(vis, Bool) )
 			{
 			g.color = Color.White;
