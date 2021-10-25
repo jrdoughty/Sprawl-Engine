@@ -41,7 +41,7 @@ class GameSystem extends System
             new Scale(1,1),
             new Bounds2D(Main.WIDTH,Main.HEIGHT),
             new Visible(true),
-            new RenderOffset2D(new components.core.Vec2(0, 0)));
+            new RenderOffset2D(0.0, 0.0));
 
 
         var characterEcho = new Entity().add(
@@ -107,6 +107,9 @@ class GameSystem extends System
                 body.position.x += 15;
             c.body = body;
             new Entity().add(c,
+                new Position(body.position.x, body.position.y),
+                new Bounds2D(c.radius * 2, c.radius * 2),
+                new Visible(true),
                 new ImageComp(Assets.images.peg),
                 AnimComp.createAnimDataRange(0,0,Math.round(100)),
                 new Angle(0));

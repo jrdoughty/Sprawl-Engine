@@ -42,7 +42,11 @@ class EnemyUnitCollision extends System
                     c.body.shapes.at(0).material = new Material(0,1,2,.5,.001);
                     c.body.applyImpulse(new Vec2(speedX, speedY));
                     c.body.applyAngularImpulse(5);
+                    
                     new Entity().add(c,
+                        new Visible(true),
+                        new Bounds2D(c.radius * 2, c.radius * 2),
+                        new Position(c.body.position.x, c.body.position.y),
                         new ImageComp(Assets.images.coin),
                         AnimComp.createAnimDataRange(0,0,Math.round(100)),
                         new Angle(0));

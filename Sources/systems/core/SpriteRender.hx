@@ -23,17 +23,18 @@ class SpriteRender extends System
     {
         bufferCallback = Project.bufferCallback;
     }
-    
-    @d inline function sortByYPos() 
-    {
-        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
-    }
+
     @d inline function draw() 
     {
         var buffer = bufferCallback();
         if(buffer == null) return;
         
-        sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
+        sprites.entities.sort(function(a,b){
+            var aPosition = a.get(Position);
+            var bPosition = b.get(Position);
+    
+            return Math.round(aPosition.y - bPosition.y);
+        });
         // micro optimizaion to not test each entity twice
         var h1 = sprites.entities.head;
         while (h1 != null) {
@@ -59,6 +60,7 @@ class SpriteRender extends System
         var renderOffset = e.get(RenderOffset2D);
         var xScale = 1.0; // Assume a sprite scale of 1:1 by default
         var yScale = 1.0;
+
 
         if(renderOffset != null) // If we have a render offset, we'll grab the offsets from that instead
         { 
@@ -86,12 +88,12 @@ class SpriteRender extends System
                     Math.floor(ac.indices[ac.index] * wh.w / ic.width) * wh.h, 
                     wh.w, wh.h, 
                     x, y, 
-                    wh.w * s.x, wh.h * s.y);
+                    wh.w * xScale, wh.h * yScale);
             else if (s == null) {
                 g.drawImage(ic,x,y);
             }
             else
-                g.drawScaledImage(ic, x, y, wh.w*s.x, wh.h*s.y);
+                g.drawScaledImage(ic, x, y, wh.w*xScale, wh.h*yScale);
 			if (angle != null && cast(angle,FastFloat) != 0) 
 				g.popTransformation();
         }
