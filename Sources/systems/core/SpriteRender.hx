@@ -23,11 +23,6 @@ class SpriteRender extends System
     {
         bufferCallback = Project.bufferCallback;
     }
-    
-    // @d inline function sortByYPos() 
-    // {
-    //     sprites.entities.sort(function(a,b){return Math.round(a.get(Position).y - b.get(Position).y);});
-    // }
 
     @d inline function draw() 
     {
