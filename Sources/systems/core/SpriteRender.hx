@@ -38,11 +38,7 @@ class SpriteRender extends System
             var aPosition = a.get(Position);
             var bPosition = b.get(Position);
     
-            if (aPosition == null || bPosition == null)
-            {
-                trace('Something broke');
-            }
-            return Math.round(a.get(Position).y - b.get(Position).y);
+            return Math.round(aPosition.y - bPosition.y);
         });
         // micro optimizaion to not test each entity twice
         var h1 = sprites.entities.head;
@@ -62,11 +58,6 @@ class SpriteRender extends System
 		var s:Scale = e.get(Scale);
 		var vis:Visible = e.get(Visible);
 		var angle:Angle = e.get(Angle);
-        if (pos == null)
-        {
-            trace('Null position');
-        }
-        trace(pos);
         var x = pos.x;
         var y = pos.y;
         var xOffset = 0.5; // Assumed we render from the center of the sprite by default
