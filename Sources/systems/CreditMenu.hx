@@ -19,7 +19,7 @@ class CreditMenu extends System
             new Scale(Main.WIDTH/images.menubackground.width,Main.HEIGHT/images.menubackground.height),
             new Bounds2D(images.menubackground.width,images.menubackground.height),
             new Visible(true),
-            new TopLeftRender(true));
+            new RenderOffset2D(new components.core.Vec2(0, 0)));
         new Entity().add(
             new Position(Main.WIDTH /2 , Main.HEIGHT/2),
             new ImageComp(images.button),

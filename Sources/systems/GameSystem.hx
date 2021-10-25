@@ -41,7 +41,7 @@ class GameSystem extends System
             new Scale(1,1),
             new Bounds2D(Main.WIDTH,Main.HEIGHT),
             new Visible(true),
-            new TopLeftRender(true));
+            new RenderOffset2D(new components.core.Vec2(0, 0)));
 
 
         var characterEcho = new Entity().add(
