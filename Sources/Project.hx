@@ -96,9 +96,9 @@ class Project {
 		Workflow.addSystem(new Animation());
 		
 		//Renders after Animation stepping systems
+		Workflow.addSystem(new PhysicsStateTransformer());
 		Workflow.addSystem(new SpriteRender());
 		Workflow.addSystem(new ShapeRender());
-		Workflow.addSystem(new PhysicsSpriteRender());
 		Workflow.addSystem(new UI());
 		
 		//Add Inputs at the end because the update loop clears them 
