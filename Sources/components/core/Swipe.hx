@@ -1,10 +1,10 @@
 package components.core;
 
 
-class Swipe
+class Swipe  implements hxbit.Serializable 
 {
-	public var start:Vec2;
-	public var end:Vec2;
+	@:s public var start:Vec2;
+	@:s public var end:Vec2;
 
 	public function new(start:Vec2, end:Vec2):Void
 	{

@@ -1,8 +1,12 @@
 package components.core;
-import kha.Image;
-@:forward
-abstract ImageComp(Image) from Image to Image {
-    public function new(i:Image) {
-        this = i;
+
+import hxbit.Serializable;
+
+class ImageComp implements Serializable{
+    
+    @:s public var name:String;
+
+    public function new(s:String) {
+        name = s;
     }
 }

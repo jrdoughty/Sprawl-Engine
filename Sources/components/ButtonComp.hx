@@ -1,10 +1,10 @@
 package components;
 
-class ButtonComp {
+class ButtonComp   implements hxbit.Serializable {
 
-    public var tag:String;
-    public var active:Bool;
-    public var over:Bool;
+    @:s public var tag:String;
+    @:s public var active:Bool;
+    @:s public var over:Bool;
     public function new(t:String, a:Bool = true, o:Bool = false) {//Do I need this?
         tag = t;
         active = a;

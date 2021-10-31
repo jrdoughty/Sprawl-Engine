@@ -81,27 +81,25 @@ class SpriteRender extends System
 		if (ic != null && vis != null && cast(vis, Bool) )
 			{
 			g.color = Color.White;
-			if (angle != null && cast(angle,FastFloat) != 0) 
-					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(cast(angle,FastFloat))).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
+			if (angle != null && angle.value != 0) 
+					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(angle.value)).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
 			if(ac != null)
-                g.drawScaledSubImage(ic, Std.int(ac.indices[ac.index] * wh.w) % ic.width, 
-                    Math.floor(ac.indices[ac.index] * wh.w / ic.width) * wh.h, 
+                g.drawScaledSubImage(AssetRepo.images.get(ic.name), Std.int(ac.indices[ac.index] * wh.w) % AssetRepo.images.get(ic.name).width, 
+                    Math.floor(ac.indices[ac.index] * wh.w / AssetRepo.images.get(ic.name).width) * wh.h, 
                     wh.w, wh.h, 
                     x, y, 
                     wh.w * xScale, wh.h * yScale);
             else if (s == null) {
-                g.drawImage(ic,x,y);
+                g.drawImage(AssetRepo.images.get(ic.name),x,y);
             }
             else
-                g.drawScaledImage(ic, x, y, wh.w*xScale, wh.h*yScale);
-			if (angle != null && cast(angle,FastFloat) != 0) 
+                g.drawScaledImage(AssetRepo.images.get(ic.name), x, y, wh.w*xScale, wh.h*yScale);
+			if (angle != null && angle.value != 0) 
 				g.popTransformation();
         }
 		#if debug_collisions
 			g.color = Color.fromBytes(255, 0, 0);
-			g.drawRect(x - collider.x * scaleX, y - collider.y * scaleY, width, height);
-			g.color = Color.fromBytes(0, 255, 0);
-			g.drawRect(tempcollider.x, tempcollider.y, tempcollider.width, tempcollider.height);
+			g.drawRect(x, y, wh.w * xScale, wh.h * yScale);
 		#end
 	}
 	

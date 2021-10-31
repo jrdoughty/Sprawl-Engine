@@ -1,11 +1,11 @@
 package components;
 
-class AwardFont {
-    public var value:String;
-    public var fontSize:Int; 
-    public var r:Int = 0;
-    public var b:Int = 0;
-    public var g:Int = 0;
+class AwardFont  implements hxbit.Serializable  {
+    @:s public var value:String;
+    @:s public var fontSize:Int; 
+    @:s public var r:Int = 0;
+    @:s public var b:Int = 0;
+    @:s public var g:Int = 0;
     public function new(v:String,fs:Int = 20) {
         value = v;
         fontSize = fs;

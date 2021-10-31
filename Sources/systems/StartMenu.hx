@@ -15,14 +15,14 @@ class StartMenu extends System
         
         new Entity().add(//Background
             new Position(0, 0),
-            new ImageComp(images.menubackground),
+            new ImageComp("menubackground"),
             new Scale(Main.WIDTH/images.menubackground.width,Main.HEIGHT/images.menubackground.height),
             new Bounds2D(images.menubackground.width,images.menubackground.height),
             new Visible(true),
             new RenderOffset2D(0.0, 0.0));
         new Entity().add(
             new Position(Main.WIDTH /2 , Main.HEIGHT/2),
-            new ImageComp(images.button),
+            new ImageComp("button"),
             new AnimData(new StringMap()),
             new Scale(10,5),
             new Bounds2D(48,16),
@@ -34,7 +34,7 @@ class StartMenu extends System
         );
         new Entity().add(
             new Position(Main.WIDTH /2, Main.HEIGHT/2 + 96),
-            new ImageComp(images.button),
+            new ImageComp("button"),
             new AnimData(new StringMap()),
             new Scale(10,5),
             new Bounds2D(48,16),
@@ -48,13 +48,13 @@ class StartMenu extends System
             new Position(Main.WIDTH /2-145, Main.HEIGHT/4),
             new Scale(10,30),
             new Visible(true),
-            new TextComp("Git Gold",Assets.fonts._8bitlim,kha.Color.Orange)
+            new TextComp("Git Gold","_8bitlim",kha.Color.Orange)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-140, Main.HEIGHT/4),
             new Scale(10,28),
             new Visible(true),
-            new TextComp("Git Gold",Assets.fonts._8bitlim,kha.Color.Yellow)
+            new TextComp("Git Gold","_8bitlim",kha.Color.Yellow)
         );
         if(Project.highScore>0)
         {
@@ -62,13 +62,13 @@ class StartMenu extends System
                 new Position(Main.WIDTH /2-145, Main.HEIGHT/4*3+27),
                 new Scale(10,15),
                 new Visible(true),
-                new TextComp("High Score " + Project.highScore,Assets.fonts._8bitlim,kha.Color.Yellow)
+                new TextComp("High Score " + Project.highScore,"_8bitlim",kha.Color.Yellow)
             );
             new Entity().add(
                 new Position(Main.WIDTH /2-145, Main.HEIGHT/4*3+127),
                 new Scale(10,15),
                 new Visible(true),
-                new TextComp("Last Score " + Project.lastScore,Assets.fonts._8bitlim,kha.Color.Yellow)
+                new TextComp("Last Score " + Project.lastScore,"_8bitlim",kha.Color.Yellow)
             );
         }
     }

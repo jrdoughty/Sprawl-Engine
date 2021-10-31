@@ -47,7 +47,7 @@ class EnemyUnitCollision extends System
                         new Visible(true),
                         new Bounds2D(c.radius * 2, c.radius * 2),
                         new Position(c.body.position.x, c.body.position.y),
-                        new ImageComp(Assets.images.coin),
+                        new ImageComp("coin"),
                         AnimComp.createAnimDataRange(0,0,Math.round(100)),
                         new Angle(0));
                     Audio.play(Assets.sounds.smack);

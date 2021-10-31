@@ -26,9 +26,9 @@ class PhysicsStateTransformer extends System
     {
     }
 
-    @u public function updateRotationOfCoin(e:Entity, circle:Circle, angle:Angle)
+    @u public function updateRotationOfCoin(circle:Circle, angle:Angle)
     {    
-        e.add(cast(circle.body.rotation, Angle));
+        angle.value = cast(circle.body.rotation, FastFloat);
     }   
     
     @u public function updateBounds(circle:Circle, bounds2D:Bounds2D)

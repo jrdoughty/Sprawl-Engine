@@ -42,7 +42,7 @@ class DebrisUnitCollision extends System
                     c.body.applyImpulse(new Vec2(speedX, speedY));
                     c.body.applyAngularImpulse(5);
                     new Entity().add(c,
-                        new ImageComp(Assets.images.coin),
+                        new ImageComp("coin"),
                         AnimComp.createAnimDataRange(0,0,Math.round(100)),
                         new Angle(0));
                     Audio.play(Assets.sounds.debris);

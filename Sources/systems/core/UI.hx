@@ -30,7 +30,7 @@ class UI extends echoes.System
         var buffer = bufferCallback();
         if(buffer == null) return;
         buffer.g2.color = Color.White;
-        buffer.g2.font = Assets.fonts._8bitlim;
+        buffer.g2.font = AssetRepo.fonts.get("_8bitlim");
 		buffer.g2.fontSize = 48;
 		buffer.g2.drawString("Score "+s.score+"", 32, 32);
     }
@@ -41,7 +41,7 @@ class UI extends echoes.System
         if(buffer == null) return;
         var timeLeft =Math.round((t.get('timer').endTime - t.get('timer').currentTime));
         buffer.g2.color = timeLeft>5?Color.White:Color.Red;
-        buffer.g2.font = Assets.fonts._8bitlim;
+        buffer.g2.font = AssetRepo.fonts.get("_8bitlim");
 		buffer.g2.fontSize = 48;
 		buffer.g2.drawString("Time " + (timeLeft>=0?timeLeft:0), 496, 32);
     }
@@ -57,7 +57,7 @@ class UI extends echoes.System
         a.r %= 256;
         a.g %= 256;
         buffer.g2.color = Color.fromBytes(a.r,a.g,a.b);
-        buffer.g2.font = Assets.fonts._8bitlim;
+        buffer.g2.font = AssetRepo.fonts.get("_8bitlim");
 		buffer.g2.fontSize = 48;
 		buffer.g2.drawString(a.value, p.x, p.y);
     }
@@ -66,7 +66,7 @@ class UI extends echoes.System
         var buffer = bufferCallback();
         if(buffer == null) return;
         buffer.g2.color = Color.White;
-        buffer.g2.font = Assets.fonts._8bitlim;
+        buffer.g2.font = AssetRepo.fonts.get("_8bitlim");
         buffer.g2.fontSize = Math.round(8*s.y);
         buffer.g2.drawString(b.tag, p.x - wh.w/2 - b.tag.length * s.y, p.y - wh.h/2 - buffer.g2.fontSize/2);//totally non-scientific way of centering the text
         
@@ -77,7 +77,7 @@ class UI extends echoes.System
         var buffer = bufferCallback();
         if(buffer == null) return;
         buffer.g2.color = t.color;
-        buffer.g2.font = t.font;
+        buffer.g2.font = AssetRepo.fonts.get(t.font);
         buffer.g2.fontSize = Math.round(8*s.y);
         buffer.g2.drawString(t.text, p.x - t.text.length * s.y, p.y - buffer.g2.fontSize/2);//totally non-scientific way of centering the text
         

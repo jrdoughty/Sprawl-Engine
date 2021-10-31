@@ -1,15 +1,16 @@
 package components.core;
 
+import hxbit.Serializable;
 import haxe.Timer;
 
-class TimeComp
+class TimeComp implements Serializable
 {
-    public var timeMS:Int;
-    public var loop:Bool;
-    public var isComplete:Bool = false;
-    public var startTime:Float;
-    public var endTime:Float;
-    public var currentTime:Float;
+    @:s public var timeMS:Int;
+    @:s public var loop:Bool;
+    @:s public var isComplete:Bool = false;
+    @:s public var startTime:Float;
+    @:s public var endTime:Float;
+    @:s public var currentTime:Float;
     public function new(t:Int, loop:Bool = false) 
     {
         startTime = Timer.stamp();

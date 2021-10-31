@@ -1,22 +1,18 @@
 package components.core;
 
+import hxbit.Serializable;
 import kha.Font;
 import kha.Color;
 import kha.Assets;
 
-class TextComp {
+class TextComp implements Serializable{
 
-    public var text:String;
-    public var color:Color;
-    public var font:Font;
+    @:s public var text:String;
+    @:s public var color:Color;
+    @:s public var font:String;
 
-    public function new(t:String,f:Font = null,c:Color = Color.White) {
-        if(f == null)
-        {
-            font = Assets.fonts._8bitlim;
-        }
-        else 
-            font = f;
+    public function new(t:String,f:String = 'OpenSans',c:Color = Color.White) {
+        font = f;
         text = t;
         color = c;
     }

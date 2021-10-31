@@ -15,14 +15,16 @@ class CreditMenu extends System
         
         new Entity().add(//Background
             new Position(0, 0),
-            new ImageComp(images.menubackground),
-            new Scale(Main.WIDTH/images.menubackground.width,Main.HEIGHT/images.menubackground.height),
-            new Bounds2D(images.menubackground.width,images.menubackground.height),
+            new ImageComp("menubackground"),
+            new Scale(Main.WIDTH/AssetRepo.images.get("menubackground").width,
+                Main.HEIGHT/AssetRepo.images.get("menubackground").height),
+            new Bounds2D(AssetRepo.images.get("menubackground").width,
+                AssetRepo.images.get("menubackground").height),
             new Visible(true),
             new RenderOffset2D(0.0, 0.0));
         new Entity().add(
             new Position(Main.WIDTH /2 , Main.HEIGHT/2),
-            new ImageComp(images.button),
+            new ImageComp("button"),
             new AnimData(new StringMap()),
             new Scale(10,5),
             new Bounds2D(48,16),
@@ -34,7 +36,7 @@ class CreditMenu extends System
         );
         new Entity().add(
             new Position(Main.WIDTH /2, Main.HEIGHT/2 + 96),
-            new ImageComp(images.button),
+            new ImageComp("button"),
             new AnimData(new StringMap()),
             new Scale(10,5),
             new Bounds2D(48,16),
@@ -48,49 +50,49 @@ class CreditMenu extends System
             new Position(Main.WIDTH /2-145, 85),
             new Scale(10,18),
             new Visible(true),
-            new TextComp("John Doughty",Assets.fonts._8bitlim,kha.Color.Orange)
+            new TextComp("John Doughty","_8bitlim",kha.Color.Orange)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-140, 85),
             new Scale(10,17.5),
             new Visible(true),
-            new TextComp("John Doughty",Assets.fonts._8bitlim,kha.Color.Yellow)
+            new TextComp("John Doughty","_8bitlim",kha.Color.Yellow)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-145, 215),
             new Scale(10,15.5),
             new Visible(true),
-            new TextComp("Art and Code",Assets.fonts._8bitlim,kha.Color.Orange)
+            new TextComp("Art and Code","_8bitlim",kha.Color.Orange)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-140, 215),
             new Scale(10,15),
             new Visible(true),
-            new TextComp("Art and Code",Assets.fonts._8bitlim,kha.Color.Yellow)
+            new TextComp("Art and Code","_8bitlim",kha.Color.Yellow)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-145, 590),
             new Scale(10,10),
             new Visible(true),
-            new TextComp("Special Thanks",Assets.fonts._8bitlim,kha.Color.Orange)
+            new TextComp("Special Thanks","_8bitlim",kha.Color.Orange)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-140, 590),
             new Scale(10,9.5),
             new Visible(true),
-            new TextComp("Special Thanks",Assets.fonts._8bitlim,kha.Color.Yellow)
+            new TextComp("Special Thanks","_8bitlim",kha.Color.Yellow)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-145, 660),
             new Scale(10,9.75),
             new Visible(true),
-            new TextComp("Ben Immel and Nick Cash",Assets.fonts._8bitlim,kha.Color.Orange)
+            new TextComp("Ben Immel and Nick Cash","_8bitlim",kha.Color.Orange)
         );
         new Entity().add(
             new Position(Main.WIDTH /2-140, 660),
             new Scale(10,9.5),
             new Visible(true),
-            new TextComp("Ben Immel and Nick Cash",Assets.fonts._8bitlim,kha.Color.Yellow)
+            new TextComp("Ben Immel and Nick Cash","_8bitlim",kha.Color.Yellow)
         );
     }
 

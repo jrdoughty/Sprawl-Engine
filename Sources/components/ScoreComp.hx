@@ -1,7 +1,7 @@
 package components;
-class ScoreComp
+class ScoreComp  implements hxbit.Serializable 
 {
-    public var score:Int;
+    @:s public var score:Int;
     public function new(s:Int) 
     {
         score = s;   

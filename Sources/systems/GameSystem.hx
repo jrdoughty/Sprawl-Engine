@@ -27,7 +27,6 @@ class GameSystem extends System
         var numCollectors:Int = 10;
         var gameTime:Int = 15;
         var speed = 5;
-        var images = Assets.images;
         var sEntity = new Entity().add(
             new ScoreComp(0),
             new TimeData(["timer"=>new TimeComp(gameTime),"gameEndTimer"=>new TimeComp(gameTime+4)]));
@@ -37,7 +36,7 @@ class GameSystem extends System
         new Entity().add(//Background
             new Position(0, 0),
             AnimComp.createAnimDataRange(0,0,Math.round(100)),
-            new ImageComp(images.back),
+            new ImageComp("back"),
             new Scale(1,1),
             new Bounds2D(Main.WIDTH,Main.HEIGHT),
             new Visible(true),
@@ -49,7 +48,7 @@ class GameSystem extends System
             new Velocity(0,0),
             new Player(),
             AnimComp.createAnimDataRange(7,7,Math.round(speed),"idle"),
-            new ImageComp(images.main),
+            new ImageComp("main"),
             new AnimData([
                 "idle"=>AnimComp.createAnimDataRange(7,7,Math.round(speed),"idle"),
                 "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed),"run"),
@@ -68,7 +67,7 @@ class GameSystem extends System
                 Utils.findRandomPointInCircle(characterEcho.get(Position),64),
                 new Velocity(0,0),
                 new Scale(1,1),
-                new ImageComp(images.unit),
+                new ImageComp("unit"),
                 AnimComp.createAnimDataRange(0,1,Math.round(speed)),
                 new Bounds2D(32,32),
                 new AnimData([
@@ -88,7 +87,7 @@ class GameSystem extends System
                 new Position(Main.WIDTH * Math.random(), Main.PLAYAREAHEIGHT * Math.random()/2 ),
                 new Velocity(0,0),
                 new Scale(1,1),
-                new ImageComp(images.peep),
+                new ImageComp("peep"),
                 new Enemy(),
                 AnimComp.createAnimDataRange(0,3,Math.round(speed)),
                 new Bounds2D(32,32),
@@ -110,7 +109,7 @@ class GameSystem extends System
                 new Position(body.position.x, body.position.y),
                 new Bounds2D(c.radius * 2, c.radius * 2),
                 new Visible(true),
-                new ImageComp(Assets.images.peg),
+                new ImageComp("peg"),
                 AnimComp.createAnimDataRange(0,0,Math.round(100)),
                 new Angle(0));
         }
@@ -134,7 +133,7 @@ class GameSystem extends System
                     new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-32),
                     new Velocity(0,0),
                     new Scale(1,1),
-                    new ImageComp(images.ogre),
+                    new ImageComp("ogre"),
                     AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                     new Bounds2D(32,64),
                     new AnimData([
@@ -151,7 +150,7 @@ class GameSystem extends System
                     new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-16),
                     new Velocity(0,0),
                     new Scale(1,1),
-                    new ImageComp(images.goblinbigbag),
+                    new ImageComp("goblinbigbag"),
                     AnimComp.createAnimDataRange(3,5,Math.round(speed)),
                     new Bounds2D(32,32),
                     new AnimData([
@@ -168,7 +167,7 @@ class GameSystem extends System
                     new Position(Main.WIDTH/numCollectors*i,Main.HEIGHT-16),
                     new Velocity(0,0),
                     new Scale(1,1),
-                    new ImageComp(images.alt),
+                    new ImageComp("alt"),
                     AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                     new Bounds2D(32,32),
                     new AnimData([
@@ -180,15 +179,20 @@ class GameSystem extends System
                 );
             }
         }
-        var debImages = [images.tree,images.barrel,images.bottle, images.shovel, images.box];
+        var debimages = ["tree",
+            "barrel",
+            "bottle", 
+            "shovel", 
+            "box"];
         for(i in 0...numPeople*4)
         {
             new Entity().add(
                 new Position(Math.random()*Main.WIDTH,Math.random()*Main.PLAYAREAHEIGHT),
                 new Scale(1,1),
-                new ImageComp(debImages[(i%debImages.length)]),
+                new ImageComp(debimages[(i%debimages.length)]),
                 AnimComp.createAnimDataRange(0,0,Math.round(speed)),
-                new Bounds2D(debImages[(i%debImages.length)].width,debImages[(i%debImages.length)].height),
+                new Bounds2D(AssetRepo.images.get(debimages[(i%debimages.length)]).width,
+                    AssetRepo.images.get(debimages[(i%debimages.length)]).height),
                 new Visible(true),
                 new Debris()
             );
@@ -204,14 +208,13 @@ class GameSystem extends System
         {
             var speed = 5;
             var numPeople = 10;
-            var images = Assets.images;
             for(i in 0...numPeople)
             {
                 new Entity().add(//(.4+Math.random()/8)
                     new Position(Main.WIDTH * Math.random(), Main.PLAYAREAHEIGHT * Math.random() ),
                     new Velocity(0,0),
                     new Scale(1,1),
-                    new ImageComp(images.peep),
+                    new ImageComp("peep"),
                     new Enemy(),
                     AnimComp.createAnimDataRange(0,3,Math.round(speed)),
                     new Bounds2D(32,32),

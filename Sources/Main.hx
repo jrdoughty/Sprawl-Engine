@@ -22,6 +22,7 @@ class Main
 		function(_){
 			Assets.loadEverything(function()
 			{	
+				AssetRepo.init();
 				new Project();
 			});
 		});

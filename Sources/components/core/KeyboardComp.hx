@@ -3,11 +3,11 @@ import kha.input.KeyCode;
 
 class KeyboardComp implements hxbit.Serializable
 {
-	public var keysPressed:Map<KeyCode, Bool>;
-	public var keysHeld:Map<KeyCode, Bool>;
-	public var keysUp:Map<KeyCode, Bool>;
-	public var keysCount:Int = 0;
-	public var keysJustPressed:Bool = false;
+	@:s public var keysPressed:Map<KeyCode, Bool>;
+	@:s public var keysHeld:Map<KeyCode, Bool>;
+	@:s public var keysUp:Map<KeyCode, Bool>;
+	@:s public var keysCount:Int = 0;
+	@:s public var keysJustPressed:Bool = false;
 
 	public function new()
 	{	

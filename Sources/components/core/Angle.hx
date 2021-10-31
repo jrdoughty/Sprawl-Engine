@@ -2,7 +2,8 @@ package components.core;
 
 import kha.FastFloat;
 
-abstract Angle(FastFloat) from FastFloat to FastFloat
+class Angle implements hxbit.Serializable 
 {
-    public inline function new(f:FastFloat = 0) this = f;
+    @:s public var value:FastFloat;
+    public inline function new(f:FastFloat = 0) value = f;
 }
