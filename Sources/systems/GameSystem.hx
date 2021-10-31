@@ -39,7 +39,7 @@ class GameSystem extends System
             new ImageComp("back"),
             new Scale(1,1),
             new Bounds2D(Main.WIDTH,Main.HEIGHT),
-            new Visible(true),
+            new Visibility(),
             new RenderOffset2D(0.0, 0.0));
 
 
@@ -55,7 +55,7 @@ class GameSystem extends System
                 "throw"=>AnimComp.createAnimDataRange(4,6,Math.round(speed),"throw")]),
             new Scale(1,1),
             new Bounds2D(32,32),
-            new Visible(true),
+            new Visibility(),
             new GamePad(0),
             new KeyboardComp(),
             new MouseComp()
@@ -75,7 +75,7 @@ class GameSystem extends System
                     "run"=>AnimComp.createAnimDataRange(0,1,Math.round(speed)),
                     "thrown"=>AnimComp.createAnimDataRange(2,3,Math.round(speed)),
                     "dazed"=>AnimComp.createAnimDataRange(4,7,Math.round(speed))]),
-                new Visible(true),
+                new Visibility(),
                 new Angle(0),
                 new Unit(Math.round(120 * Math.random()))
             );
@@ -94,7 +94,7 @@ class GameSystem extends System
                 new AnimData([
                     "idle"=>AnimComp.createAnimDataRange(2,2,Math.round(speed)),
                     "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),
-                new Visible(true),
+                new Visibility(),
                 new Angle(0)//360 * Math.random())
             );
         }
@@ -108,7 +108,7 @@ class GameSystem extends System
             new Entity().add(c,
                 new Position(body.position.x, body.position.y),
                 new Bounds2D(c.radius * 2, c.radius * 2),
-                new Visible(true),
+                new Visibility(),
                 new ImageComp("peg"),
                 AnimComp.createAnimDataRange(0,0,Math.round(100)),
                 new Angle(0));
@@ -139,7 +139,7 @@ class GameSystem extends System
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),
-                    new Visible(true),
+                    new Visibility(),
                     new Angle(0),
                     new Catcher(Math.round(120),3)
                 );
@@ -156,7 +156,7 @@ class GameSystem extends System
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(3,5,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,2,Math.round(speed))]),
-                    new Visible(true),
+                    new Visibility(),
                     new Angle(0),
                     new Catcher(Math.round(200),5)
                 );
@@ -173,7 +173,7 @@ class GameSystem extends System
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,2,Math.round(speed))]),
-                    new Visible(true),
+                    new Visibility(),
                     new Angle(0),
                     new Catcher(Math.round(60),1)
                 );
@@ -193,7 +193,7 @@ class GameSystem extends System
                 AnimComp.createAnimDataRange(0,0,Math.round(speed)),
                 new Bounds2D(AssetRepo.images.get(debimages[(i%debimages.length)]).width,
                     AssetRepo.images.get(debimages[(i%debimages.length)]).height),
-                new Visible(true),
+                new Visibility(),
                 new Debris()
             );
         }
@@ -221,7 +221,7 @@ class GameSystem extends System
                     new AnimData([
                         "idle"=>AnimComp.createAnimDataRange(2,2,Math.round(speed)),
                         "run"=>AnimComp.createAnimDataRange(0,3,Math.round(speed))]),
-                    new Visible(true),
+                    new Visibility(),
                     new Angle(0)//360 * Math.random())
                 );
             }

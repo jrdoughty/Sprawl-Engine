@@ -44,7 +44,7 @@ class EnemyUnitCollision extends System
                     c.body.applyAngularImpulse(5);
                     
                     new Entity().add(c,
-                        new Visible(true),
+                        new Visibility(),
                         new Bounds2D(c.radius * 2, c.radius * 2),
                         new Position(c.body.position.x, c.body.position.y),
                         new ImageComp("coin"),

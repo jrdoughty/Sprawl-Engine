@@ -2,8 +2,8 @@ package components.core;
 
 class Bounds2D implements hxbit.Serializable
 {
-    public var w:Float;
-    public var h:Float;
+    public var w:Float = 0;
+    public var h:Float = 0;
     public function new(w = .0, h = .0)
     {
         this.w = w;

@@ -6,7 +6,7 @@ import haxe.Timer;
 class TimeComp implements Serializable
 {
     @:s public var timeMS:Int;
-    @:s public var loop:Bool;
+    @:s public var loop:Bool = false;
     @:s public var isComplete:Bool = false;
     @:s public var startTime:Float;
     @:s public var endTime:Float;

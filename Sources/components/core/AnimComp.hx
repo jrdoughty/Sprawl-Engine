@@ -5,9 +5,9 @@ import haxe.ds.StringMap;
 class AnimComp  implements hxbit.Serializable {
 	@:s public var indices: Array<Int>;
 	@:s public var speeddiv: Int;
-	@:s public var count: Int;
-	@:s public var index: Int;
-	@:s public var idKey: String;
+	@:s public var count: Int = 0;
+	@:s public var index: Int = 0;
+	@:s public var idKey: String = "";
 	
 	
 	public function new(indices: Array<Int>, speeddiv: Int, idKey:String = "") {

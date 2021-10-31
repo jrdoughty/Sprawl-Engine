@@ -51,7 +51,7 @@ class SpriteRender extends System
 		var wh:Bounds2D = e.get(Bounds2D);
 		var pos:Position = e.get(Position);
 		var s:Scale = e.get(Scale);
-		var vis:Visible = e.get(Visible);
+		var vis:Bool = e.get(Visibility).visible;
 		var angle:Angle = e.get(Angle);
         var x = pos.x;
         var y = pos.y;
@@ -78,7 +78,7 @@ class SpriteRender extends System
         x -= Math.round(wh.w * xOffset * xScale); 
         y -= Math.round(wh.h * yOffset * yScale);
 
-		if (ic != null && vis != null && cast(vis, Bool) )
+		if (ic != null && vis != null && vis)
 			{
 			g.color = Color.White;
 			if (angle != null && angle.value != 0) 
