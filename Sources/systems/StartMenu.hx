@@ -40,7 +40,7 @@ class StartMenu extends System
             new AnimData(new StringMap()),
             new Scale(10,5),
             new Bounds2D(48,16),
-            new Visibility(),
+            new Visibility(.05,true),
             new ButtonComp('credits'),
             new GamePad(0),
             new KeyboardComp(),
@@ -74,7 +74,8 @@ class StartMenu extends System
             );
         }
 
-        var s = new Serializer();
+        //var s = new Serializer();
+        //var bits = s.
         
     }
 

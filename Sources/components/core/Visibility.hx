@@ -4,8 +4,8 @@ import kha.FastFloat;
 
 class Visibility
 {
-    @:s var opacity:FastFloat = 1;
-    @:s var visible:Bool = true;
+    @:s public var opacity:FastFloat = 1;//Not Yet Implemented
+    @:s public var visible:Bool = true;
 
     public inline function new(opacity:FastFloat = 1,visible:Bool = true)
     {

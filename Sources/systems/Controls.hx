@@ -81,7 +81,7 @@ class Controls extends echoes.System
 					{
 						t.y = Main.PLAYAREAHEIGHT;
 					}
-					i.get(Unit).framesUntil = Math.round(Utils.getDistanceByPosition(pos,cast(t,Position))); 
+					i.get(Unit).framesUntil = Math.round(Utils.getDistanceByPosition(pos,t)); 
 					i.add(t);
 					i.add(i.get(AnimData).get('thrown'));
 					p.framesUntil = 15;

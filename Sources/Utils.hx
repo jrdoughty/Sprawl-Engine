@@ -2,7 +2,7 @@ package;
 import components.*;
 import components.core.*;
 class Utils {
-    public static inline function getDistanceByPosition(pos1:Position,  pos2:Position):Float
+    public static inline function getDistanceByPosition(pos1:Vec2,  pos2:Vec2):Float
     {        
         return Math.sqrt((pos1.x-pos2.x)*(pos1.x-pos2.x)+(pos1.y-pos2.y)*(pos1.y-pos2.y));
     }
@@ -24,37 +24,37 @@ class Utils {
             pos1.y < pos2.y+wh2.h &&
             pos1.y > pos2.y;
     }
-    public static inline function pointInAABBTestWithScale(pos1:Position,  pos2:Position, wh2:Bounds2D,s:Scale) {
+    public static inline function pointInAABBTestWithScale(pos1:Vec2,  pos2:Vec2, wh2:Bounds2D,s:Scale) {
         return pos1.x < pos2.x+wh2.w * s.x &&
             pos1.x > pos2.x &&
             pos1.y < pos2.y+wh2.h * s.y &&
             pos1.y > pos2.y;
     }
-    public static inline function pointInAABBTestWithScaleCentered(pos1:Position,  pos2:Position, wh2:Bounds2D,s:Scale) {
+    public static inline function pointInAABBTestWithScaleCentered(pos1:Vec2,  pos2:Vec2, wh2:Bounds2D,s:Scale) {
         return pos1.x < pos2.x + wh2.w/2 * s.x &&
             pos1.x > pos2.x - wh2.w/2 * s.x  &&
             pos1.y < pos2.y + wh2.h/2 * s.y &&
             pos1.y > pos2.y - wh2.h/2 * s.y;
     }
-    public static inline function AABBTest(pos1:Position, wh1:Bounds2D, pos2:Position, wh2:Bounds2D) {
+    public static inline function AABBTest(pos1:Vec2, wh1:Bounds2D, pos2:Vec2, wh2:Bounds2D) {
         return pos1.x < pos2.x+wh2.w &&
             pos1.x + wh1.w > pos2.x &&
             pos1.y < pos2.y+wh2.h &&
             pos1.y + wh1.h > pos2.y;
     }
-    public static inline function AABBTestFromCenter(pos1:Position, wh1:Bounds2D, pos2:Position, wh2:Bounds2D) {
+    public static inline function AABBTestFromCenter(pos1:Vec2, wh1:Bounds2D, pos2:Vec2, wh2:Bounds2D) {
         return pos1.x - wh1.w/2 < pos2.x + wh2.w/2 &&
             pos1.x + wh1.w/2 > pos2.x  - wh2.w/2&&
             pos1.y - wh1.h/2 < pos2.y + wh2.h/2 &&
             pos1.y + wh1.h/2 > pos2.y - wh2.h/2;
     }
-    public static inline function AABBTestWithScale(pos1:Position, wh1:Bounds2D, pos2:Position, wh2:Bounds2D) {
+    public static inline function AABBTestWithScale(pos1:Vec2, wh1:Bounds2D, pos2:Vec2, wh2:Bounds2D) {
         return pos1.x < pos2.x+wh2.w &&
             pos1.x + wh1.w > pos2.x &&
             pos1.y < pos2.y+wh2.h &&
             pos1.y + wh1.h > pos2.y;
     }
-    public static inline function AABBTestFromCenterWithScale(pos1:Position, wh1:Bounds2D, pos2:Position, wh2:Bounds2D) {
+    public static inline function AABBTestFromCenterWithScale(pos1:Vec2, wh1:Bounds2D, pos2:Vec2, wh2:Bounds2D) {
         return pos1.x - wh1.w/2 < pos2.x + wh2.w/2 &&
             pos1.x + wh1.w/2 > pos2.x  - wh2.w/2&&
             pos1.y - wh1.h/2 < pos2.y + wh2.h/2 &&
@@ -68,13 +68,13 @@ class Utils {
      * @param cirPos 
      * @param r 
      */
-    public static inline function CenteredRectCircleOverlapTest(recPos:Position, recWH:Bounds2D, cirPos:Position, r:Float) {
+    public static inline function CenteredRectCircleOverlapTest(recPos:Vec2, recWH:Bounds2D, cirPos:Vec2, r:Float) {
         
         var modifiedPos = new Position(recPos.x - recWH.w/2,recPos.y - recWH.h/2);
 
         return RectCircleOverlapTest(modifiedPos, recWH, cirPos,r);
     }
-    public static inline function RectCircleOverlapTest(recPos:Position, recWH:Bounds2D, cirPos:Position, r:Float) {
+    public static inline function RectCircleOverlapTest(recPos:Vec2, recWH:Bounds2D, cirPos:Vec2, r:Float) {
         var testX:Float = cirPos.x;
         var testY:Float = cirPos.y;
 
@@ -104,7 +104,7 @@ class Utils {
      * @param	radius		The radius of the circle.
      * @return	The randomized Position in the circle.
      */
-     public static inline function findRandomPointInCircle(centerPoint:Position, radius:Float) {
+     public static inline function findRandomPointInCircle(centerPoint:Vec2, radius:Float) {
         var a = Math.random() * 2 * Math.PI;
         var r = radius * Math.sqrt(Math.random());
         // If you need it in Cartesian coordinates

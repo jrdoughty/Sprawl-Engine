@@ -1,9 +1,12 @@
 package components;
 import components.core.*;
 
-@:forward
-abstract TargetPosition(Vec2) {
+class TargetPosition extends Position
+{
 
-    public inline function new(x = .0, y = .0) this = new Vec2(x, y);
+    public function new(x = .0, y = .0)
+    {
+        super(x,y); 
+    }
 
 }

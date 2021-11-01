@@ -51,7 +51,8 @@ class SpriteRender extends System
 		var wh:Bounds2D = e.get(Bounds2D);
 		var pos:Position = e.get(Position);
 		var s:Scale = e.get(Scale);
-		var vis:Bool = e.get(Visibility).visible;
+		var vis:Bool = e.get(Visibility) == null || e.get(Visibility).visible;
+		var opacity:Float = e.get(Visibility) == null ? 1:e.get(Visibility).opacity;
 		var angle:Angle = e.get(Angle);
         var x = pos.x;
         var y = pos.y;
@@ -84,11 +85,14 @@ class SpriteRender extends System
 			if (angle != null && angle.value != 0) 
 					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(angle.value)).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
 			if(ac != null)
+            {
+                g.opacity = opacity;
                 g.drawScaledSubImage(AssetRepo.images.get(ic.name), Std.int(ac.indices[ac.index] * wh.w) % AssetRepo.images.get(ic.name).width, 
                     Math.floor(ac.indices[ac.index] * wh.w / AssetRepo.images.get(ic.name).width) * wh.h, 
                     wh.w, wh.h, 
                     x, y, 
                     wh.w * xScale, wh.h * yScale);
+            }
             else if (s == null) {
                 g.drawImage(AssetRepo.images.get(ic.name),x,y);
             }

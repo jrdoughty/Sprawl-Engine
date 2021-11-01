@@ -83,7 +83,8 @@ class IdleMovement extends System
 
     public function createPositionAround(pos:Position, range:Float):TargetPosition 
     {
-        return cast(Utils.findRandomPointInCircle(pos,32), TargetPosition);
+        var pos = Utils.findRandomPointInCircle(pos,32);
+        return new TargetPosition(pos.x, pos.y);
     }
     @u  function updateC(unit:Entity,c:Catcher, p:Position) {
         

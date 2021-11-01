@@ -20,19 +20,19 @@ class GamePad implements hxbit.Serializable
 	public static inline var DLEFT:Int = 13;
 	public static inline var DRIGHT:Int = 14;
 
-	public var id:Int;
-	public var active:Bool;
+	@:s public var id:Int;
+	@:s public var active:Bool;
 
-	public var leftAnalog:Vec2 = new Vec2(0, 0);
-	public var rightAnalog:Vec2 = new Vec2(0, 0);
-	public var leftTrigger:Float = 0;
-	public var rightTrigger:Float = 0;
+	@:s public var leftAnalog:Vec2 = new Vec2(0, 0);
+	@:s public var rightAnalog:Vec2 = new Vec2(0, 0);
+	@:s public var leftTrigger:Float = 0;
+	@:s public var rightTrigger:Float = 0;
 	
-	public var buttonsPressed:Map<Int, Bool> = new Map<Int, Bool>();;
-	public var buttonsHeld:Map<Int, Bool> = new Map<Int, Bool>();;
-	public var buttonsUp:Map<Int, Bool> = new Map<Int, Bool>();;
-	public var buttonsCount:Int = 0;
-	public var buttonsJustPressed:Bool = false;	
+	@:s public var buttonsPressed:Map<Int, Bool> = new Map<Int, Bool>();
+	@:s public var buttonsHeld:Map<Int, Bool> = new Map<Int, Bool>();
+	@:s public var buttonsUp:Map<Int, Bool> = new Map<Int, Bool>();
+	@:s public var buttonsCount:Int = 0;
+	@:s public var buttonsJustPressed:Bool = false;	
 	
 	public function new(id:Int)
 	{
