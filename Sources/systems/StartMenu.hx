@@ -1,5 +1,7 @@
 package systems;
 
+import haxe.macro.Type;
+import serialization.WorkflowData;
 import echoes.System;
 import kha.Assets;
 import echoes.Entity;
@@ -7,6 +9,7 @@ import components.*;
 import components.core.*;
 import haxe.ds.StringMap;
 import hxbit.Serializer;
+import echoes.Workflow;
 
 
 class StartMenu extends System
@@ -74,9 +77,84 @@ class StartMenu extends System
             );
         }
 
-        //var s = new Serializer();
-        //var bits = s.
-        
+        var s = new Serializer();
+        var d = new WorkflowData();
+        for(i in Workflow.entities)
+        {
+            d.entities.push(i);
+            d.idPool.push(i);
+            d.status.push(i.status());
+            trace('-----------------------');
+            if(i.exists(Position))
+            {
+                var seri = new haxe.Serializer();
+                seri.serialize(i.get(Position));
+                trace(seri.toString());
+            }
+            if(i.exists(Bounds2D))
+            {
+                var seri = new haxe.Serializer();
+                seri.serialize(i.get(Bounds2D));
+                trace(seri.toString());
+            }
+            if(i.exists(MouseComp))
+            {
+                var seri = new haxe.Serializer();
+                seri.serialize(i.get(MouseComp));
+                trace(seri.toString());
+            }
+            if(i.exists(TextComp))
+            {
+                var seri = new haxe.Serializer();
+                seri.serialize(i.get(TextComp));
+                trace(seri.toString());
+            }
+            for(j in i.print().substr(3,i.print().length-3).split('},'))
+            {
+                var name = j.substr(0,j.indexOf('='));
+                var stri = ('cy'+name.length+":"+name);
+                for(k in j.substr(j.indexOf('{')+1,(j.length-1-j.indexOf('{'))).split(','))
+                {
+                    k = StringTools.replace(k, '\n','');
+                    k = StringTools.replace(k, '\t','');
+                    k = StringTools.replace(k,' ','');
+                    k = StringTools.replace(k,'}','');
+                    var vari = k.split(':')[0];
+                    var val = k.split(':')[1];
+                    stri += ('y'+vari.length+':'+ vari);
+                    var num = Std.parseInt(val);
+                    if(num == Math.NaN || num == null)
+                        stri += ('y'+val.length + val);
+                    else
+                    {
+                        if(Std.parseFloat(val)%1>0)
+                        {
+                            stri += ('d'+ val);
+                        }
+                        else 
+                        {
+                            stri += ('i'+ val);
+                        }
+                    }
+                }
+                stri += ('g');
+                trace(stri);
+                /*
+                j = j.split('{')[0];
+                if(j.indexOf('.')!=-1 && j.indexOf('=')!=-1 )
+                {
+                    var name = (j.substr(j.indexOf('.')+1,j.indexOf('=')-1-j.indexOf('.')));
+                    trace('cy'+name.length+name);
+                }*/
+            }
+            var unserializer = new haxe.Unserializer(i.print()); 
+            //trace(unserializer.unserialize());
+
+        }
+        var result = new haxe.Unserializer('cy24:components.core.Positiony5:__uidi29y1:yd174.5y1:xi310g').unserialize();
+        //trace(result);
+        //var bytes = s.serialize(d);
+        //trace(s.unserialize(bytes, WorkflowData));
     }
 
     @u public function mouseBtnUpdate (m:MouseComp, b:ButtonComp, p:Position, wh:Bounds2D, s:Scale)
@@ -84,7 +162,7 @@ class StartMenu extends System
         var mPos = new Position(m.x,m.y);
         if(m.mousePressed[0] && Utils.pointInAABBTestWithScaleCentered(mPos,p,wh,s))
         {
-            trace(b.tag+' down');
+            //trace(b.tag+' down');
         }
         else if(m.mouseUp[0] && Utils.pointInAABBTestWithScaleCentered(mPos,p,wh,s))
         {

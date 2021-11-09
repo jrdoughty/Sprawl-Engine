@@ -10,6 +10,16 @@
 			],
 			"group": "build",
 			"label": "Kha: Build for Debug HTML5"
+		},
+		{
+			"type": "Kha",
+			"target": "Windows",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe"
+			],
+			"group": "build",
+			"label": "Kha: Build for Windows"
 		}
 	]
 }

@@ -4,6 +4,6 @@ import kha.FastFloat;
 
 class Angle implements hxbit.Serializable 
 {
-    @:s public var value:FastFloat = 0;
+    @:s public var value:Float = 0;
     public inline function new(f:FastFloat = 0) value = f;
 }
