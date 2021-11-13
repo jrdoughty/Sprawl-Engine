@@ -24,10 +24,10 @@ class SpriteRender extends System
         bufferCallback = Project.bufferCallback;
     }
 
-    @d inline function draw() 
+    @d function draw() 
     {
         var buffer = bufferCallback();
-        if(buffer == null) return;
+        if(buffer == null || sprites.entities.head == null) return;
         
         sprites.entities.sort(function(a,b){
             var aPosition = a.get(Position);
