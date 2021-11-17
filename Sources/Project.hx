@@ -1,5 +1,7 @@
 package;
 
+import systems.cameras.CameraTransformPopper;
+import systems.cameras.CameraTransformPusher;
 import nape.shape.Polygon;
 import nape.phys.BodyType;
 import nape.phys.Body;
@@ -97,8 +99,10 @@ class Project {
 		
 		//Renders after Animation stepping systems
 		Workflow.addSystem(new PhysicsStateTransformer());
+		Workflow.addSystem(new CameraTransformPusher());
 		Workflow.addSystem(new SpriteRender());
 		Workflow.addSystem(new ShapeRender());
+		Workflow.addSystem(new CameraTransformPopper());
 		Workflow.addSystem(new UI());
 		
 		//Add Inputs at the end because the update loop clears them 

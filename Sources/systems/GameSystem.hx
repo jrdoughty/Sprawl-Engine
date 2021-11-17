@@ -42,9 +42,9 @@ class GameSystem extends System
             new Visibility(),
             new RenderOffset2D(0.0, 0.0));
 
-
+        var playerPosition = new Position(Main.WIDTH /2 , Main.HEIGHT/2);
         var characterEcho = new Entity().add(
-            new Position(Main.WIDTH /2 , Main.HEIGHT/2),
+            playerPosition,
             new Velocity(0,0),
             new Player(),
             AnimComp.createAnimDataRange(7,7,Math.round(speed),"idle"),
@@ -59,6 +59,11 @@ class GameSystem extends System
             new GamePad(0),
             new KeyboardComp(),
             new MouseComp()
+        );
+        var camera = new Entity().add(
+            playerPosition,
+            new Bounds2D(900.0, 698.0),
+            new Camera()
         );
         var i;
         for(i in 0...numUnits)

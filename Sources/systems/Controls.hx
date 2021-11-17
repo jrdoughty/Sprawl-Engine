@@ -7,6 +7,10 @@ import kha.input.KeyCode;
 import echoes.View;
 import echoes.Entity;
 
+// Input Reader system, that reads a keyboard and mouse component, and sets something?
+// Create a general input receiver -> mover thing. Anything with a Position and Keyboard Component should execute it?
+// Need to think about an 
+
 class Controls extends echoes.System
 {
 	public static inline final speed:Int = 3;
@@ -14,8 +18,8 @@ class Controls extends echoes.System
     var unitView:View<Unit, Position>;
 
     public function new() {}
-	@u public function updateK(p:Entity, pos:Position, playComp:Player, k:KeyboardComp, s:Scale, ac:AnimComp, ad:AnimData)
-	{
+
+	@u public function updateK(p:Entity, pos:Position, playComp:Player, k:KeyboardComp, s:Scale, ac:AnimComp, ad:AnimData) {
 		playComp.framesUntil--;
 
 		if(playComp.framesUntil<=0 && (k.keysHeld[KeyCode.Up] || k.keysHeld[KeyCode.W]))

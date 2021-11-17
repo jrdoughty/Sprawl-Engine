@@ -62,15 +62,14 @@ class SpriteRender extends System
         var xScale = 1.0; // Assume a sprite scale of 1:1 by default
         var yScale = 1.0;
 
-
-        if(renderOffset != null) // If we have a render offset, we'll grab the offsets from that instead
-        { 
+        // If we have a render offset, we'll grab the offsets from that instead 
+        if(renderOffset != null) { 
             xOffset = renderOffset.x;
             yOffset = renderOffset.y;
         }
         
-        if (s != null) // If we have a scale component, check the components scale instead of using our default
-        {
+        // If we have a scale component, check the components scale instead of using our default
+        if (s != null) {
             xScale = s.x;    
             yScale = s.y;    
         }
@@ -80,12 +79,13 @@ class SpriteRender extends System
         y -= Math.round(wh.h * yOffset * yScale);
 
 		if (ic != null && vis != null && vis)
-			{
+        {
 			g.color = Color.White;
-			if (angle != null && angle.value != 0) 
-					g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(angle.value)).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
-			if(ac != null)
-            {
+            
+            if (angle != null && angle.value != 0)  {
+                g.pushTransformation(g.transformation.multmat(FastMatrix3.translation(pos.x , pos.y )).multmat(FastMatrix3.rotation(angle.value)).multmat(FastMatrix3.translation(-pos.x , -pos.y )));
+            }
+			if (ac != null) {
                 g.opacity = opacity;
                 g.drawScaledSubImage(AssetRepo.images.get(ic.name), Std.int(ac.indices[ac.index] * wh.w) % AssetRepo.images.get(ic.name).width, 
                     Math.floor(ac.indices[ac.index] * wh.w / AssetRepo.images.get(ic.name).width) * wh.h, 
@@ -96,10 +96,13 @@ class SpriteRender extends System
             else if (s == null) {
                 g.drawImage(AssetRepo.images.get(ic.name),x,y);
             }
-            else
+            else {
                 g.drawScaledImage(AssetRepo.images.get(ic.name), x, y, wh.w*xScale, wh.h*yScale);
-			if (angle != null && angle.value != 0) 
+            }
+
+			if (angle != null && angle.value != 0) {
 				g.popTransformation();
+            }
         }
 		#if debug_collisions
 			g.color = Color.fromBytes(255, 0, 0);
