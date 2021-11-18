@@ -96,6 +96,7 @@ class Project {
 		Workflow.addSystem(new MoveToTargetPosition());
 		Workflow.addSystem(new CatcherCollectSystem());
 		Workflow.addSystem(new Animation());
+		Workflow.addSystem(new ObjectFollow());
 		
 		//Renders after Animation stepping systems
 		Workflow.addSystem(new PhysicsStateTransformer());
