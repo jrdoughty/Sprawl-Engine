@@ -5,6 +5,8 @@ project.addLibrary('Echoes');
 project.addLibrary('hxbit');
 project.addLibrary('slide');
 project.addLibrary('nape-haxe4');
+project.addLibrary('hxcpp-debug-server');
+project.addLibrary('hxcpp');
 project.addParameter('-dce full');
 //project.addDefine('debug_collisions');
 project.icon = 'Assets/icon.png';

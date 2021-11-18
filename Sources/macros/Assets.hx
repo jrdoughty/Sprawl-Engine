@@ -90,6 +90,29 @@ class Assets {
             pos: Context.currentPos(),
             kind: FieldType.FVar(macro: Array<String>, macro $a{files})
         });
+        
+        files = [];
+        for(entry in FileSystem.readDirectory(assetSrcFolder)) {
+            if( Std.parseInt(entry.charAt(0)) != null)
+                entry = '_'+entry;
+            if(entry.indexOf('.txt') != -1 )
+            {    
+                files.push(macro $v{entry.substring(0,entry.length-4)+'_txt'});
+            } 
+            else if(entry.indexOf('.sav') != -1 )
+            {    
+                files.push(macro $v{entry.substring(0,entry.length-4)+'_sav'});
+            }
+        }
+        // TODO: modify the fields
+        // add the fields to the class
+        fields.push({
+            name: 'blobs',
+            //doc: 'Relative path for file ${files}',
+            access: [Access.APublic, Access.AStatic],
+            pos: Context.currentPos(),
+            kind: FieldType.FVar(macro: Array<String>, macro $a{files})
+        });
 
         
         files = [];

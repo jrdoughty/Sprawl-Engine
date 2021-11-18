@@ -26,6 +26,13 @@
             "name": "Kha: Krom",
             "preLaunchTask": "Kha: Build for Krom",
             "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "HXCPP",
+            "type": "hxcpp",
+            "request": "launch",
+            "preLaunchTask": "Kha: Build for Windows",
+            "program": "${workspaceFolder}/bin/application.exe"
         }
     ],
     "compounds": []

@@ -19,6 +19,16 @@
 				"$haxe"
 			],
 			"group": "build",
+			"label": "Kha: Build for Krom"
+		},
+		{
+			"type": "Kha",
+			"target": "Windows",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe"
+			],
+			"group": "build",
 			"label": "Kha: Build for Windows"
 		}
 	]
