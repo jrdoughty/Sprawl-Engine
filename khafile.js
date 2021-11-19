@@ -7,7 +7,7 @@ project.addLibrary('slide');
 project.addLibrary('nape-haxe4');
 project.addLibrary('hxcpp-debug-server');
 project.addLibrary('hxcpp');
-project.addParameter('-dce full');
+project.addParameter('-dce no');
 //project.addDefine('debug_collisions');
 project.icon = 'Assets/icon.png';
 project.windowOptions.width = 900;
