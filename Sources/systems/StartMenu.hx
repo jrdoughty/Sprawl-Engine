@@ -5,31 +5,28 @@ import js.Browser;
 #else
 import sys.io.File;
 #end
-import haxe.macro.Type;
 import serialization.WorkflowData;
 import echoes.System;
-import kha.Assets;
 import echoes.Entity;
 import components.*;
 import components.core.*;
-import haxe.ds.StringMap;
-import hxbit.Serializer;
 import echoes.Workflow;
 
 
 class StartMenu extends System
 {
     public function new() {
-        var speed = 5;
-        var images = Assets.images;
         //seri.unserialize(b);
         var bs = AssetRepo.blobs;
         #if js
         Browser.getLocalStorage().setItem('test.txt',bs.get('startmenu_txt').toString());
         Workflow.load(Browser.getLocalStorage().getItem('test.txt'));
         #else
-        File.saveContent('test.txt',bs.get('startmenu_txt').toString());
-        Workflow.load(File.getContent('test.txt'));
+        var s = new hxbit.Serializer();
+        
+        File.saveBytes('test.sav', haxe.io.Bytes.ofString(bs.get('startmenu_txt').toString()));
+        
+        Workflow.load(File.getBytes('test.sav').toString());
         #end
     }
 

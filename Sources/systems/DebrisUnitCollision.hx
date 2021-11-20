@@ -11,7 +11,6 @@ import nape.shape.Polygon;
 import nape.shape.Circle;
 import nape.geom.Vec2;
 import echoes.Entity;
-import kha.Assets;
 import kha.audio1.Audio;
 
 class DebrisUnitCollision extends System 
@@ -45,7 +44,7 @@ class DebrisUnitCollision extends System
                         new ImageComp("coin"),
                         AnimComp.createAnimDataRange(0,0,Math.round(100)),
                         new Angle(0));
-                    Audio.play(Assets.sounds.debris);
+                    Audio.play(AssetRepo.sounds.get("debris"));
                 }
                 debris.remove(Debris); 
                 unit.framesUntil += 30;

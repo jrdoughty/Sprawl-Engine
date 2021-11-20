@@ -1,7 +1,6 @@
 package systems;
 
 import echoes.System;
-import kha.Assets;
 import echoes.Entity;
 import components.*;
 import components.core.*;
@@ -10,8 +9,6 @@ import haxe.ds.StringMap;
 class CreditMenu extends System
 {
     public function new() {
-        var speed = 5;
-        var images = Assets.images;
         
         new Entity().add(//Background
             new Position(0, 0),

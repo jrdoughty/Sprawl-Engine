@@ -5,7 +5,7 @@ import echoes.System;
 import components.*;
 import components.core.*;
 import echoes.Entity;
-import kha.Assets;
+import AssetRepo;
 import haxe.ds.StringMap;
 import nape.shape.*;
 import nape.phys.Body;
@@ -21,7 +21,7 @@ class GameSystem extends System
     public function new ()
     {
         if(Project.bgChannel == null)
-            Project.bgChannel = Audio.play(Assets.sounds.carnivalrides,true);
+            Project.bgChannel = Audio.play(AssetRepo.sounds.get("carnivalrides"),true);
         var numUnits:Int = 10;
         var numPeople:Int = 15;
         var numCollectors:Int = 10;
@@ -244,7 +244,7 @@ class GameSystem extends System
             {
                 i.add(i.get(AnimData).get('idle'));
                 i.remove(Player);
-                Audio.play(Assets.sounds.endoflevel);//should only happen once
+                Audio.play(AssetRepo.sounds.get("endoflevel"));//should only happen once
             }
         }
         if(t.get('gameEndTimer').endTime - t.get('gameEndTimer').currentTime <= 0)
@@ -255,7 +255,7 @@ class GameSystem extends System
             }
             Project.lastScore = s.score;
             Project.activeState = 'menu';
-            Audio.play(Assets.sounds.endoflevel);//should only happen once
+            Audio.play(AssetRepo.sounds.get("endoflevel"));//should only happen once
         }
     }
 }

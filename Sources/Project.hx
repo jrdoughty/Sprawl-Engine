@@ -1,31 +1,15 @@
 package;
 
-import nape.shape.Polygon;
-import nape.phys.BodyType;
-import nape.phys.Body;
-import kha.Worker;
-import haxe.Constraints.Function;
-import systems.core.*;
 import kha.Framebuffer;
 import kha.Scheduler;
 import kha.System;
-import kha.Assets;
-import echoes.Entity;
-import components.*;
-import systems.*;
 import echoes.Workflow;
 import haxe.ds.StringMap;
-import kha.math.FastMatrix3;
-import kha.graphics2.Graphics;
-import kha.Color;
-import kha.FastFloat;
-import hxbit.Serializer;
-import slide.Slide;
 import kha.audio1.AudioChannel;
 import haxe.Timer;
-import nape.geom.Vec2;
-import nape.space.Space;
-import nape.shape.Circle;
+import slide.Slide;
+import systems.*;
+import systems.core.*;
 
 class Project {
 	public var score:Int = 0;
@@ -73,7 +57,7 @@ class Project {
 	{
 		buffer = framebuffers[0];//obviously has to happen before the Workflow.draw
 		
-        buffer.g2.begin(true, Color.Black);
+        buffer.g2.begin(true, kha.Color.Black);
 		//if(active)
 		{
 			Workflow.draw();

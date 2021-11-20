@@ -1,6 +1,5 @@
 package components.core;
 
-import kha.FastFloat;
 
 class Visibility
 {

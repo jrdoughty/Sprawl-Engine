@@ -1,20 +1,7 @@
 package systems.core;
 
-import kha.Image;
-import nape.phys.BodyType;
 import echoes.System;
-import kha.Color;
-import kha.Framebuffer;
 import nape.shape.*;
-import components.*;
-import kha.math.Vector2;
-import nape.geom.Vec2;
-import kha.Color;
-import kha.graphics2.Graphics;
-import kha.math.FastMatrix3;
-import kha.FastFloat;
-import kha.Framebuffer;
-import kha.Assets;
 import echoes.Entity;
 import components.core.*;
 
@@ -28,7 +15,7 @@ class PhysicsStateTransformer extends System
 
     @u public function updateRotationOfCoin(circle:Circle, angle:Angle)
     {    
-        angle.value = cast(circle.body.rotation, FastFloat);
+        angle.value = circle.body.rotation;
     }   
     
     @u public function updateBounds(circle:Circle, bounds2D:Bounds2D)

@@ -12,7 +12,7 @@ import nape.shape.Polygon;
 import nape.shape.Circle;
 import nape.geom.Vec2;
 import echoes.Entity;
-import kha.Assets;
+import AssetRepo;
 
 class EnemyUnitCollision extends System 
 {
@@ -50,7 +50,7 @@ class EnemyUnitCollision extends System
                         new ImageComp("coin"),
                         AnimComp.createAnimDataRange(0,0,Math.round(100)),
                         new Angle(0));
-                    Audio.play(Assets.sounds.smack);
+                    Audio.play(AssetRepo.sounds.get("smack"));
                 }
                 enemy.remove(TargetPosition);
                 enemy.add(new TargetPosition(-100,-100));

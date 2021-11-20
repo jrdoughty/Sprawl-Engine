@@ -5,7 +5,6 @@ import components.*;
 import components.core.*;
 import echoes.System;
 import kha.Framebuffer;
-import kha.Assets;
 import echoes.Entity;
 
 
