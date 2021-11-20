@@ -18,16 +18,17 @@ class StartMenu extends System
     public function new() {
         //seri.unserialize(b);
         var bs = AssetRepo.blobs;
+        Workflow.load(bs.get('startmenu_txt').toString());
+        /*
         #if js
         Browser.getLocalStorage().setItem('test.txt',bs.get('startmenu_txt').toString());
         Workflow.load(Browser.getLocalStorage().getItem('test.txt'));
         #else
         var s = new hxbit.Serializer();
-        
         File.saveBytes('test.sav', haxe.io.Bytes.ofString(bs.get('startmenu_txt').toString()));
-        
         Workflow.load(File.getBytes('test.sav').toString());
         #end
+        */
     }
 
     @u public function mouseBtnUpdate (m:MouseComp, b:ButtonComp, p:Position, wh:Bounds2D, s:Scale)

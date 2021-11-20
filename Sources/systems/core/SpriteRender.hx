@@ -19,9 +19,9 @@ class SpriteRender extends System
 
 
 
-    public function new()
+    public function new(bc:Void->Framebuffer)
     {
-        bufferCallback = Project.bufferCallback;
+        bufferCallback = bc;
     }
 
     @d function draw() 

@@ -12,9 +12,9 @@ class UI extends echoes.System
 {
     var bufferCallback:Void->Framebuffer;
     
-    public function new()
+    public function new(bc:Void->Framebuffer)
     {
-        bufferCallback = Project.bufferCallback;
+        bufferCallback = bc;
     }
     
     @u function updateAward(a:AwardFont, p:Position) 

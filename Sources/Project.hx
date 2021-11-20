@@ -81,9 +81,9 @@ class Project {
 		
 		//Renders after Animation stepping systems
 		Workflow.addSystem(new PhysicsStateTransformer());
-		Workflow.addSystem(new SpriteRender());
-		Workflow.addSystem(new ShapeRender());
-		Workflow.addSystem(new UI());
+		Workflow.addSystem(new SpriteRender(bufferCallback));
+		Workflow.addSystem(new ShapeRender(bufferCallback));
+		Workflow.addSystem(new UI(bufferCallback));
 		
 		//Add Inputs at the end because the update loop clears them 
 		Workflow.addSystem(new Keyboard());
@@ -100,8 +100,8 @@ class Project {
 	{
 		Workflow.addSystem(new StartMenu());
 		//Renders after Animation stepping systems
-		Workflow.addSystem(new SpriteRender());
-		Workflow.addSystem(new UI());
+		Workflow.addSystem(new SpriteRender(bufferCallback));
+		Workflow.addSystem(new UI(bufferCallback));
 		
 		//Add Inputs at the end because the update loop clears them 
 		Workflow.addSystem(new Keyboard());
@@ -113,8 +113,8 @@ class Project {
 	{
 		Workflow.addSystem(new CreditMenu());
 		//Renders after Animation stepping systems
-		Workflow.addSystem(new SpriteRender());
-		Workflow.addSystem(new UI());
+		Workflow.addSystem(new SpriteRender(bufferCallback));
+		Workflow.addSystem(new UI(bufferCallback));
 		
 		//Add Inputs at the end because the update loop clears them 
 		Workflow.addSystem(new Keyboard());
