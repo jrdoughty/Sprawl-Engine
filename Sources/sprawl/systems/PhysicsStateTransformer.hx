@@ -15,7 +15,7 @@ class PhysicsStateTransformer extends System
 
     @u public function updateRotationOfCoin(circle:Circle, rotation:Rotation)
     {    
-        rotation.rotation = circle.body.rotation;
+        rotation.value = circle.body.rotation;
     }   
     
     @u public function updateBounds(circle:Circle, bounds2D:Bounds2D)
