@@ -53,7 +53,7 @@ class SpriteRender extends System
 		var s:Scale = e.get(Scale);
 		var vis:Null<Bool> = e.get(Visibility) == null || e.get(Visibility).visible;
 		var opacity:Float = e.get(Visibility) == null ? 1:e.get(Visibility).opacity;
-		var angle:Angle = e.get(Angle);
+		var angle:Rotation = e.get(Rotation);
         var x = pos.x;
         var y = pos.y;
         var xOffset = 0.5; // Assumed we render from the center of the sprite by default
