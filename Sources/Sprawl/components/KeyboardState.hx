@@ -1,7 +1,7 @@
 package sprawl.components;
 import kha.input.KeyCode;
 
-class KeyboardComp implements hxbit.Serializable
+class KeyboardState implements hxbit.Serializable
 {
 	@:s public var keysPressed:Map<KeyCode, Bool>;
 	@:s public var keysHeld:Map<KeyCode, Bool>;
